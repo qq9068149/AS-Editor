@@ -1,0 +1,194 @@
+
+@charset "utf-8";
+
+ 
+
+html {
+
+    -webkit-text-size-adjust: 100%;
+
+    -ms-text-size-adjust: 100%;
+
+    -webkit-overflow-scrolling : touch;
+
+}
+
+html, body, #app{width:100%;height:100%;}
+
+ 
+
+input[type="submit"], input[type="reset"], input[type="button"], input {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    resize: none;
+
+    border: none;
+
+}
+
+ 
+
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    font-size:14px;
+
+    box-sizing:border-box;
+
+}
+
+ 
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+
+    display: block;
+
+}
+
+ 
+
+img {
+
+    height: auto;
+
+    width: auto\9; /* ie8 */
+
+    -ms-interpolation-mode: bicubic;/*为了照顾ie图片缩放失真*/
+
+}
+
+ 
+
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+body {
+
+    font: 12px/1.5 'Microsoft YaHei','宋体', Tahoma, Arial, sans-serif;
+
+    color: #555;
+
+    background-color: #fff;
+
+    overflow-x: hidden;
+
+}
+
+ul,li{
+
+    list-style-type: none;
+
+}
+
+.clearfix:after {
+
+    content: "";
+
+    display: block;
+
+    visibility: hidden;
+
+    height: 0;
+
+    clear: both;
+
+}
+
+.clearfix {
+
+    zoom: 1;
+
+}
+
+a {
+
+    text-decoration: none;
+
+    color: #969696;
+
+    font-family: 'Microsoft YaHei', Tahoma, Arial, sans-serif;
+
+}
+
+a:hover {
+
+    text-decoration: none;
+
+}
+
+ul, ol {
+
+    list-style: none;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+    font-size: 100%;
+
+    font-family: 'Microsoft YaHei';
+
+}
+
+img {
+
+    border: none;
+
+}
+
+input{
+
+    font-family: 'Microsoft YaHei';
+
+}
+
+ 
+
+.one-txt-cut{
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+ 
+
+.txt-cut{
+
+    overflow : hidden;
+
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+
+    -webkit-box-orient: vertical;
+
+}
+
+ 
+
+a:link,a:active,a:visited,a:hover {
+
+    background: none;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+i {
+    font-style: normal !important;
+}
+
+input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
