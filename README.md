@@ -14,13 +14,15 @@
 #### 使用说明
 
 > 自定义组件可以看 
-  src\layout\home\index.vue               （页面）
-  src\components\sliderassembly\index.vue （左侧组件大全）
-  src\utils\componentProperties.js        （组件数据）
+  src/layout/home/index.vue               （编辑页面文件）
+  src/components/sliderassembly/index.vue （左侧组件大全文件）
+  src/components/componentscom            （左侧组件目录）
+  src/components/rightslider               (右侧组件目录)
+  src/utils/componentProperties.js         （组件数据）
 
 #### componentProperties（组件数据）字段注解
 
-```json
+```js
 {
   component: 'custommodule', //中间部分手机组件的name
   text: '自定义模块',
