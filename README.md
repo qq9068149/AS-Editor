@@ -15,11 +15,13 @@
 
 ##### 自定义组件可以看：
 
-src/layout/home/index.vue （编辑页面文件）
+```js
+src/layout/home/index.vue               （编辑页面文件）
 src/components/sliderassembly/index.vue （左侧组件大全文件）
-src/components/componentscom （左侧组件目录）
-src/components/rightslider (右侧组件目录)
-src/utils/componentProperties.js （组件数据）
+src/components/componentscom            （左侧组件目录）
+src/components/rightslider               (右侧组件目录)
+src/utils/componentProperties.js         (组件数据)
+```
 
 #### componentProperties（组件数据）字段注解
 
