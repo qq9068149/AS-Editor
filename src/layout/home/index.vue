@@ -28,8 +28,9 @@
           ><i class="el-icon-delete-solid el-icon--left"></i>重置</el-button
         >
         <el-button @click="Preservation"
-          ><i class="el-icon-s-claim el-icon--left"></i>上传并继续</el-button
+          ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
         >
+        <el-button @click="catJson">查看JSON </el-button>
         <el-button @click="upperShelf" type="primary"
           ><i class="el-icon-upload el-icon--left"></i>上架</el-button
         >
@@ -140,6 +141,13 @@
         >
           <i class="iconfont icon-zujian" />
           组件管理
+        </span>
+        <span
+          class="active"
+          v-show="rightcom!='componenmanagement'&&rightcom!='decorate'"
+        >
+          <i class="iconfont icon-zujian" />
+          组件设置
         </span>
       </div>
 
@@ -393,7 +401,38 @@ export default {
         })
       })
     },
-
+    // 查看JSON
+    catJson() {
+      this.$alert(
+        `{
+          <br/>
+          "id": ${this.id},
+          <br/>
+          "name": "${this.pageSetup.name}",
+          <br/>
+          "templateJson": ${JSON.stringify(this.pageSetup)},
+          <br/>
+          "component": ${JSON.stringify(this.pageComponents)},
+          <br/>
+        }`,
+        '查看JSON',
+        {
+          confirmButtonText: '确定',
+          customClass: 'JSONView',
+          dangerouslyUseHTMLString: true,
+          callback: () => {},
+        }
+      )
+      console.log(
+        {
+          id: this.id,
+          name: this.pageSetup.name,
+          templateJson: this.pageSetup,
+          component: this.pageComponents,
+        },
+        '----------------查看JSON'
+      )
+    },
     /**
      * 保存
      *
@@ -934,6 +973,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: #f7f8fa;
   }
 
   /* 手机 */
@@ -947,9 +987,9 @@ export default {
     &::-webkit-scrollbar {
       width: 1px;
     }
-    &::-webkit-scrollbar-thumb {
-      background-color: #155bd4;
-    }
+    // &::-webkit-scrollbar-thumb {
+    //   background-color: #155bd4;
+    // }
 
     /* 手机样式 */
     .phoneAll {
@@ -1074,6 +1114,8 @@ export default {
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
+    padding: 0 12px;
+    background: #fff;
     &::-webkit-scrollbar {
       width: 1px;
     }
@@ -1086,7 +1128,7 @@ export default {
   .decorateTab {
     position: fixed;
     display: flex;
-    right: 390px;
+    right: 380px;
     top: 115px;
     flex-direction: column;
     span {
@@ -1129,4 +1171,5 @@ export default {
   transform: translate(8px, 8px);
   opacity: 0;
 }
+
 </style>

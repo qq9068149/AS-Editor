@@ -6,30 +6,30 @@ const componentsData = new Map()
 componentsData.set('captiontext', {
   component: 'captiontext',
   text: '标题文字',
-  type: '1-1',
+  type: '1-3',
   active: true,
   style: 'captiontextsstyle',
   setStyle: {
     text: '标题文字',
-    name: '标题文字',
-    description: '',
-    wordSize: 16,
-    descriptionSize: 12,
-    wordWeight: 400,
-    positions: 'left',
-    descriptionWeight: 200,
-    wordColor: 'rgba(50, 50, 51, 10)',
-    descriptionColor: 'rgba(150, 151, 153, 10)',
-    backColor: 'rgba(255, 255, 255, 10)',
-    borderBott: false,
-    wordHeight: 24,
-    more: {
-      show: false,
-      type: 1,
-      text: '查看更多',
-      httpType: 1,
-      http: '',
-      select: {},
+    name: '标题文字',//标题内容
+    description: '',//描述内容
+    wordSize: 16,//标题大小
+    descriptionSize: 12,//描述大小
+    wordWeight: 400,//标题粗细
+    positions: 'left', //显示位置  可选left/center
+    descriptionWeight: 200,//描述粗细
+    wordColor: 'rgba(50, 50, 51, 10)',//标题颜色
+    descriptionColor: 'rgba(150, 151, 153, 10)',//描述颜色
+    backColor: 'rgba(255, 255, 255, 10)', //背景颜色
+    borderBott: false, //底部分割线
+    wordHeight: 24,//框体高度
+    more: {    //查看更多
+      show: false,//是否显示查看更多
+      type: 1, // 样式选择
+      text: '查看更多', //自定义文字
+      httpType: 1,//链接类型
+      http: '',//外部链接
+      select: {},//内部跳转链接
     },
   },
 })
@@ -37,7 +37,7 @@ componentsData.set('captiontext', {
 componentsData.set('listswitching', {
   component: 'listswitching',
   text: '商品',
-  type: '1-2',
+  type: '2-1',
   active: true,
   style: 'listswitchingstyle',
   setStyle: {
@@ -84,13 +84,13 @@ componentsData.set('pictureads', {
   style: 'pictureadsstyle',
   setStyle: {
     text: '图片广告',
-    swiperType: 0,
-    borderRadius: 0,
-    pageMargin: 0,
-    imageMargin: 0,
-    pagingType: 0,
-    rowindividual: 2,
-    imageList: [],
+    swiperType: 0,  // 选择模板
+    borderRadius: 0,// 图片倒角
+    pageMargin: 0,  // 页面边距
+    imageMargin: 0, // 图片边距
+    pagingType: 0,  // 分页类型: 0/"bullets"/"fraction"/"progressbar"
+    rowindividual: 2,// 一行个数
+    imageList: [],  // 添加图片
   },
 })
 
@@ -118,7 +118,7 @@ componentsData.set('graphicnavigation', {
 componentsData.set('richtext', {
   component: 'richtext',
   text: '富文本',
-  type: '1-5',
+  type: '1-10',
   active: true,
   style: 'richtextstyle',
   setStyle: {
@@ -170,7 +170,7 @@ componentsData.set('magiccube', {
 componentsData.set('auxiliarysegmentation', {
   component: 'auxiliarysegmentation',
   text: '辅助分割',
-  type: '1-7',
+  type: '1-11',
   active: true,
   style: 'auxiliarysegmentationstyle',
   setStyle: {
@@ -185,7 +185,7 @@ componentsData.set('auxiliarysegmentation', {
 componentsData.set('commoditysearch', {
   component: 'commoditysearch',
   text: '商品搜索',
-  type: '1-8',
+  type: '1-1',
   active: true,
   style: 'commoditysearchstyle',
   setStyle: {
@@ -204,7 +204,7 @@ componentsData.set('commoditysearch', {
 componentsData.set('storeinformation', {
   component: 'storeinformation',
   text: '店铺信息',
-  type: '1-9',
+  type: '1-12',
   active: true,
   style: 'storeinformationstyle',
   setStyle: {
@@ -219,7 +219,7 @@ componentsData.set('storeinformation', {
 componentsData.set('entertheshop', {
   component: 'entertheshop',
   text: '进入店铺',
-  type: '1-10',
+  type: '1-13',
   active: true,
   style: 'entertheshopstyle',
   setStyle: {
@@ -233,7 +233,7 @@ componentsData.set('entertheshop', {
 componentsData.set('notice', {
   component: 'notice',
   text: '公告',
-  type: '1-11',
+  type: '1-7',
   active: true,
   style: 'noticestyle',
   setStyle: {
@@ -246,7 +246,7 @@ componentsData.set('notice', {
 componentsData.set('videoss', {
   component: 'videoss',
   text: '视频',
-  type: '1-12',
+  type: '1-8',
   active: true,
   style: 'videostyle',
   setStyle: {
@@ -258,7 +258,7 @@ componentsData.set('videoss', {
 componentsData.set('voicer', {
   component: 'voicer',
   text: '音频',
-  type: '1-13',
+  type: '1-9',
   active: true,
   style: 'voicerstyle',
   setStyle: {
@@ -269,7 +269,7 @@ componentsData.set('voicer', {
 componentsData.set('custommodule', {
   component: 'custommodule',
   text: '自定义模块',
-  type: '1-14',
+  type: 'demo',
   active: true,
   style: 'custommodulestyle',
   setStyle: {
@@ -281,7 +281,7 @@ componentsData.set('custommodule', {
 componentsData.set('communitypowder', {
   component: 'communitypowder',
   text: '社群涨粉',
-  type: '1-15',
+  type: '1-14',
   active: true,
   style: 'communitypowderstyle',
   setStyle: {
@@ -296,12 +296,12 @@ componentsData.set('communitypowder', {
 })
 componentsData.set('storenotecard', {
   component: 'storenotecard',
-  text: '店铺笔记卡片',
-  type: '1-16',
+  text: '文章模块',
+  type: '2-2',
   active: true,
   style: 'storenotecardstyle',
   setStyle: {
-    text: '店铺笔记卡片',
+    text: '文章模块',
     name: '这里显示专题名称', //专题名称
     commodityType: 0, // 选择模板
     moditystyle: 0, // 卡片样式选择
@@ -353,24 +353,24 @@ componentsData.set('onlineservice', {
 })
 componentsData.set('investigate', {
   component: 'investigate',
-  text: '调研',
-  type: '1-20',
+  text: '表单模块',
+  type: '2-3',
   active: true,
   style: 'investigatestyle',
   setStyle: {
-    text: '调研',
-    title: '调研',
+    text: '表单模块',
+    title: '表单模块',
     jsonData: [], //value1为sass显示内容，value2为前端显示内容
   },
 })
 componentsData.set('tabBar', {
   component: 'tabBar',
-  text: '导航',
-  type: '1-21',
+  text: '底部导航',
+  type: '1-5',
   active: true,
   style: 'tabBarStyle',
   setStyle: {
-    text: '导航',
+    text: '底部导航',
     activeColor: '#1989fa',
     inactiveColor: '#7d7e80',
     isShowBorder: true,
@@ -384,7 +384,7 @@ componentsData.set('tabBar', {
 componentsData.set('follow', {
   component: 'follow',
   text: '关注公众号',
-  type: '1-22',
+  type: '1-15',
   active: true,
   style: 'followStyle',
   setStyle: {
@@ -397,7 +397,7 @@ componentsData.set('follow', {
 componentsData.set('suspension', {
   component: 'suspension',
   text: '悬浮按钮',
-  type: '1-23',
+  type: '1-16',
   active: true,
   style: 'suspensionstyle',
   setStyle: {

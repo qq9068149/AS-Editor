@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #app {
   position: absolute;
   left: 0;
@@ -90,5 +90,8 @@ export default {
 .fade-leave-to {
   transform: translateX(5px);
   opacity: 0;
+}
+.el-message-box.JSONView{
+  width: 1100px;
 }
 </style>

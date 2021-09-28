@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
     <el-input v-model="datas.demo" placeholder="请输入公告" />
     <el-input v-model="datas.img" placeholder="图片地址" />
-        {{ 'aaa'+ data-type}}
+        {{ 'aaa'+ datas.type}}
 
   </div>
 </template>

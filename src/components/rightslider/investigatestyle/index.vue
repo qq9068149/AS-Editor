@@ -25,7 +25,7 @@
         <el-input
           v-model="item.name"
           class="title"
-          placeholder="调研名称"
+          placeholder="表单模块名称"
         ></el-input>
         <el-select
           v-model="item.type"

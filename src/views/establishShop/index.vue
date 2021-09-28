@@ -337,8 +337,10 @@
         </section>
       </el-tab-pane>
 
-      <!-- <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane> -->
+      <el-tab-pane label="开屏广告" name="openScreen">
+        配置管理
+      </el-tab-pane>
+      <!-- <el-tab-pane label="xxx" name="third">xxx</el-tab-pane> -->
     </el-tabs>
 
     <!-- 推广弹框 -->
@@ -733,9 +735,9 @@ export default {
   box-sizing: border-box;
 
   /* tab */
-  /deep/.el-tabs__nav-wrap .is-top {
-    padding: 0 20px;
-  }
+  // /deep/.el-tabs__nav-wrap .is-top {
+  //   padding: 0 20px;
+  // }
 
   .el-dropdown-link {
     cursor: pointer;

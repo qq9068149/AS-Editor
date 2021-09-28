@@ -16,7 +16,8 @@
           v-for="(item, ind) in items.comList"
           :key="ind"
         >
-          <i class="iconfont" :class="item.icon" />
+          <i class="iconfont" :class="item.icon"  v-if="item.icon" />
+          <van-icon :name="item.vanIcon" v-else />
           <p>{{ item.text }}</p>
         </div>
       </el-collapse-item>
@@ -38,17 +39,18 @@ export default {
           title: '基础组件',
           comList: [
             {
-              text: '标题文本',
+              text: '商品搜索',
               type: '1-1',
+              icon: 'icon-shangpinsousuo',
+              name: 'commoditysearch',
+            },
+            {
+              text: '标题文本',
+              type: '1-3',
               icon: 'icon-Component-biaotiwenzi',
               name: 'captiontext',
             },
-            {
-              text: '商品',
-              type: '1-2',
-              icon: 'icon-goods',
-              name: 'listswitching',
-            },
+
             {
               text: '图片广告',
               type: '1-3',
@@ -62,10 +64,10 @@ export default {
               name: 'graphicnavigation',
             },
             {
-              text: '富文本',
+              text: '底部导航',
               type: '1-5',
-              icon: 'icon-fuwenben',
-              name: 'richtext',
+              icon: 'icon-daohang',
+              name: 'tabBar',
             },
             {
               text: '魔方',
@@ -74,210 +76,117 @@ export default {
               name: 'magiccube',
             },
             {
-              text: '辅助分割',
-              type: '1-7',
-              icon: 'icon-Component-fuzhufenge',
-              name: 'auxiliarysegmentation',
-            },
-            {
-              text: '商品搜索',
-              type: '1-8',
-              icon: 'icon-shangpinsousuo',
-              name: 'commoditysearch',
-            },
-            {
-              text: '店铺信息',
-              type: '1-9',
-              icon: 'icon-dianpuxinxi',
-              name: 'storeinformation',
-            },
-            {
-              text: '进入店铺',
-              type: '1-10',
-              icon: 'icon-jinrudianpu',
-              name: 'entertheshop',
-            },
-            {
               text: '公告',
-              type: '1-11',
+              type: '1-7',
               icon: 'icon-gonggao',
               name: 'notice',
             },
+            
             {
               text: '视频',
-              type: '1-12',
+              type: '1-8',
               icon: 'icon-shipin',
               name: 'videoss',
             },
             {
               text: '音频',
-              type: '1-13',
+              type: '1-9',
               icon: 'icon-yuyin',
               name: 'voicer',
             },
-             
+            {
+              text: '富文本',
+              type: '1-10',
+              icon: 'icon-fuwenben',
+              name: 'richtext',
+            },
+            {
+              text: '辅助分割',
+              type: '1-11',
+              icon: 'icon-Component-fuzhufenge',
+              name: 'auxiliarysegmentation',
+            },
+
+            {
+              text: '店铺信息',
+              type: '1-12',
+              icon: 'icon-dianpuxinxi',
+              name: 'storeinformation',
+            },
+            {
+              text: '进入店铺',
+              type: '1-13',
+              icon: 'icon-jinrudianpu',
+              name: 'entertheshop',
+            },            
             {
               text: '社群涨粉',
-              type: '1-15',
+              type: '1-14',
               icon: 'icon-kuaisuzhangfen',
               name: 'communitypowder',
             },
-            {
-              text: '店铺笔记卡片',
-              type: '1-16',
-              icon: 'icon-dianpubijikapian',
-              name: 'storenotecard',
-            },
             /* {
-              text: '人群运营',
+              text: 'xxx',
               type: '1-17',
               icon: 'icon-yunying',
               name: ''
             }, */
             /* {
-              text: '在线客服',
+              text: 'xxx',
               type: '1-19',
               icon: 'icon-weibiaoti-_huaban',
               name: ''
             }, */
             /* {
-              text: '个性化推荐',
+              text: 'xxxx',
               type: '1-18',
               icon: 'icon-gexinghuatuijian',
               name: ''
             }, */
             {
-              text: '调研',
-              type: '1-20',
-              icon: 'icon-dianpubijikapian',
-              name: 'investigate',
-            },
-            {
-              text: '导航',
-              type: '1-21',
-              icon: 'icon-daohang',
-              name: 'tabBar',
-            },
-            {
               text: '关注公众号',
-              type: '1-22',
+              type: '1-15',
               icon: 'icon-gongzhonghao',
               name: 'follow',
             },
             {
               text: '悬浮',
-              type: '1-23',
+              type: '1-16',
               icon: 'icon-wangye',
               name: 'suspension',
             },
             {
               text: '自定义模块',
-              type: '1-13',
+              type: 'demo',
               icon: 'icon-zidingyimokuai',
               name: 'custommodule'
             }, 
           ],
         },
-        /* {
-          title: '营销组件',
+        {
+          title: '业务组件',
           comList: [
             {
-              text: '优惠券',
+              text: '商品',
               type: '2-1',
-              icon: 'icon-youhuiquan',
-              name: ''
+              icon: 'icon-goods',
+              name: 'listswitching',
             },
             {
-              text: '限时折扣',
+              text: '文章模块',
               type: '2-2',
-              icon: 'icon-xianshizhekou',
-              name: ''
+              icon: 'icon-dianpubijikapian',
+              name: 'storenotecard',
             },
             {
-              text: '秒杀',
+              text: '表单模块',
               type: '2-3',
-              icon: 'icon-miaosha',
-              name: ''
-            },
-            {
-              text: '拼团',
-              type: '2-4',
-              icon: 'icon-pintuan-copy',
-              name: ''
-            },
-            {
-              text: '砍价',
-              type: '2-5',
-              icon: 'icon-kanjia',
-              name: ''
-            },
-            {
-              text: '周期购',
-              type: '2-6',
-              icon: 'icon-zhouqi',
-              name: ''
-            },
-            {
-              text: '积分商城',
-              type: '2-7',
-              icon: 'icon-jifenzhang',
-              name: ''
+              vanIcon: 'orders-o',
+              name: 'investigate',
             }
           ]
         },
-        {
-          title: '教育组件',
-          comList: [
-            {
-              text: '课程',
-              type: '3-1',
-              icon: 'icon-kecheng',
-              name: ''
-            },
-            {
-              text: '老师',
-              type: '3-2',
-              icon: 'icon-laoshi',
-              name: ''
-            },
-            {
-              text: '知识专栏',
-              type: '3-3',
-              icon: 'icon-zhishizhuanlan1',
-              name: ''
-            },
-            {
-              text: '知识内容',
-              type: '3-4',
-              icon: 'icon-zhishizhuanlan',
-              name: ''
-            },
-            {
-              text: '知识直播',
-              type: '3-5',
-              icon: 'icon-zhibobofangshexiangjitianxianxianxing',
-              name: ''
-            },
-            {
-              text: '知识付费会员',
-              type: '3-6',
-              icon: 'icon-zhishifufeihuiyuan',
-              name: ''
-            },
-            {
-              text: '群打卡',
-              type: '3-7',
-              icon: 'icon-daka',
-              name: ''
-            },
-            {
-              text: '报名表单',
-              type: '3-8',
-              icon: 'icon-baomingbiaodan',
-              name: ''
-            }
-          ]
-        } */
+
       ],
     }
   },
@@ -310,12 +219,13 @@ export default {
 <style scoped lang="less">
 /* 组件 */
 .sliderassembly {
-  width: 190px;
+  width: 275px;
   height: 100%;
   overflow-y: scroll;
   border-right: 1px solid #ebedf0;
   box-sizing: border-box;
   padding: 0 12px;
+  background: #fff;
   /* 滚动条 */
   &::-webkit-scrollbar {
     width: 1px;
