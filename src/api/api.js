@@ -121,7 +121,7 @@ class httpApi {
 		method: 'post'
 	})
 	
-	//设置为系统模板
+	//设置为模板
 	saveDefaultTemplate = data => httpAjax({
 		url: '/adm/shopTemplate/saveDefaultTemplate',
 		data,

@@ -12,63 +12,55 @@
       <!-- 内容 -->
       <el-tabs v-model="activeName" width="100%" @tab-click="handleClick">
         <el-tab-pane label="系统页模板" name="0">
-          <!-- 模板列表 -->
-          <section class="templateList">
-            <div class="entyTemplate">
-              <i
-                class="el-icon-circle-plus-outline"
-                style="
-                  font-size: 45px;
-                  color: #fff;
-                  background: rgb(217, 220, 223, 0.5);
-                  border-radius: 50%;
-                "
-              />
-              <p style="margin-top: 10px; font-size: 14px; color: #7d7e80">
-                使用空白模板
-              </p>
-              <!-- 进入事件 -->
-              <div class="hove">
-                <el-button
-                  type="primary"
-                  size="small"
-                  @click="$router.push({ path: 'home' })"
-                  >使用模板</el-button
-                >
-              </div>
-            </div>
-          </section>
-          <div v-for="(item, index) in dtList" :key="index">
-            <section class="templateList">
-              <!--                <i class="el-icon-circle-plus-outline" style="font-size: 45px;color: #fff;background: rgb(217, 220, 223, .5);border-radius: 50%;" />-->
-              <van-image
-                width="100%"
-                height="320px"
-                fit="scale-down"
-                :src="item.imgUrl"
-              />
-              <p style="margin-top: 10px; font-size: 14px; color: #7d7e80">
-                {{ item.name }}
-              </p>
-              <!-- 进入事件 -->
-              <div class="hove">
-                <el-button
-                  type="primary"
-                  size="small"
-                  @click="
-                    $router.push({ path: 'home?id=' + item.id + '&type=tpl' })
+          <el-row>
+            <el-col :span="6" :offset="1">
+              <!-- 模板列表 -->
+              <el-card
+                shadow="hover"
+                @click.native="$router.push({ path: 'home' })"
+              >
+                <i
+                  class="el-icon-circle-plus-outline"
+                  style="
+                    font-size: 45px;
+                    color: #fff;
+                    background: rgb(217, 220, 223, 0.5);
+                    border-radius: 50%;
                   "
-                  >使用模板</el-button
-                >
-              </div>
-            </section>
-          </div>
+                />
+                <div>空白模板</div>
+              </el-card>
+            </el-col>
+            <el-col
+              :span="6"
+              v-for="(item, index) in dtList"
+              :key="index"
+              :offset="1"
+            >
+              <el-card shadow="hover">
+                <van-image
+                  width="100%"
+                  height="320px"
+                  fit="scale-down"
+                  :src="item.imgUrl"
+                />
+                <div class="bottom">
+                  <time class="name">{{ item.name }}</time>
+                  <el-button
+                    type="text"
+                    class="button"
+                    @click="
+                      $router.push({
+                        path: 'home?id=' + item.id + '&type=tpl',
+                      })
+                    "
+                    >使用模板</el-button
+                  >
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
         </el-tab-pane>
-
-        <!-- <el-tab-pane label="行业模板" name="1">行业模板</el-tab-pane>
-        <el-tab-pane label="活动/节日模板" name="2">活动/节日模板</el-tab-pane>
-        <el-tab-pane label="主页模板" name="3">主页模板</el-tab-pane>
-        <el-tab-pane label="我的模板" name="4">我的模板</el-tab-pane> -->
       </el-tabs>
     </el-dialog>
   </div>
@@ -141,47 +133,28 @@ export default {
       overflow-x: scroll;
       display: flex;
       padding: 10px;
-      /* 模板列表 */
-      .templateList {
-        width: 184px;
-        height: 380px;
-        position: relative;
-        transition: all 1s;
-        transform: translateY(0);
-        margin-top: 10px;
-        margin-left: 20px;
-        border-radius: 4px 4px 0 0;
-        border: 1px solid #f2f2f2;
+    }
+  }
+  /deep/.el-row {
+    width: 896px;
+    .el-card {
+      margin-bottom: 30px;
+      .el-card__body {
+        height: 385px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-
-        .entyTemplate {
-          width: 185px;
+        .bottom {
+          width: 100%;
           display: flex;
-          flex-direction: column;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-        }
-        .hove {
-          display: none;
-        }
-
-        &:hover {
-          transform: translateY(-5px);
-          margin-top: -10px;
-          /* 进入事件 */
-          .hove {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+          .name{
+            width: 70%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
         }
       }

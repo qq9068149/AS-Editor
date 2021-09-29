@@ -116,9 +116,9 @@
                   <el-form-item label="名称">
                     <span>{{ props.row.name }}</span>
                   </el-form-item>
-                  <el-form-item label="详情">
+                  <!-- <el-form-item label="详情">
                     <span>{{ props.row.details }}</span>
-                  </el-form-item>
+                  </el-form-item> -->
                   <el-form-item label="创建时间">
                     <span>{{ props.row.createTime }}</span>
                   </el-form-item>
@@ -167,7 +167,7 @@
               </template>
             </el-table-column>
             <!-- 详情 -->
-            <el-table-column prop="details" min-width="130" label="详情" />
+            <!-- <el-table-column prop="details" min-width="130" label="详情" /> -->
 
             <!-- 创建时间 -->
             <el-table-column
@@ -201,14 +201,6 @@
                   slot="prefix"
                   class="el-input__icon el-icon-search search-icon"
                 ></i>
-                <!-- <el-input
-                  v-model="searchs"
-                  size="mini"
-                  type="text"
-                  placeholder="请输入需要搜索的页面名称"
-                >
-                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                </el-input> -->
                 <el-button
                   type="primary"
                   size="small"
@@ -258,7 +250,7 @@
                     type="text"
                     size="small"
                     @click="setDefaultTemplate(scope.row.id, 1)"
-                    >设置为系统模板</el-button
+                    >设置为模板</el-button
                   >
                   <el-button
                     style="padding: 0 5px; border-right: 1px solid #e5e5e5"
@@ -306,19 +298,6 @@
                     >导出配置</el-button
                   >
                 </el-popconfirm>
-                <!-- 更多 -->
-                <!-- <el-dropdown placement="bottom-start" @command="dropDownButton">
-                  <span class="el-dropdown-link">
-                    更多<i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item :command="{type: 1, data: scope.row}">添加为我的模板</el-dropdown-item>
-                    <el-dropdown-item command="2">狮子头</el-dropdown-item>
-                    <el-dropdown-item command="3">螺蛳粉</el-dropdown-item>
-                    <el-dropdown-item command="4" disabled>双皮奶</el-dropdown-item>
-                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown> -->
               </template>
             </el-table-column>
           </el-table>
@@ -337,8 +316,8 @@
         </section>
       </el-tab-pane>
 
-      <el-tab-pane label="开屏广告" name="openScreen">
-        配置管理
+      <el-tab-pane label="开屏广告" name="screen">
+        <screen/>
       </el-tab-pane>
       <!-- <el-tab-pane label="xxx" name="third">xxx</el-tab-pane> -->
     </el-tabs>
@@ -354,6 +333,7 @@
 <script>
 import extension from 'components/extension'
 import createTemplate from 'components/createTemplate'
+import screen from '../../layout/screen'
 
 export default {
   inject: ['reload'],
@@ -386,7 +366,7 @@ export default {
       homepageData: null, //主页内容
     }
   },
-  components: { extension, createTemplate },
+  components: { extension, createTemplate,screen },
   created() {
     this.getList(1, this.pageNumber, this.searchs, this.status)
   },
@@ -492,13 +472,13 @@ export default {
         this.getList(1, this.pageNumber, this.searchs, this.status)
       })
     },
-    /* 设置为系统模板 */
+    /* 设置为模板 */
     setDefaultTemplate(id, type) {
       this.$httpApi.saveDefaultTemplate({ id, type }).then((res) => {
         if (res.code !== 0) return this.$message.error(res.msg)
         /* 成功弹框 */
         this.$message({
-          message: '设置为系统模板成功',
+          message: '设置为模板成功',
           type: 'success',
         })
         this.currentPage = 1
@@ -823,7 +803,7 @@ export default {
       min-height: 400px;
     }
     /deep/.cell {
-      text-align: center;
+      text-align: left;
       font-size: 14px;
       overflow: hidden;
       white-space: nowrap;
