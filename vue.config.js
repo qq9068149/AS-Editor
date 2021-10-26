@@ -12,7 +12,7 @@ module.exports = {
     open: true,
     proxy: {
       '/api': {
-        target: 'https://xxx.xxx.xxx/',
+        target: 'https://shop.starfirelink.com/',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

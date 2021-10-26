@@ -295,7 +295,7 @@ export default {
     /* 获取下拉框内容 */
     getOption() {
       this.$httpApi.shopTemplate().then((res) => {
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
         this.options = res.data.shopTemplateList
       })
     },

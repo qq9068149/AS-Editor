@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: '/establishShop' },
+  // { path: '/', redirect: '/establishShop' },
   {
     path: '/',
     name: 'layout',

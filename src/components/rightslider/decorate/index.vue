@@ -236,8 +236,7 @@ export default {
     // 获取店铺信息
     getShopInfo() {
       this.$httpApi.queryShopInfo().then((res) => {
-        // console.log('shop info ', res)
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         this.shopData.shopName = res.data.name // 店铺名称
         this.shopData.shopPic = res.data.icon // 店铺头像
@@ -257,7 +256,6 @@ export default {
 
       this.$httpApi.updateShopInfo(params).then((res) => {
         console.log('change shop info ::', res)
-        if (res.code !== 0) return this.$message.error(res.msg)
         this.$message.success(res.msg)
       })
     },

@@ -386,7 +386,7 @@ export default {
         .then((res) => {
           /* 取消加载 */
 
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
 
           this.total = res.count - 1
 
@@ -461,8 +461,8 @@ export default {
 
     /* 设为主页按钮 */
     setHomePage(id) {
-      this.$httpApi.homePage({ id }).then((res) => {
-        if (res.code !== 0) return this.$message.error(res.msg)
+      this.$httpApi.homePage({ id }).then(() => {
+        
         /* 成功弹框 */
         this.$message({
           message: '设置为主页成功',
@@ -474,8 +474,8 @@ export default {
     },
     /* 设置为模板 */
     setDefaultTemplate(id, type) {
-      this.$httpApi.saveDefaultTemplate({ id, type }).then((res) => {
-        if (res.code !== 0) return this.$message.error(res.msg)
+      this.$httpApi.saveDefaultTemplate({ id, type }).then(() => {
+        
         /* 成功弹框 */
         this.$message({
           message: '设置为模板成功',
@@ -496,11 +496,11 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)',
       })
-      this.$httpApi.delete({ id }).then((res) => {
+      this.$httpApi.delete({ id }).then(() => {
         /* 取消加载 */
         loadingss.close()
 
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         /* 成功弹框 */
         this.$message({
@@ -542,11 +542,11 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)',
       })
-      this.$httpApi.copy({ id }).then((res) => {
+      this.$httpApi.copy({ id }).then(() => {
         /* 取消加载 */
         loadingss.close()
 
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         /* 成功弹框 */
         this.$message({
@@ -574,7 +574,7 @@ export default {
       this.$httpApi.exportTemplate({ shopTemplateId: id }).then((res) => {
         /* 取消加载 */
         loadingss.close()
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         let data = res.data.exportData
         let fileName = name + '.yhxl'
@@ -624,11 +624,11 @@ export default {
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)',
       })
-      this.$httpApi.importTemplate({ id }).then((res) => {
+      this.$httpApi.importTemplate({ id }).then(() => {
         /* 取消加载 */
         loadingss.close()
 
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         /* 成功弹框 */
         this.$message({
@@ -674,7 +674,7 @@ export default {
         .then((res) => {
           this.loading = false
 
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           console.log(res.data.shopCommodity, '------------------shopCommodity')
           localStorage.setItem(
             'shopCommodity',

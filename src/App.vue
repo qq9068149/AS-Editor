@@ -26,9 +26,7 @@ export default {
       this.$httpApi
         .loginAdminTest({ loginname: 'admin', pwd: '123456' })
         .then((res) => {
-          if (!res.success) {
-            return this.$message.error(res.msg)
-          }
+          console.log(res)
           this.getPermission()
         })
     } else {
@@ -52,9 +50,6 @@ export default {
     },
     getPermission() {
       this.$httpApi.getPermission().then((res) => {
-        if (!res.success) {
-          return this.$message.error(res.msg)
-        }
         let permissionsList = res.data.permissionsList
 
         for (let i in permissionsList) {

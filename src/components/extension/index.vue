@@ -112,7 +112,7 @@ export default {
     // 获取海报模板
     selectDataApi() {
       this.$httpApi.selectData().then((res) => {
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
         this.options = res.data.posterList
         this.selectType = res.data.posterList[0].title
         // 没有默认模板请求
@@ -138,7 +138,7 @@ export default {
         })
         .then((res) => {
           loading.close()
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           this.$message({
             message: '海报加载成功',
             type: 'success',

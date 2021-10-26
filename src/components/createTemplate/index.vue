@@ -95,7 +95,7 @@ export default {
     },
     loadDefaultTemplate() {
       this.$httpApi.defaultTemplate().then((res) => {
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
         console.log(res)
         this.dtList = res.data.defaultTemplateList
       })

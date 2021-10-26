@@ -283,7 +283,7 @@ export default {
           /* 取消加载 */
           loading.close()
 
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           let datas = res.data.shopTemplate
 
           //如果为模板，则需要将id设置为null,否则模板会被修改
@@ -363,7 +363,7 @@ export default {
         this.$httpApi.shelves({ shopTemplateId: this.id }).then((res) => {
           /* 取消加载 */
           loadingss.close()
-          if (res.code !== 0) return this.$message.error(res.msg)
+          console.log(res)
 
           this.$router.push({ path: 'establishShop' })
           this.id = null
@@ -387,8 +387,7 @@ export default {
         this.$httpApi.shelves({ shopTemplateId: this.id }).then((res) => {
           /* 取消加载 */
           loadingss.close()
-          if (res.code !== 0) return this.$message.error(res.msg)
-
+          console.log(res)
           this.$message({
             message: '上架成功',
             type: 'success',
@@ -468,7 +467,7 @@ export default {
               /* 取消加载 */
               loadings.close()
 
-              if (res.code !== 0) return this.$message.error(res.msg)
+              
 
               this.$message({
                 message: '上传成功',
@@ -519,7 +518,7 @@ export default {
             type: 'success',
           })
 
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           /* 获取图片链接 */
           callBack(res.data.src)
         })

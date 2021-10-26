@@ -237,12 +237,12 @@ export default {
         /* 获取视频,音频,直播信息 */
         this.$httpApi.newsList({ type: res }).then((res) => {
           this.activ = 0
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           this.options = res.data
         })
       } else if (res === '10') {
         this.$httpApi.shopTemplate().then((res) => {
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           this.options = res.data.shopTemplateList
         })
       }

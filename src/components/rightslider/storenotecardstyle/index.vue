@@ -453,7 +453,7 @@ export default {
           /* 获取视频,音频,直播信息 */
           this.$httpApi.newsList({ type: linkType }).then((res) => {
             this.activ = 0
-            if (res.code !== 0) return this.$message.error(res.msg)
+            
             res.data.length === 0 ? (this.emptyText = '暂无数据') : null
             this.options = res.data
 
@@ -466,7 +466,7 @@ export default {
         } else if (linkType === '10') {
           // 历史页面
           this.$httpApi.shopTemplate().then((res) => {
-            if (res.code !== 0) return this.$message.error(res.msg)
+            
             this.options = res.data.shopTemplateList
 
             // 校验数据
@@ -484,13 +484,13 @@ export default {
         /* 获取视频,音频,直播信息 */
         this.$httpApi.newsList({ type: res }).then((res) => {
           this.activ = 0
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           this.options1 = res.data
         })
       } else if (res === '10') {
         // 历史页面
         this.$httpApi.shopTemplate().then((res) => {
-          if (res.code !== 0) return this.$message.error(res.msg)
+          
           this.options1 = res.data.shopTemplateList
         })
       }

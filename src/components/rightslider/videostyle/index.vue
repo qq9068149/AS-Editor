@@ -71,7 +71,7 @@ export default {
       /* 获取视频信息 */
       this.$httpApi.newsList({ type: 1 }).then((res) => {
         this.activ = 0
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
         this.videoList = res.data
       })
     },

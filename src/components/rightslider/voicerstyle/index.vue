@@ -67,7 +67,7 @@ export default {
       this.$httpApi.newsList({ type: 3 }).then((res) => {
         this.activ = 0
         console.log(res.data)
-        if (res.code !== 0) return this.$message.error(res.msg)
+        
 
         this.voicerList = res.data
       })
