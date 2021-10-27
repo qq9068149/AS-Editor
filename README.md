@@ -4,6 +4,8 @@
 
 基于 vue 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
+与AS-Editor一起使用可以可视化生成vue页面 [AS-Editor-H5](https://gitee.com/was666/as-editor-h5.git)
+
 #### 安装教程
 
 1.  npm install （安装 node_modules 模块）
