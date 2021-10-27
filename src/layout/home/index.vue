@@ -27,13 +27,13 @@
         <el-button @click="reloads" type="danger"
           ><i class="el-icon-delete-solid el-icon--left"></i>重置</el-button
         >
-        <el-button @click="Preservation"
+        <!-- <el-button @click="Preservation"
           ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
-        >
+        > -->
         <el-button @click="catJson">查看JSON </el-button>
-        <el-button @click="upperShelf" type="primary"
+        <!-- <el-button @click="upperShelf" type="primary"
           ><i class="el-icon-upload el-icon--left"></i>上架</el-button
-        >
+        > -->
       </div>
     </section>
 
@@ -144,7 +144,7 @@
         </span>
         <span
           class="active"
-          v-show="rightcom!='componenmanagement'&&rightcom!='decorate'"
+          v-show="rightcom != 'componenmanagement' && rightcom != 'decorate'"
         >
           <i class="iconfont icon-zujian" />
           组件设置
@@ -283,7 +283,6 @@ export default {
           /* 取消加载 */
           loading.close()
 
-          
           let datas = res.data.shopTemplate
 
           //如果为模板，则需要将id设置为null,否则模板会被修改
@@ -294,8 +293,6 @@ export default {
           this.pageComponents = JSON.parse(datas.component)
 
           console.log(this.pageComponents, '--------------------pageComponents')
-          // TODO: 旧店铺组件模板数据是否需要同步？
-          // this.mergeComponents()
 
           if (datas.templateJson) {
             console.log('----------home datas1')
@@ -322,24 +319,6 @@ export default {
   },
 
   methods: {
-    // 合并组件数据
-    mergeComponents() {
-      // item 店铺绑定的组件数据    需要吧 item 合并到 componentsData 数据中
-      this.pageComponents.forEach((item, index) => {
-        if (componentProperties.get(item.component)) {
-          // 更改单个组件数据
-          this.$set(
-            this.pageComponents,
-            index,
-            this.$common.assiginObj(
-              componentProperties.get(item.component),
-              item
-            )
-          )
-        }
-      })
-    },
-
     dropDownButton(res) {
       // 设为系统模板
       if (res === '1') {
@@ -392,9 +371,6 @@ export default {
             message: '上架成功',
             type: 'success',
           })
-          /* this.$alert('请返回上一页进行刷新操作对您创建的页面进行操作', '上架成功', {
-            confirmButtonText: '确定',
-          }); */
           this.$router.push({ path: 'establishShop' })
           this.id = null
         })
@@ -409,9 +385,9 @@ export default {
           <br/>
           "name": "${this.pageSetup.name}",
           <br/>
-          "templateJson": ${JSON.stringify(this.pageSetup)},
+          "templateJson": '${JSON.stringify(this.pageSetup)}',
           <br/>
-          "component": ${JSON.stringify(this.pageComponents)},
+          "component": '${JSON.stringify(this.pageComponents)}',
           <br/>
         }`,
         '查看JSON',
@@ -467,8 +443,6 @@ export default {
               /* 取消加载 */
               loadings.close()
 
-              
-
               this.$message({
                 message: '上传成功',
                 type: 'success',
@@ -518,7 +492,6 @@ export default {
             type: 'success',
           })
 
-          
           /* 获取图片链接 */
           callBack(res.data.src)
         })
@@ -1170,5 +1143,4 @@ export default {
   transform: translate(8px, 8px);
   opacity: 0;
 }
-
 </style>

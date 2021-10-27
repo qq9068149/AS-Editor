@@ -6,19 +6,6 @@
       <!-- <span>关注我们</span> -->
       <!-- <span>店铺信息</span> -->
     </p>
-    <!-- <img
-      draggable="false"
-      v-show="datas.botLogo"
-      :src="datas.botLogo"
-      style="width: 110px; margin-left: 35%; margin-top: 10px"
-    /> -->
-    <!-- <p class="yinjia" :style="{ 'margin-top': datas ? '0px' : '10px' }">
-      <img
-        draggable="false"
-        class="logo"
-        src="@/assets/images/Robot.png"
-      /><span>星火相连提供技术支持</span>
-    </p> -->
   </div>
 </template>
 

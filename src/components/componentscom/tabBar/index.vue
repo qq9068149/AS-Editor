@@ -80,7 +80,7 @@ export default {
   width: 100%;
   position: relative;
   position: absolute;
-  bottom: 0px;
+  bottom: -54px;
   left: 0px;
   z-index: 2;
 }
