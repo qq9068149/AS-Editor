@@ -42,6 +42,12 @@ src/utils/componentProperties.js            // 组件数据
 }
 ```
 
+#### 扩展项目
+
+AS-Editor-H5：[https://gitee.com/was666/as-editor-h5.git](https://gitee.com/was666/as-editor-h5.git)
+
+AS-Editor-H5为移动端vue模版，可以通过JSON可视化生成vue页面
+
 #### 参与贡献
 
 1.  Fork 本仓库
