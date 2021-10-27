@@ -13,6 +13,12 @@
 
 #### 使用说明
 
+##### 使用教程
+![步骤1](https://images.gitee.com/uploads/images/2021/1027/112917_5f4b400d_5546746.png "image1.png")
+![步骤2](https://images.gitee.com/uploads/images/2021/1027/112939_e466bef2_5546746.png "image2.png")
+![步骤3](https://images.gitee.com/uploads/images/2021/1027/112950_60be2a1a_5546746.png "image3.png")
+![步骤4](https://images.gitee.com/uploads/images/2021/1027/113000_117378e7_5546746.png "image4.png")
+
 ##### 自定义组件可以看：
 
 ```js
@@ -42,12 +48,3 @@ src/utils/componentProperties.js         (组件数据)
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-#### 特技
-
-1.  使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
