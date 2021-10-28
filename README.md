@@ -54,3 +54,10 @@ AS-Editor-H5是移动端vue模版，可以通过定义的JSON生成vue页面
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
+
+#### 结尾
+
+如果喜欢的话给个要 star 一下哈！
+
+如果有意见和问题 可以在 lssues提出，我会在线解答。
+
