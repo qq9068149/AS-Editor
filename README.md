@@ -6,8 +6,8 @@
 
 #### 安装教程
 
-1.  npm install （安装 node_modules 模块）
-2.  yarn upgrade (用于更新包到基于规范范围的最新版本)
+1.  npm install   （安装 node_modules 模块）
+2.  yarn upgrade   (用于更新包到基于规范范围的最新版本)
 3.  npm run serve （运行）
 4.  npm run build （打包）
 
@@ -23,22 +23,22 @@
 ##### 自定义组件可以看：
 
 ```js
-src / layout / home / index.vue // 编辑页面文件
-src / components / sliderassembly / index.vue // 左侧组件大全文件
-src / components / componentscom // 左侧组件目录
-src / components / rightslider // 右侧组件目录
-src / utils / componentProperties.js // 组件数据
+src / layout / home / index.vue                 // 编辑页面文件
+src / components / sliderassembly / index.vue   // 左侧组件大全文件
+src / components / componentscom                // 左侧组件目录
+src / components / rightslider                  // 右侧组件目录
+src / utils / componentProperties.js            // 组件数据
 ```
 
 #### componentProperties（组件数据）字段注解
 
 ```js
 {
-  component: 'custommodule',    //中间部分手机组件的name
-  text: '自定义模块',            //组件文字描述
+  component: 'custommodule',    // 中间部分手机组件的name
+  text: '自定义模块',             // 组件文字描述
   type: '1-14',                 // data-tpye
   active: true,                 // 是否选中
-  style: 'custommodulestyle',   //右边组件设置的name
+  style: 'custommodulestyle',   // 右边组件设置的name
   setStyle: {}                  // 组件动态数据
 }
 ```
