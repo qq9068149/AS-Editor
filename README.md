@@ -7,9 +7,9 @@
 #### 安装教程
 
 1.  npm install   （安装 node_modules 模块）
-2.  yarn upgrade   (用于更新包到基于规范范围的最新版本)
-3.  npm run serve （运行）
-4.  npm run build （打包）
+2.  npm run serve （运行）
+3.  npm run build （打包）
+4.  npm update     (用于更新包到基于规范范围的最新版本)
 
 #### 使用说明
 
