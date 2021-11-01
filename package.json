@@ -1,6 +1,6 @@
 {
   "name": "as-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -13,6 +13,7 @@
     "clipboard": "^2.0.6",
     "core-js": "^3.19.0",
     "element-ui": "^2.15.6",
+    "file-saver": "^2.0.5",
     "html2canvas": "1.0.0-alpha.9",
     "nprogress": "^0.2.0",
     "qrcode": "^1.4.4",

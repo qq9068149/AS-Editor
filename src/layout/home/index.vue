@@ -14,23 +14,16 @@
         返回店铺列表
       </p>
       <div>
-        <!-- <div class="frop">
-          <el-dropdown @command="dropDownButton" placement="bottom-start">
-            <el-button type="primary">
-              更多操作
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="1">保存为系统模板</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div> -->
         <el-button @click="reloads" type="danger"
           ><i class="el-icon-delete-solid el-icon--left"></i>重置</el-button
         >
+        <el-button @click="catJson">查看JSON </el-button>
+        <el-button @click="$refs.file.click()" >导入JSON </el-button>
+        <el-button @click="exportJSON">导出JSON </el-button>
+        <input type="file" ref="file" id="file" accept=".json" @change="importJSON" style="display: none;" />
         <!-- <el-button @click="Preservation"
           ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
         > -->
-        <el-button @click="catJson">查看JSON </el-button>
         <!-- <el-button @click="upperShelf" type="primary"
           ><i class="el-icon-upload el-icon--left"></i>上架</el-button
         > -->
@@ -176,7 +169,8 @@ import componentProperties from '@/utils/componentProperties' // 组件数据
 import sliderassembly from 'components/sliderassembly' // 左侧组件大全
 import phoneBottom from 'components/phoneBottom' // 手机底部
 
-import html2canvas from 'html2canvas'
+import html2canvas from 'html2canvas' // 生成图片
+import FileSaver from 'file-saver' // 导入or导出JSON
 
 /* 手机组件 */
 import {
@@ -319,37 +313,6 @@ export default {
   },
 
   methods: {
-    dropDownButton(res) {
-      // 设为系统模板
-      if (res === '1') {
-        this.systemTemplate()
-      }
-      console.log(res)
-    },
-
-    /**
-     * 设为系统模板
-     *
-     */
-    systemTemplate() {
-      this.Preservation(() => {
-        const loadingss = this.$loading({
-          lock: true,
-          text: '添加为系统模板...',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)',
-        })
-        this.$httpApi.shelves({ shopTemplateId: this.id }).then((res) => {
-          /* 取消加载 */
-          loadingss.close()
-          console.log(res)
-
-          this.$router.push({ path: 'establishShop' })
-          this.id = null
-        })
-      })
-    },
-
     /**
      * 上架
      *
@@ -771,6 +734,36 @@ export default {
           this.$router.go(-1)
         })
         .catch(() => {})
+    },
+
+    // 导出json
+    exportJSON() {
+      // 将json转换成字符串
+      const data = JSON.stringify({
+        id: this.id,
+        name: this.pageSetup.name,
+        templateJson: JSON.stringify(this.pageSetup),
+        component: JSON.stringify(this.pageComponents),
+      })
+      const blob = new Blob([data], { type: '' })
+      FileSaver.saveAs(blob, `${this.pageSetup.name}.json`)
+    },
+    // 导入json
+    importJSON() {
+      const file = document.getElementById('file').files[0]
+      const reader = new FileReader()
+      reader.readAsText(file)
+      let _this = this
+      reader.onload = function () {
+        // this.result为读取到的json字符串，需转成json对象
+        let ImportJSON = JSON.parse(this.result)
+        // 检测是否导入成功
+        console.log(ImportJSON,'-----------------导入成功')
+        // 导入JSON数据
+        _this.id = ImportJSON.id
+        _this.pageSetup = JSON.parse(ImportJSON.templateJson)
+        _this.pageComponents = JSON.parse(ImportJSON.component)
+      }
     },
   },
 
