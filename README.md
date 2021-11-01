@@ -19,6 +19,8 @@
 ![步骤2](https://images.gitee.com/uploads/images/2021/1027/112939_e466bef2_5546746.png 'image2.png')
 ![步骤3](https://images.gitee.com/uploads/images/2021/1027/112950_60be2a1a_5546746.png 'image3.png')
 ![步骤4](https://images.gitee.com/uploads/images/2021/1027/113000_117378e7_5546746.png 'image4.png')
+![步骤5](https://images.gitee.com/uploads/images/2021/1101/173304_1e88f8bb_5546746.png "image5.png")
+![步骤6](https://images.gitee.com/uploads/images/2021/1101/173318_fee90ec7_5546746.png "image6.png")
 
 ##### 自定义组件可以看：
 
