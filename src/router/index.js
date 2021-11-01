@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // { path: '/', redirect: '/establishShop' },
   {
     path: '/',
     name: 'layout',
@@ -12,7 +11,7 @@ const routes = [
     component: () => import('@/layout'),
     children: [
       {
-        //首页
+        //  首页
         path: '/home',
         name: 'home',
         component: () => import('@/layout/home'),
@@ -20,7 +19,7 @@ const routes = [
     ],
   },
   {
-    //创建页面
+    //  创建页面
     path: '/establishShop',
     name: 'establishShop',
     component: () => import('@/views/establishShop'),
@@ -28,7 +27,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes,
+  base: process.env.BASE_URL,
+  routes
 })
 
 export default router

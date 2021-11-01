@@ -403,7 +403,7 @@ export default {
           this.tableData = res.data
         })
         .then(() => {
-          this.getShopCommodity()
+          this.loading = false
         })
         .catch(() => {
           this.loading = false
@@ -667,24 +667,7 @@ export default {
       console.log(err)
       console.log(file)
       console.log(fileList)
-    },
-    getShopCommodity() {
-      this.$httpApi
-        .getShopCommodity()
-        .then((res) => {
-          this.loading = false
-
-          
-          console.log(res.data.shopCommodity, '------------------shopCommodity')
-          localStorage.setItem(
-            'shopCommodity',
-            JSON.stringify(res.data.shopCommodity)
-          )
-        })
-        .catch(() => {
-          this.loading = false
-        })
-    },
+    }
   },
 
   computed: {

@@ -114,7 +114,7 @@ class httpApi {
 		method: 'post'
 	})
 
-	//获取当前用户权限
+	//手机登录接口
 	loginAdminTest = data => httpAjax({
 		url: '/loginAdminTest',
 		data,

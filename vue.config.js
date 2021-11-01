@@ -12,7 +12,7 @@ module.exports = {
     open: true,
     proxy: {
       '/api': {
-        target: 'https://shop.starfirelink.com/',
+        target: 'https://player.okgene.work/',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

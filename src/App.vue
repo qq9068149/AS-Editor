@@ -21,18 +21,13 @@ export default {
     }
   },
   created() {
-    if (process.env.NODE_ENV === 'development') {
-      // console.log('开发环境')
-      this.$httpApi
-        .loginAdminTest({ loginname: 'admin', pwd: '123456' })
-        .then((res) => {
-          console.log(res)
-          this.getPermission()
-        })
-    } else {
-      // console.log('生产环境')
-      this.getPermission()
-    }
+    this.$httpApi
+      .loginAdminTest({ loginname: 'admin', pwd: '123456' })
+      .then((res) => {
+        console.log(res)
+        this.getPermission()
+        this.getShopCommodity()
+      })
   },
   mounted() {
     //将hasPermission挂载到window
@@ -48,6 +43,7 @@ export default {
         this.isRouterAlive = true
       })
     },
+    // 获取当前用户权限
     getPermission() {
       this.$httpApi.getPermission().then((res) => {
         let permissionsList = res.data.permissionsList
@@ -57,8 +53,25 @@ export default {
         }
       })
     },
+    // 返回一个布尔值，判断对象是否包含特定的自身（非继承）属性
     hasPermission(permission) {
       return this.permissionsJson.hasOwnProperty(permission)
+    },
+    // 获取商品数据
+    getShopCommodity() {
+      this.$httpApi
+        .getShopCommodity()
+        .then((res) => {
+          this.loading = false
+          console.log(res.data.shopCommodity, '------------------shopCommodity')
+          localStorage.setItem(
+            'shopCommodity',
+            JSON.stringify(res.data.shopCommodity)
+          )
+        })
+        .catch(() => {
+          this.loading = false
+        })
     },
   },
 }
@@ -86,7 +99,7 @@ export default {
   transform: translateX(5px);
   opacity: 0;
 }
-.el-message-box.JSONView{
+.el-message-box.JSONView {
   width: 1100px;
 }
 </style>

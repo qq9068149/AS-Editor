@@ -1,34 +1,6 @@
 <!-- 已被弃用  该组件为抽离的 魔方组件种商品上传 -->
 <template>
   <div class="productUpload">
-    <!-- 分类名称 -->
-    <!-- <section v-for="(item, index) in datas.commoditylisttypetab" :key="index">
-
-    <div class="bor" />
-
-    <el-input v-model="item.text" class="tit" style="width: 100px" placeholder="请输入分组名称" size="mini" />
-    <i @click="delecommoditylisttypetab(index)" class="el-icon-delete" style="cursor: pointer;padding: 2px 4px;fnot-size: 12px;margin-left: 200px;color: red;" />
-
-    <vuedraggable v-model="item.imageList" v-bind="dragOptions">
-      <transition-group>
-        <section class="imgBanner" v-for="(item, ind) in item.imageList" :key="item+ind">
-          <i class="el-icon-circle-close" @click="delecommodityimg(index, ind)" />
-          <div class="imag">
-            <img draggable="false" :src="item.coverUrl" alt="">
-          </div>
-          <div class="imgText">
-            <div>
-              <el-input disabled="disabled" style="width: 65%" v-model="item.name" size="mini" />
-              <el-input disabled="disabled" type="number" style="width: 35%" v-model.number="item.price" size="mini" />
-            </div>
-            <el-input disabled="disabled" v-model="item.introduce" size="mini" />
-          </div>
-        </section>
-      </transition-group>
-    </vuedraggable>
-
-    <el-button @click="dialogVisibleshow('commoditylisttypetab', index)" class="uploadImg" type="primary" plain><i class="el-icon-plus" />点击添加商品</el-button>
-  </section> -->
     <vuedraggable v-model="datas.commoditylisttypetab" v-bind="dragOptions">
       <section
         class="magiccubestyleList"
