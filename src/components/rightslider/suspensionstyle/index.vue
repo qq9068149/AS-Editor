@@ -29,34 +29,9 @@
             </el-option>
           </el-select>
 
-          <!-- 选择 -->
-          <el-select
-            style="width: 100%"
-            v-if="datas.type !== '11'"
-            v-model="datas.http.name"
-            placeholder="请选择跳转链接"
-            size="mini"
-            :no-data-text="emptyText"
-            @change="changeId"
-            @visible-change="
-              (isVisible) => {
-                return changeType(isVisible, datas.type)
-              }
-            "
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.id"
-              :label="item.name"
-              :value="item"
-            >
-            </el-option>
-          </el-select>
-
-          <!-- 输入外部链接 -->
+          <!-- 输入链接 -->
           <el-input
             style="width: 100%"
-            v-if="datas.type === '11'"
             size="mini"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="datas.http.externalLink"
@@ -78,7 +53,7 @@ export default {
       optionsType: [
         {
           type: '10',
-          name: '跳转至历史页面',
+          name: '内部链接',
         },
         {
           type: '11',
@@ -90,52 +65,6 @@ export default {
     }
   },
   created() {},
-  methods: {
-    // 选择类型
-    changeType(isVisible, linkType) {
-      if (isVisible && linkType) {
-        this.emptyText = '正在搜索中'
-        if (
-          linkType === '1' ||
-          linkType === '2' ||
-          linkType === '6' ||
-          linkType === '3'
-        ) {
-          /* 获取视频,音频,直播信息 */
-          this.$httpApi.newsList({ type: linkType }).then((res) => {
-            this.activ = 0
-            
-            res.data.length === 0 ? (this.emptyText = '暂无数据') : null
-            this.options = res.data
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-          })
-        } else if (linkType === '10') {
-          // 历史页面
-          this.$httpApi.shopTemplate().then((res) => {
-            
-            this.options = res.data.shopTemplateList
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-          })
-        }
-      }
-    },
-    // 保存跳转的地方
-    changeId(res) {
-      console.log(res)
-      if (res.component) delete res.component
-      this.datas.http = res
-    },
-  },
 }
 </script>
 <style lang="less" scoped>

@@ -141,27 +141,27 @@ componentsData.set('magiccube', {
     imageList: [
       {
         src: '',
-        linktype: '1',
+        linktype: '10',
         http: {},
       },
       {
         src: '',
-        linktype: '1',
+        linktype: '10',
         http: {},
       },
       {
         src: '',
-        linktype: '1',
+        linktype: '10',
         http: {},
       },
       {
         src: '',
-        linktype: '1',
+        linktype: '10',
         http: {},
       },
       {
         src: '',
-        linktype: '1',
+        linktype: '10',
         http: {},
       },
     ], //图片列表

@@ -36,7 +36,6 @@
                   v-model="item.linktype"
                   placeholder="请选择跳转类型"
                   size="mini"
-                  @change="selectType(index)"
                 >
                   <el-option
                     v-for="item in optionsType"
@@ -47,35 +46,9 @@
                   </el-option>
                 </el-select>
 
-                <!-- 选择 -->
-                <el-select
-                  style="width: 100%"
-                  v-model="item.http.name"
-                  v-if="item.linktype !== '11'"
-                  placeholder="请选择图片跳转链接"
-                  size="mini"
-                  @change="changeId"
-                  :no-data-text="emptyText"
-                  @visible-change="
-                    (isVisible) => {
-                      return changeType(isVisible, item.linktype)
-                    }
-                  "
-                >
-                  <el-option
-                    v-for="item in options"
-                    :key="item.id"
-                    :label="item.name"
-                    :value="[index, item]"
-                    :disabled="item.disabled"
-                  >
-                  </el-option>
-                </el-select>
-
-                <!-- 输入外部链接 -->
+                <!-- 输入链接 -->
                 <el-input
                   style="width: 100%"
-                  v-if="item.linktype === '11'"
                   size="mini"
                   placeholder="请输入链接，输入前确保可以访问"
                   v-model="item.http.externalLink"
@@ -286,35 +259,14 @@ export default {
       ],
       optionsType: [
         {
-          type: '1',
-          name: '视频',
-        },
-        {
-          type: '2',
-          name: '书籍',
-        },
-        {
-          type: '3',
-          name: '音频',
-        },
-        {
-          type: '6',
-          name: '直播',
-        },
-        {
-          type: '7',
-          name: '实物商品',
-        },
-        {
           type: '10',
-          name: '跳转至历史页面',
+          name: '内部链接',
         },
         {
           type: '11',
           name: '外部链接',
         },
       ], // 选择跳转类型
-      options: [],
       emptyText: '',
       uploadImgDataType: null,
     }
@@ -352,82 +304,6 @@ export default {
     /* 删除图片列表的图片 */
     deleteimg(index) {
       this.datas.imageList.splice(index, 1)
-    },
-
-    selectType(index) {
-      // 每次切换类型之前 清空之前选中跳转
-      this.datas.imageList[index].http = {}
-
-      // 清空 options
-      this.options = []
-    },
-
-    changeId(res) {
-      // 商品类型只匹配 1 2 3 6
-      if (
-        this.$utils.coursewareMetchArr.includes(
-          this.datas.imageList[res[0]].linktype
-        )
-      ) {
-        console.log('-----------1')
-        // 查询本地动态数据  然后再赋值
-        let dynamic = this.$utils.getCoursewareData(
-          this.datas.imageList[res[0]].linktype,
-          res[1].id
-        )
-        this.datas.imageList[res[0]].http = dynamic
-      } else {
-        console.log('-----------2')
-        this.datas.imageList[res[0]].http = res[1]
-      }
-      this.datas.imageList.forEach((item) => {
-        if (item.http.component) {
-          item.http.component = ''
-        }
-      })
-      console.log(this.datas.imageList, '-----------------------save data')
-    },
-
-    // 选择类型
-    changeType(isVisible, linkType) {
-      if (isVisible && linkType) {
-        this.emptyText = '正在搜索中'
-
-        if (
-          linkType === '1' ||
-          linkType === '2' ||
-          linkType === '6' ||
-          linkType === '3' ||
-          linkType === '7'
-        ) {
-          /* 获取视频,音频,直播信息 */
-          this.$httpApi.newsList({ type: linkType }).then((res) => {
-            this.activ = 0
-            
-            res.data.length === 0 ? (this.emptyText = '暂无数据') : null
-            this.options = res.data
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-          })
-        } else if (linkType === '10') {
-          // 历史页面
-          this.$httpApi.shopTemplate().then((res) => {
-            
-            this.options = res.data.shopTemplateList
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-            console.log(this.options, '----------this.options')
-          })
-        }
-      }
     },
   },
   components: { uploadimg, vuedraggable },
