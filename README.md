@@ -44,6 +44,9 @@ src / utils / componentProperties.js            // 组件数据
   setStyle: {}                  // 组件动态数据
 }
 ```
+#### 在线文档
+
+文档地址：[https://gitee.com/was666/as-editor/wikis/pages](https://gitee.com/was666/as-editor/wikis/pages)
 
 #### 扩展项目
 
