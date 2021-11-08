@@ -46,7 +46,7 @@ src / utils / componentProperties.js            // 组件数据
 ```
 #### 在线文档
 
-文档地址：[https://gitee.com/was666/as-editor/wikis/%E7%AE%80%E4%BB%8B](https://gitee.com/was666/as-editor/wikis/%E7%AE%80%E4%BB%8B)
+文档地址：[https://gitee.com/was666/as-editor/wikis](https://gitee.com/was666/as-editor/wikis)
 
 #### 扩展项目
 
