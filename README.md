@@ -37,7 +37,7 @@ src / utils / componentProperties.js            // 组件数据
 ```js
 {
   component: 'custommodule',    // 中间部分手机组件的name
-  text: '自定义模块',             // 组件文字描述
+  text: '自定义模块',            // 组件文字描述
   type: '1-14',                 // data-tpye
   active: true,                 // 是否选中
   style: 'custommodulestyle',   // 右边组件设置的name
@@ -46,7 +46,7 @@ src / utils / componentProperties.js            // 组件数据
 ```
 #### 在线文档
 
-文档地址：[https://gitee.com/was666/as-editor/wikis](https://gitee.com/was666/as-editor/wikis)
+文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
 
 #### 扩展项目
 
