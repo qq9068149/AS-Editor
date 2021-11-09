@@ -251,21 +251,12 @@ componentsData.set('videoss', {
   style: 'videostyle',
   setStyle: {
     text: '视频',
-    videoData: null, //视频信息
-    autoplay: false,
+    src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', // 视频地址
+    coverUrl:null, // 封面地址
+    autoplay: false, // 是否自动播放
   },
 })
-componentsData.set('voicer', {
-  component: 'voicer',
-  text: '音频',
-  type: '1-9',
-  active: true,
-  style: 'voicerstyle',
-  setStyle: {
-    text: '音频',
-    voicerData: null, //音频信息
-  },
-})
+
 componentsData.set('custommodule', {
   component: 'custommodule',
   text: '自定义模块',

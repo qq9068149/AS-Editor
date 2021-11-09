@@ -11,7 +11,7 @@
         "
         @click="Previous"
       >
-        返回店铺列表
+        <!-- 返回 -->
       </p>
       <div>
         <el-button @click="reloads" type="danger"
@@ -23,9 +23,6 @@
         <input type="file" ref="file" id="file" accept=".json" @change="importJSON" style="display: none;" />
         <!-- <el-button @click="Preservation"
           ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
-        > -->
-        <!-- <el-button @click="upperShelf" type="primary"
-          ><i class="el-icon-upload el-icon--left"></i>上架</el-button
         > -->
       </div>
     </section>
@@ -187,7 +184,6 @@ import {
   investigate,
   notice,
   videoss,
-  voicer,
   custommodule,
   communitypowder,
   storenotecard,
@@ -216,7 +212,6 @@ import {
   investigatestyle,
   noticestyle,
   videostyle,
-  voicerstyle,
   custommodulestyle,
   communitypowderstyle,
   storenotecardstyle,
@@ -313,32 +308,6 @@ export default {
   },
 
   methods: {
-    /**
-     * 上架
-     *
-     * @param {Function} callBack 回调函数
-     */
-    upperShelf() {
-      this.Preservation(() => {
-        const loadingss = this.$loading({
-          lock: true,
-          text: '上架中...',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)',
-        })
-        this.$httpApi.shelves({ shopTemplateId: this.id }).then((res) => {
-          /* 取消加载 */
-          loadingss.close()
-          console.log(res)
-          this.$message({
-            message: '上架成功',
-            type: 'success',
-          })
-          this.$router.push({ path: 'establishShop' })
-          this.id = null
-        })
-      })
-    },
     // 查看JSON
     catJson() {
       this.$alert(
@@ -820,8 +789,6 @@ export default {
     noticestyle,
     videoss,
     videostyle,
-    voicer,
-    voicerstyle,
     custommodule,
     custommodulestyle,
     communitypowder,

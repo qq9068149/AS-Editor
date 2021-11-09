@@ -154,17 +154,9 @@ export default {
     }
   },
 
-  created() {
-    this.initImageList()
-  },
+  created() {},
 
-  methods: {
-    // 初始化更新imageList数据
-    initImageList() {
-      this.datas.imageList = this.$utils.replaceImageList(this.datas.imageList)
-      console.log(this.datas.imageList, '------------created imageList')
-    },
-  },
+  methods: {},
 }
 </script>
 

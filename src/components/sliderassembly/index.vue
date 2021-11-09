@@ -89,12 +89,6 @@ export default {
               name: 'videoss',
             },
             {
-              text: '音频',
-              type: '1-9',
-              icon: 'icon-yuyin',
-              name: 'voicer',
-            },
-            {
               text: '富文本',
               type: '1-10',
               icon: 'icon-fuwenben',

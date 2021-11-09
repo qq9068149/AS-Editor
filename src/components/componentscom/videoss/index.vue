@@ -1,21 +1,19 @@
 <template>
   <div class="videoss">
     <!-- 默认视频 -->
-    <section class="default" v-if="!datas.videoData">
+    <section class="default" v-if="!datas.src">
       <van-icon name="tv-o" size="150px" />
     </section>
 
     <!-- 选择视频后 -->
-    <section v-else style="min-height: 200px; position: relative">
-      <!-- 视频封面 -->
-      <img
-        draggable="false"
-        :src="datas.videoData.coverUrl"
-        alt=""
-        style="width: 100%; display: block"
-      />
-      <!-- 图标 -->
-      <van-icon class="bof" name="play-circle-o" />
+    <section v-else style="position: relative">
+      <video
+        :src="datas.src"
+        controls
+        :autoplay="datas.autoplay"
+        :poster="datas.coverUrl"
+        width="100%"
+      ></video>
     </section>
 
     <!-- 删除组件 -->
@@ -31,19 +29,9 @@ export default {
   },
 
   created() {
-    this.initImageList()
   },
 
   methods: {
-    // 初始化更新imageList数据
-    initImageList() {
-      if (this.datas.videoData) {
-        let shopCommodity = JSON.parse(localStorage.getItem('shopCommodity'))
-        this.datas.videoData =
-          shopCommodity[this.datas.videoData.type][this.datas.videoData.id]
-        console.log(this.datas.videoData, '------------created imageList')
-      }
-    },
   },
 }
 </script>

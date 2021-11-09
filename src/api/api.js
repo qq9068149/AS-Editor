@@ -1,14 +1,7 @@
 import httpAjax from './http.js'
 
 class httpApi {
-
-	// 获取视频列表
-	newsList = (data) => httpAjax({
-		url: '/adm/component/getCourseList',
-		method: 'post',
-		data
-	})
-	
+  
 	// 上传图片base64
 	miniShop = (data) => httpAjax({
 		url: '/upload/base64/miniShop',
@@ -19,14 +12,6 @@ class httpApi {
 	// 保存
 	save = (data) => httpAjax({
 		url: '/adm/component/save',
-		method: 'post',
-		header: 'json',
-		data
-	})
-	
-	//上架
-	shelves = (data) => httpAjax({
-		url: '/adm/shopTemplate/shelves',
 		method: 'post',
 		header: 'json',
 		data

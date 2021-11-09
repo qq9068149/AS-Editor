@@ -79,25 +79,9 @@ export default {
     return {
       dialogVisible: false, //弹框默认隐藏
       dialogImageUrl: {}, // 选择的数据
-      type: '1',
+      type: '2',
       uploadShow: false, //是否显示上传图片
       optionsType: [
-        {
-          type: '1',
-          name: '视频',
-        },
-        {
-          type: '3',
-          name: '音频',
-        },
-        {
-          type: '6',
-          name: '直播',
-        },
-        {
-          type: '7',
-          name: '实物商品',
-        },
         {
           type: '2',
           name: '书籍',
@@ -106,14 +90,6 @@ export default {
           type: '5',
           name: '其他',
         },
-        // {
-        //   type: '10',
-        //   name: '跳转至历史页面'
-        // },
-        // {
-        //   type: '11',
-        //   name: '外部链接'
-        // }
       ], // 选择跳转类型
       options: [], //后端返回的列表提供下拉选择
       externalLink: null,
@@ -131,47 +107,138 @@ export default {
     changeType(isVisible, linkType) {
       if (isVisible && linkType) {
         this.emptyText = '正在搜索中'
-        if (
-          linkType === '1' ||
-          linkType === '2' ||
-          linkType === '6' ||
-          linkType === '3' ||
-          linkType === '7' ||
-          linkType === '5'
-        ) {
-          /* 获取视频,音频,直播信息 */
-          this.$httpApi.newsList({ type: linkType }).then((res) => {
-            this.activ = 0
-            
-            res.data.length === 0 ? (this.emptyText = '暂无数据') : null
-            this.options = res.data
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-          })
-        } else if (linkType === '10') {
-          // 历史页面
-          this.$httpApi.shopTemplate().then((res) => {
-            
-            this.options = res.data.shopTemplateList
-
-            // 校验数据
-            this.options = this.$utils.filterCommodityData(
-              linkType,
-              this.options
-            )
-          })
+        /* 获取视频,音频,直播信息 */
+        let res = {
+          code: 0,
+          success: true,
+          error: false,
+          data: [
+            {
+              id: 403,
+              createTime: 1621504872000,
+              updateTime: 1621504872000,
+              remark: null,
+              name: '查玛代表传承人',
+              classifyId: null,
+              type: 2,
+              retailPrice: 0,
+              price: 0,
+              memberPrice: 0,
+              vipPrice: 0,
+              costPrice: 0,
+              jidPrice: 0,
+              zidPrice: 0,
+              tidPrice: 0,
+              scorePrice: 0,
+              freight: 0,
+              top: null,
+              score: null,
+              sort: 1,
+              status: 1,
+              code: null,
+              coverUrl:
+                'https://imgs.starfirelink.com/minicourse/非遗传承人@2x_1621504834414.png',
+              url: 'https://mgt.starfirelink.com/mobile/index.html#/videoOnDemand?videoId=5285890818212341060',
+              lengths: '',
+              introduce: '',
+              free: 1,
+              classOne: null,
+              classTwo: null,
+              classThree: null,
+              seriesId: 0,
+              vId: null,
+              videoId: '5285890818212341060',
+              teacherId: 1,
+              details: '',
+              buys: 0,
+              tryVideoId: null,
+              tryLengths: null,
+              num: 0,
+              bannerImgUrl: null,
+              specifications: null,
+              color: null,
+              createTimes: null,
+              createTimee: null,
+              updateTimes: null,
+              updateTimee: null,
+              page: 1,
+              limit: 20,
+              order: null,
+              ordertype: null,
+              minPrice: null,
+              maxPrice: null,
+              seriesName: null,
+            },
+            {
+              id: 396,
+              createTime: 1621403190000,
+              updateTime: 1621416056000,
+              remark: null,
+              name: '测试',
+              classifyId: null,
+              type: 2,
+              retailPrice: 0,
+              price: 1,
+              memberPrice: 1,
+              vipPrice: 0,
+              costPrice: 0,
+              jidPrice: 0,
+              zidPrice: 0,
+              tidPrice: 0,
+              scorePrice: 0,
+              freight: 0,
+              top: null,
+              score: null,
+              sort: 1,
+              status: 1,
+              code: null,
+              coverUrl:
+                'https://imgs.starfirelink.com/minicourse/QQ截图20210409170420_1621416051505.png',
+              url: 'https://mgt.starfirelink.com/mobile/index.html#/videoOnDemand?videoId=',
+              lengths: '1',
+              introduce: '1',
+              free: 0,
+              classOne: null,
+              classTwo: null,
+              classThree: null,
+              seriesId: 85,
+              vId: null,
+              videoId: '',
+              teacherId: 1,
+              details: '1',
+              buys: 1,
+              tryVideoId: null,
+              tryLengths: null,
+              num: 0,
+              bannerImgUrl: null,
+              specifications: null,
+              color: null,
+              createTimes: null,
+              createTimee: null,
+              updateTimes: null,
+              updateTimee: null,
+              page: 1,
+              limit: 20,
+              order: null,
+              ordertype: null,
+              minPrice: null,
+              maxPrice: null,
+              seriesName: '非遗商城',
+            },
+          ],
         }
+        this.activ = 0
+        res.data.length === 0 ? (this.emptyText = '暂无数据') : null
+        this.options = res.data
+        // 校验数据
+        this.options = this.$utils.filterCommodityData(linkType, this.options)
       }
     },
     // 保存跳转的地方
     changeId(res) {
       console.log(res)
       // 通过商品 type 和 id  获取到商品数据  newList接口数据可以不用
-      console.log(this.$utils.getCoursewareData(this.type, res.id))
+      console.log(this.$utils.getCoursewareData(this.type, res.id),'--------')
       this.dialogImageUrl = this.$utils.getCoursewareData(this.type, res.id)
     },
     /* 显示上传文件组件 */
