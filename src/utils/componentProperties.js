@@ -27,9 +27,8 @@ componentsData.set('captiontext', {
       show: false,//是否显示查看更多
       type: 1, // 样式选择
       text: '查看更多', //自定义文字
-      httpType: 1,//链接类型
-      http: '',//外部链接
-      select: {},//内部跳转链接
+      httpType: 10,//链接类型
+      http: '',//链接
     },
   },
 })

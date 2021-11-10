@@ -207,37 +207,19 @@
 
         <!-- 跳转链接 -->
         <el-form-item label="跳转链接">
-          <!-- <el-radio-group v-model="datas.more.httpType" style="margin-left: 18px">
-            <el-radio :label="0">方式一</el-radio>
-            <el-radio :label="1">方式二</el-radio>
-          </el-radio-group> -->
+          <el-radio-group v-model="datas.more.httpType" style="margin-left: 18px">
+            <el-radio :label="10">内部链接</el-radio>
+            <el-radio :label="11">外部链接</el-radio>
+          </el-radio-group>
 
           <!-- 输入http -->
           <el-input
-            v-show="datas.more.httpType === 0"
             v-model="datas.more.http"
-            placeholder="请输入跳转链接: http://www...."
+            placeholder="请输入跳转链接"
             show-word-limit
             style="margin-top: 10px"
           />
         </el-form-item>
-        <!-- 选择创建好的页面 -->
-        <el-select
-          style="margin-top: 10px"
-          @change="changeId"
-          @visible-change="getOption"
-          v-show="datas.more.httpType === 1"
-          v-model="datas.more.select.name"
-          placeholder="请选择要跳转的页面"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.id"
-            :label="item.name"
-            :value="item"
-          >
-          </el-option>
-        </el-select>
       </div>
     </el-form>
   </section>
@@ -291,21 +273,7 @@ export default {
       ],
     }
   },
-  methods: {
-    /* 获取下拉框内容 */
-    getOption() {
-      this.$httpApi.shopTemplate().then((res) => {
-        
-        this.options = res.data.shopTemplateList
-      })
-    },
-    changeId(res) {
-      this.datas.more.select = {
-        name: res.name,
-        id: res.id,
-      }
-    },
-  },
+  methods: {},
 }
 </script>
 

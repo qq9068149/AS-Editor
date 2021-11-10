@@ -256,55 +256,8 @@ export default {
   },
 
   mounted() {
-    //该字段用于区分，是否是选择模板
-    let type = this.$route.query.type
-    if (this.$route.query.id) {
-      /* 加载 */
-      const loading = this.$loading({
-        lock: true,
-        text: '加载中...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)',
-      })
-      this.$httpApi
-        .shopTemplates({ shopTemplateId: this.$route.query.id })
-        .then((res) => {
-          /* 取消加载 */
-          loading.close()
-
-          let datas = res.data.shopTemplate
-
-          //如果为模板，则需要将id设置为null,否则模板会被修改
-          if (!type) {
-            this.id = res.data.shopTemplate.id
-          }
-
-          this.pageComponents = JSON.parse(datas.component)
-
-          console.log(this.pageComponents, '--------------------pageComponents')
-
-          if (datas.templateJson) {
-            console.log('----------home datas1')
-            this.pageSetup = JSON.parse(datas.templateJson)
-          } else {
-            console.log('----------home datas2')
-            this.pageSetup.name = datas.name
-            this.pageSetup.details = datas.details
-            this.pageSetup.bgColor = datas.bgColor
-          }
-          /* 默认页面设置 */
-          this.currentproperties = this.pageSetup
-          console.log(
-            this.currentproperties,
-            this.pageSetup,
-            '----------home datas'
-          )
-        })
-    } else {
       this.pageSetup.name = '页面标题'
       this.currentproperties = this.pageSetup
-      console.log(this.currentproperties, '----------home datas')
-    }
   },
 
   methods: {
@@ -342,49 +295,14 @@ export default {
     },
     /**
      * 保存
-     *
-     * @param {Function} callBack 回调函数
      */
-    Preservation(callBack) {
+    Preservation() {
       /* 隐藏border和删除图标 */
       this.deleShow = false
       /* 渲染结束截图 */
       this.$nextTick(() => {
         /* 截图 */
-        this.toImage((res) => {
-          /* 加载 */
-          const loadings = this.$loading({
-            lock: true,
-            text: '上传中...',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.7)',
-          })
-
-          this.$httpApi
-            .save({
-              id: this.id,
-              imgUrl: res,
-              // bgColor: this.pageSetup.colour,
-              // details:this.pageSetup.description,
-              name: this.pageSetup.name,
-              // bottomLogo: this.pageSetup.bottomLogo,
-              templateJson: JSON.stringify(this.pageSetup),
-              component: JSON.stringify(this.pageComponents),
-            })
-            .then((res) => {
-              /* 取消加载 */
-              loadings.close()
-
-              this.$message({
-                message: '上传成功',
-                type: 'success',
-              })
-
-              this.id = res.data.id
-
-              if (callBack) callBack()
-            })
-        })
+        this.toImage()
       })
     },
 
@@ -393,7 +311,7 @@ export default {
      *
      * @param {Function} callBack 回调函数
      */
-    toImage(callBack) {
+    toImage() {
       /* 加载 */
       const loading = this.$loading({
         lock: true,
@@ -415,18 +333,8 @@ export default {
         let url = canvas.toDataURL('image/png')
         const formData = new FormData()
         formData.append('base64File', url)
-        this.$httpApi.miniShop(formData).then((res) => {
-          /* 取消加载 */
-          loading.close()
-
-          this.$message({
-            message: '保存成功',
-            type: 'success',
-          })
-
-          /* 获取图片链接 */
-          callBack(res.data.src)
-        })
+        console.log(formData,'--------------页面图片formData')
+        loading.close()
       })
     },
 

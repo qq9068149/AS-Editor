@@ -55,16 +55,6 @@
         </el-slider>
       </el-form-item>
 
-      <!-- 页面分类 -->
-      <!-- <el-form-item label="分类" :hide-required-asterisk="true" prop="classification">
-        <el-select v-model="datas.classification" placeholder="请选择页面分类">
-          <el-option label="区域一" value="shanghai" />
-          <el-option label="区域二" value="beijing" />
-        </el-select>
-
-        <span class="ification">刷新</span>|<span class="ification">新建</span>
-      </el-form-item> -->
-
       <!-- 背景颜色 -->
       <el-form-item label="背景颜色">
         <!-- 单选框 -->
@@ -100,54 +90,6 @@
         </div>
       </el-form-item>
 
-      <!-- <el-form-item label="底部LOGO">
-        <div class="bottomLogo">
-          <img :src="datas.bottomLogo.botLogo" alt="" />
-          <el-button
-            @click="showUpload('0')"
-            class="uploadImg"
-            type="primary"
-            plain
-            ><i class="el-icon-plus" />点击添加图片</el-button
-          >
-        </div>
-      </el-form-item> -->
-      <!-- 底部主页 -->
-      <el-form-item label="店铺主页" class="lef" v-if="datas.bottomLogo">
-        {{ datas.bottomLogo.isShowBootom ? '显示' : '隐藏' }}
-        <el-checkbox
-          style="margin-left: 196px"
-          v-model="datas.bottomLogo.isShowBootom"
-        />
-      </el-form-item>
-
-      <!-- 店铺信息 -->
-      <el-form-item label="店铺信息">
-        <div class="shop-info">
-          <div class="shop-name">
-            店铺名称：
-            <el-input
-              v-model="shopData.shopName"
-              @blur="changeShopInfo"
-            ></el-input>
-          </div>
-
-          <div class="shop-head-pic">
-            店铺头像:
-            <img :src="shopData.shopPic" alt="" />
-            <div class="shop-head-pic-btn">
-              <el-button
-                @click="showUpload('1')"
-                class="uploadImg"
-                type="primary"
-                plain
-                ><i class="el-icon-plus" />更换头像</el-button
-              >
-              <!-- <el-button @click="changeShopInfo" type="primary" plain>保存店铺信息</el-button> -->
-            </div>
-          </div>
-        </div>
-      </el-form-item>
     </el-form>
 
     <!-- 上传图片 -->
@@ -202,63 +144,31 @@ export default {
         'hsla(209, 100%, 56%, 0.73)',
         '#c7158577',
       ],
-      shopData: {
-        shopName: null, // 店铺名称
-        shopPic: null, // 店铺头像
-      },
       uploadImgDataType: null, // 获取到的图片地址属于哪一类别   0 修改底部logo   1 修改店铺图标 2 页面背景图
     }
   },
 
-  created() {
-    this.getShopInfo()
-  },
+  created() {},
 
   methods: {
-    // 显示上传图片组件   type : 0 修改底部logo   1 修改店铺图标 2 页面背景图
+    // 显示上传图片组件   type :  2 页面背景图
     showUpload(type) {
       this.uploadImgDataType = type
       this.$refs.upload.showUpload()
     },
 
-    // 底部logo
+    // 上传图片
     uploadInformation(res) {
-      if (this.uploadImgDataType === '0') {
-        this.datas.bottomLogo.botLogo = res
-      } else if (this.uploadImgDataType === '1') {
-        this.shopData.shopPic = res
-        this.changeShopInfo()
-      } else if (this.uploadImgDataType === '2') {
+      if (this.uploadImgDataType === '2') {
         this.datas.bgImg = res
       }
     },
 
-    // 获取店铺信息
-    getShopInfo() {
-      this.$httpApi.queryShopInfo().then((res) => {
-        
-
-        this.shopData.shopName = res.data.name // 店铺名称
-        this.shopData.shopPic = res.data.icon // 店铺头像
-      })
-    },
     // 清空背景图片
     clear() {
       this.datas.bgImg = ''
     },
 
-    // 修改店铺信息
-    changeShopInfo() {
-      let params = {
-        name: this.shopData.shopName,
-        icon: this.shopData.shopPic,
-      }
-
-      this.$httpApi.updateShopInfo(params).then((res) => {
-        console.log('change shop info ::', res)
-        this.$message.success(res.msg)
-      })
-    },
   },
   watch: {
     colourAction(data) {

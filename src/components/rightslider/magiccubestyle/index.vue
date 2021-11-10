@@ -424,15 +424,8 @@ export default {
     },
   },
   created() {
-    this.initImageList()
   },
   methods: {
-    // 初始化更新imageList数据
-    initImageList() {
-      this.datas.imageList = this.$utils.replaceImageList(this.datas.imageList)
-      console.log(this.datas.imageList, '------------created imageList')
-    },
-
     /* 替换 */
     uploadInformation(res) {
       this.datas.imageList[this.imgActive].src = res

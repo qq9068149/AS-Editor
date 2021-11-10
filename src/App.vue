@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       isRouterAlive: true,
-      permissionsJson: {},
     }
   },
   created() {
@@ -25,16 +24,9 @@ export default {
       .loginAdminTest({ loginname: 'admin', pwd: '123456' })
       .then((res) => {
         console.log(res)
-        this.getPermission()
-        this.getShopCommodity()
       })
   },
-  mounted() {
-    //将hasPermission挂载到window
-    window['hasPermission'] = (data) => {
-      return this.hasPermission(data)
-    }
-  },
+  mounted() {},
   methods: {
     // 刷新页面
     reload() {
@@ -42,36 +34,6 @@ export default {
       this.$nextTick(() => {
         this.isRouterAlive = true
       })
-    },
-    // 获取当前用户权限
-    getPermission() {
-      this.$httpApi.getPermission().then((res) => {
-        let permissionsList = res.data.permissionsList
-
-        for (let i in permissionsList) {
-          this.permissionsJson[permissionsList[i].funkey] = 1
-        }
-      })
-    },
-    // 返回一个布尔值，判断对象是否包含特定的自身（非继承）属性
-    hasPermission(permission) {
-      return this.permissionsJson.hasOwnProperty(permission)
-    },
-    // 获取商品数据
-    getShopCommodity() {
-      this.$httpApi
-        .getShopCommodity()
-        .then((res) => {
-          this.loading = false
-          console.log(res.data.shopCommodity, '------------------shopCommodity')
-          localStorage.setItem(
-            'shopCommodity',
-            JSON.stringify(res.data.shopCommodity)
-          )
-        })
-        .catch(() => {
-          this.loading = false
-        })
     },
   },
 }

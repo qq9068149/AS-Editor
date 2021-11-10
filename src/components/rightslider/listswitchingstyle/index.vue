@@ -63,28 +63,6 @@
         </el-color-picker>
       </el-form-item>
 
-      <!-- 更多 -->
-      <el-form-item label="更多" class="lef">
-        {{ datas.showMore ? '显示' : '隐藏' }}
-        <el-checkbox style="margin-left: 196px" v-model="datas.showMore" />
-        <el-select
-          v-model="datas.moreUrl"
-          v-show="datas.showMore"
-          placeholder="请选择更多跳转链接"
-          size="mini"
-          @visible-change="getOption"
-          @change="selectMore"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.id"
-            :label="item.name"
-            :value="[item.id, item.name]"
-          >
-          </el-option>
-        </el-select>
-      </el-form-item>
-
       <div v-show="datas.commoditylisttype === 0">
         <h5 style="color: #000; font-size: 14px">添加商品</h5>
         <p style="color: #969799; font-size: 12px; margin-top: 10px">
@@ -549,22 +527,8 @@ export default {
     }
   },
   created() {
-    // if(this.datas.moreUrl) {
-    //   this.moreName = this.datas.moreUrl[1]
-    // }
-    // this.changeImageListData()
   },
   methods: {
-    changeImageListData() {
-      let shopCommodity = JSON.parse(localStorage.getItem('shopCommodity'))
-      console.log(shopCommodity, '--------------listswitching datas')
-      // let newList = []
-      // this.datas.imageList.forEach((element) => {
-      //   newList.push(shopCommodity[element.type][element.id])
-      // })
-
-      // this.datas.imageList = newList
-    },
     /* 上传图片弹框 */
     dialogVisibleshow(text, number) {
       this.$refs.upload.showUpload()
@@ -622,19 +586,6 @@ export default {
     /* 删除分组 */
     delecommoditylisttypetab(index) {
       this.datas.commoditylisttypetab.splice(index, 1)
-    },
-
-    /* 获取下拉框内容 */
-    getOption() {
-      this.$httpApi.shopTemplate().then((res) => {
-        
-        this.options = res.data.shopTemplateList
-      })
-    },
-
-    selectMore() {
-      this.datas.showMore = true
-      this.datas.moreUrl = this.moreName
     },
   },
   computed: {

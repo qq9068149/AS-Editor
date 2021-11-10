@@ -205,12 +205,6 @@
       >
         <!-- 视频图片 -->
         <div class="bg-pic">
-          <!-- <img
-            draggable="false"
-            :src="item | getCommodityItemData('coverUrl')"
-            alt=""
-            :style="{ 'border-radius': datas.borderRadius + 'px' }"
-          /> -->
           <img
             draggable="false"
             :src="item.coverUrl"
@@ -267,7 +261,6 @@
             }"
           >
             {{ item.name }}
-            <!-- {{ item | getCommodityItemData('name') }} -->
           </h5>
           <!-- 视频描述 -->
           <p
@@ -276,7 +269,6 @@
             }"
           >
             {{ item.introduce }}
-            <!-- {{ item | getCommodityItemData('introduce') }} -->
           </p>
           <div
             class="mony"
@@ -285,7 +277,6 @@
             <span v-show="datas.priceofcommodity"
               ><i>￥</i>
               {{ item.price }}
-              <!-- {{ item | getCommodityItemData('price') }} -->
             </span>
             <div v-show="datas.purchasebutton">
               <van-icon
@@ -554,12 +545,6 @@
             >
               <!-- 视频图片 -->
               <div class="bg-pic">
-                <!-- <img
-                  draggable="false"
-                  :src="item | getCommodityItemData('coverUrl')"
-                  alt=""
-                  :style="{ 'border-radius': datas.borderRadius + 'px' }"
-                /> -->
                 <img
                   draggable="false"
                   :src="item.coverUrl"
@@ -624,7 +609,6 @@
                   }"
                 >
                   {{ item.name }}
-                  <!-- {{ item | getCommodityItemData('name') }} -->
                 </h5>
                 <!-- 视频描述 -->
                 <p
@@ -633,7 +617,6 @@
                   }"
                 >
                   {{ item.introduce }}
-                  <!-- {{ item | getCommodityItemData('introduce') }} -->
                 </p>
                 <div
                   class="mony"
@@ -642,7 +625,6 @@
                   <span v-show="datas.priceofcommodity"
                     ><i>￥</i>
                     {{ item.price }}
-                    <!-- {{ item | getCommodityItemData('price') }} -->
                   </span>
                   <div v-show="datas.purchasebutton">
                     <van-icon
@@ -882,12 +864,6 @@
               >
                 <!-- 视频图片 -->
                 <div class="bg-pic">
-                  <!-- <img
-                    draggable="false"
-                    :src="item | getCommodityItemData('coverUrl')"
-                    alt=""
-                    :style="{ 'border-radius': datas.borderRadius + 'px' }"
-                  /> -->
                   <img
                     draggable="false"
                     :src="item.coverUrl"
@@ -953,7 +929,6 @@
                     }"
                   >
                     {{ item.name }}
-                    <!-- {{ item | getCommodityItemData('name') }} -->
                   </h5>
                   <!-- 视频描述 -->
                   <p
@@ -963,7 +938,6 @@
                     }"
                   >
                     {{ item.introduce }}
-                    <!-- {{ item | getCommodityItemData('introduce') }} -->
                   </p>
                   <div
                     class="mony"
@@ -972,7 +946,6 @@
                     <span v-show="datas.priceofcommodity"
                       ><i>￥</i>
                       {{ item.price }}
-                      <!-- {{ item | getCommodityItemData('price') }} -->
                     </span>
                     <div v-show="datas.purchasebutton">
                       <van-icon

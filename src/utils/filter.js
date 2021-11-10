@@ -22,24 +22,6 @@ let globalFilter = {
     s = s < 10 ? '0' + s : s
     return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
   },
-
-  /**
-   *
-   * 获取最新的组件数据
-   * @param {*} itemData
-   * @param {*} itemKey
-   * @returns
-   */
-  getCommodityItemData(itemData, itemKey) {
-    let shopCommodity = JSON.parse(localStorage.getItem('shopCommodity'))
-    if (
-      shopCommodity[itemData.type] && shopCommodity[itemData.type][itemData.id]
-    ) {
-      return shopCommodity[itemData.type][itemData.id][itemKey]
-    } else {
-      return null
-    }
-  },
 }
 
 export default globalFilter

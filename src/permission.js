@@ -30,11 +30,6 @@ Vue.prototype.$httpApi = httpApi
 /* import VueCookies from 'vue-cookies'
 Vue.use(VueCookies) */
 
-Vue.prototype.$hasPermission = function (permission) {
-  //console.log("---------$hasPermission-------")
-  return window.hasPermission(permission)
-}
-
 // 挂载 uitls
 import Utils from './utils/index'
 Vue.prototype.$utils = Utils

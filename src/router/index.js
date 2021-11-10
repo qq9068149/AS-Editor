@@ -18,12 +18,6 @@ const routes = [
       },
     ],
   },
-  {
-    //  创建页面
-    path: '/establishShop',
-    name: 'establishShop',
-    component: () => import('@/views/establishShop'),
-  },
 ]
 
 const router = new VueRouter({

@@ -114,11 +114,6 @@ export default {
             succFun(res.result)
           }
           xhr.send(formData)
-
-          // this.$httpApi.uploadImgs(formData).then(res => {
-          //   if(res.success != true) return failFun('HTTP Error: ' + res.msg)
-          //   succFun(res.result)
-          // })
         },
       },
       predefineColors: [
