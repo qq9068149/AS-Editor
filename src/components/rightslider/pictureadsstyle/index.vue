@@ -270,11 +270,11 @@ export default {
   computed: {
     styleText() {
       let data
-      if (this.datas.swiperType === 0) return (data = '一行一个')
-      if (this.datas.swiperType === 1) return (data = '轮播海报')
-      if (this.datas.swiperType === 2) return (data = '多图单行')
-      if (this.datas.swiperType === 3) return (data = '立体模式')
-      if (this.datas.swiperType === 4) return (data = '导航横向滑动')
+      if (this.datas.swiperType === 0) data = '一行一个'
+      if (this.datas.swiperType === 1) data = '轮播海报'
+      if (this.datas.swiperType === 2) data = '多图单行'
+      if (this.datas.swiperType === 3) data = '立体模式'
+      if (this.datas.swiperType === 4) data = '导航横向滑动'
 
       return data
     },

@@ -591,12 +591,12 @@ export default {
   computed: {
     styleText() {
       let modeType
-      if (this.datas.commodityType === 0) return (modeType = '大图模式')
-      if (this.datas.commodityType === 1) return (modeType = '一行两个')
-      if (this.datas.commodityType === 2) return (modeType = '一行三个')
-      if (this.datas.commodityType === 3) return (modeType = '详细列表')
-      if (this.datas.commodityType === 4) return (modeType = '一大两小')
-      if (this.datas.commodityType === 5) return (modeType = '横向滑动')
+      if (this.datas.commodityType === 0)  modeType = '大图模式'
+      if (this.datas.commodityType === 1)  modeType = '一行两个'
+      if (this.datas.commodityType === 2)  modeType = '一行三个'
+      if (this.datas.commodityType === 3)  modeType = '详细列表'
+      if (this.datas.commodityType === 4)  modeType = '一大两小'
+      if (this.datas.commodityType === 5)  modeType = '横向滑动'
 
       return modeType
     },
