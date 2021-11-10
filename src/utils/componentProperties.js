@@ -297,15 +297,12 @@ componentsData.set('storenotecard', {
     moditystyle: 0, // 卡片样式选择
     borderRadius: 0, // 图片边角
     textWeight: 400, // 标题粗细
-    positions: 'left', // 文字位置
     noteLabels: true, // 笔记标签
     readingNumber: true, // 阅读数
     praisePoints: true, //点赞数
     viewMore1: true, //更多1
     viewMore2: true, //更多2
     imageList: [],
-    purchase: '马上抢',
-    // eslint-disable-next-line no-dupe-keys
     positions: 'bottom', //标题位置
     linktype: '10',
     http: {},

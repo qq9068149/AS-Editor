@@ -57,7 +57,7 @@ class utils {
    * @returns {boolean} 如果值是数组，则为True，否则为false
    */
   isArray(val) {
-    Object.prototype.toString.call(val) === '[object Array]'
+    return Object.prototype.toString.call(val) === '[object Array]'
   }
 
   /**
@@ -91,12 +91,7 @@ class utils {
     // 遍历目标对象
     for (let key in obj) {
       let value = obj[key]
-      // eslint-disable-next-line no-constant-condition
-      if (this.getObjClass(value) === 'Object' || 'Array') {
-        result[key] = this.deepClone(value)
-      } else {
-        result[key] = obj[key]
-      }
+      result[key] = this.deepClone(value)
     }
 
     return result
