@@ -1,4 +1,4 @@
-import httpAjax from './http.js'
+import httpAjax from './httpAjax.js'
 
 class httpApi {
 

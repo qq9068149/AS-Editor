@@ -133,7 +133,7 @@ export default {
     // 提交按钮是否可以点击
     disabl() {
       if (!this.dialogImageUrl) return true
-      else return false
+      return false
     },
   },
 }

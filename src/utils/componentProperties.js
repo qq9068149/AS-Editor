@@ -1,9 +1,9 @@
-const componentsData = new Map()
+const componentProperties = new Map()
 
 // 数据版本  每次修改组件数据  需要对版本进行修改
-// componentsData.set('componentsDataVersion', 'V1.0.0')
+// componentProperties.set('componentPropertiesVersion', 'V1.0.0')
 
-componentsData.set('captiontext', {
+componentProperties.set('captiontext', {
   component: 'captiontext',
   text: '标题文字',
   type: '1-3',
@@ -33,7 +33,7 @@ componentsData.set('captiontext', {
   },
 })
 
-componentsData.set('listswitching', {
+componentProperties.set('listswitching', {
   component: 'listswitching',
   text: '商品',
   type: '2-1',
@@ -75,7 +75,7 @@ componentsData.set('listswitching', {
   },
 })
 
-componentsData.set('pictureads', {
+componentProperties.set('pictureads', {
   component: 'pictureads',
   text: '图片广告',
   type: '1-3',
@@ -93,7 +93,7 @@ componentsData.set('pictureads', {
   },
 })
 
-componentsData.set('graphicnavigation', {
+componentProperties.set('graphicnavigation', {
   component: 'graphicnavigation',
   text: '图文导航',
   type: '1-4',
@@ -114,7 +114,7 @@ componentsData.set('graphicnavigation', {
   },
 })
 
-componentsData.set('richtext', {
+componentProperties.set('richtext', {
   component: 'richtext',
   text: '富文本',
   type: '1-10',
@@ -126,7 +126,7 @@ componentsData.set('richtext', {
     backColor: 'rgb(249, 249, 249)', //背景颜色
   },
 })
-componentsData.set('magiccube', {
+componentProperties.set('magiccube', {
   component: 'magiccube',
   text: '魔方',
   type: '1-6',
@@ -166,7 +166,7 @@ componentsData.set('magiccube', {
     ], //图片列表
   },
 })
-componentsData.set('auxiliarysegmentation', {
+componentProperties.set('auxiliarysegmentation', {
   component: 'auxiliarysegmentation',
   text: '辅助分割',
   type: '1-11',
@@ -181,7 +181,7 @@ componentsData.set('auxiliarysegmentation', {
     bordertp: 'solid', //线的类型
   },
 })
-componentsData.set('commoditysearch', {
+componentProperties.set('commoditysearch', {
   component: 'commoditysearch',
   text: '商品搜索',
   type: '1-1',
@@ -200,7 +200,7 @@ componentsData.set('commoditysearch', {
     hotords: [], //热词
   },
 })
-componentsData.set('storeinformation', {
+componentProperties.set('storeinformation', {
   component: 'storeinformation',
   text: '店铺信息',
   type: '1-12',
@@ -215,7 +215,7 @@ componentsData.set('storeinformation', {
     Discount: '在线支付满150减30，满100减20', //优惠信息
   },
 })
-componentsData.set('entertheshop', {
+componentProperties.set('entertheshop', {
   component: 'entertheshop',
   text: '进入店铺',
   type: '1-13',
@@ -229,7 +229,7 @@ componentsData.set('entertheshop', {
     http: {},
   },
 })
-componentsData.set('notice', {
+componentProperties.set('notice', {
   component: 'notice',
   text: '公告',
   type: '1-7',
@@ -242,7 +242,7 @@ componentsData.set('notice', {
     textColor: 'rgba(100, 101, 102)', //文字颜色
   },
 })
-componentsData.set('videoss', {
+componentProperties.set('videoss', {
   component: 'videoss',
   text: '视频',
   type: '1-8',
@@ -256,7 +256,7 @@ componentsData.set('videoss', {
   },
 })
 
-componentsData.set('custommodule', {
+componentProperties.set('custommodule', {
   component: 'custommodule',
   text: '自定义模块',
   type: 'demo',
@@ -268,7 +268,7 @@ componentsData.set('custommodule', {
     img:'https://img2.baidu.com/it/u=1905875968,4289754134&fm=26&fmt=auto&gp=0.jpg'
   },
 })
-componentsData.set('communitypowder', {
+componentProperties.set('communitypowder', {
   component: 'communitypowder',
   text: '社群涨粉',
   type: '1-14',
@@ -284,7 +284,7 @@ componentsData.set('communitypowder', {
     backColor: 'rgb(255, 255, 255)', //背景颜色
   },
 })
-componentsData.set('storenotecard', {
+componentProperties.set('storenotecard', {
   component: 'storenotecard',
   text: '文章模块',
   type: '2-2',
@@ -308,7 +308,7 @@ componentsData.set('storenotecard', {
     http: {},
   },
 })
-componentsData.set('crowdoperation', {
+componentProperties.set('crowdoperation', {
   component: 'crowdoperation',
   text: '人群运营',
   type: '1-17',
@@ -318,7 +318,7 @@ componentsData.set('crowdoperation', {
     text: '人群运营',
   },
 })
-componentsData.set('personalizedrecommendation', {
+componentProperties.set('personalizedrecommendation', {
   component: 'personalizedrecommendation',
   text: '个性化推荐',
   type: '1-18',
@@ -328,7 +328,7 @@ componentsData.set('personalizedrecommendation', {
     text: '个性化推荐',
   },
 })
-componentsData.set('onlineservice', {
+componentProperties.set('onlineservice', {
   component: 'onlineservice',
   text: '在线客服',
   type: '1-19',
@@ -338,7 +338,7 @@ componentsData.set('onlineservice', {
     text: '在线客服',
   },
 })
-componentsData.set('investigate', {
+componentProperties.set('investigate', {
   component: 'investigate',
   text: '表单模块',
   type: '2-3',
@@ -350,7 +350,7 @@ componentsData.set('investigate', {
     jsonData: [], //value1为sass显示内容，value2为前端显示内容
   },
 })
-componentsData.set('tabBar', {
+componentProperties.set('tabBar', {
   component: 'tabBar',
   text: '底部导航',
   type: '1-5',
@@ -368,7 +368,7 @@ componentsData.set('tabBar', {
     iconList: [],
   },
 })
-componentsData.set('follow', {
+componentProperties.set('follow', {
   component: 'follow',
   text: '关注公众号',
   type: '1-15',
@@ -381,7 +381,7 @@ componentsData.set('follow', {
     followAppId: '',
   },
 })
-componentsData.set('suspension', {
+componentProperties.set('suspension', {
   component: 'suspension',
   text: '悬浮按钮',
   type: '1-16',
@@ -394,4 +394,4 @@ componentsData.set('suspension', {
   },
 })
 
-export default componentsData
+export default componentProperties

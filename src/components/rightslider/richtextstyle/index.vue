@@ -89,11 +89,11 @@ export default {
         ],
         image_advtab: true,
         toolbar: [
-          'fullscreen code bold italic underline strikethrough alignleft aligncenter alignright alignjustify \
-          outdent indent image link removeformat cut copy paste ltr rtl anchor restoredraft pagebreak save \
-          table tabledelete tableprops tablerowprops tablecellprops tableinsertrowbefore tableinsertrowafter tabledeleterow tableinsertcolbefore tableinsertcolafter tabledeletecol \
-          backcolor formatselect fontselect fontsizeselect forecolor \
-          subscript superscript hr preview print searchreplace wordcount toc charmap bullist numlist insertdatetime undo redo',
+          `fullscreen code bold italic underline strikethrough alignleft aligncenter alignright alignjustify 
+          outdent indent image link removeformat cut copy paste ltr rtl anchor restoredraft pagebreak save 
+          table tabledelete tableprops tablerowprops tablecellprops tableinsertrowbefore tableinsertrowafter tabledeleterow tableinsertcolbefore tableinsertcolafter tabledeletecol 
+          backcolor formatselect fontselect fontsizeselect forecolor 
+          subscript superscript hr preview print searchreplace wordcount toc charmap bullist numlist insertdatetime undo redo`,
         ],
         theme: 'silver', //主题
         menubar: false,
