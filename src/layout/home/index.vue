@@ -49,7 +49,6 @@
             <!-- 左半部分 -->
             <div class="lef" v-show="pageSetup.isBack">
               <van-icon name="arrow-left" />
-              <!-- <span>首页</span> -->
             </div>
             <!-- 标题 -->
             <div
@@ -866,26 +865,11 @@ export default {
         position: relative;
         /* 左边 */
         .lef {
-          // display: flex;
-          // align-items: center;
-          // height: 100%;
           position: absolute;
           left: 18px;
           top: 50%;
           transform: translateY(-50%);
-
           /* 图标 */
-          i {
-            padding: 2px;
-            border: 1px solid #dcdcdc;
-            border-radius: 50%;
-            margin-right: 8px;
-
-            &::before {
-              color: #dcdcdc;
-            }
-          }
-
           span {
             color: #000;
             font-weight: 400;

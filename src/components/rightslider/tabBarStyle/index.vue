@@ -52,8 +52,22 @@
           >
             <i class="el-icon-circle-close" @click="deleteimg(index)" />
             <!-- 图片 -->
-            <div class="imag">
-              <img :src="item.iconPic" alt="" draggable="false" />
+            <div>
+              <div
+                class="imagBox"
+                v-for="replaceIconIndex in 2"
+                :key="replaceIconIndex"
+                @click="replaceIcon(replaceIconIndex, index)"
+              >
+                <img
+                  class="imag"
+                  :src="replaceIconIndex == 1 ? item.iconPic : item.inactive"
+                  draggable="false"
+                />
+                <div>
+                  {{ replaceIconIndex == 1 ? '选中时' : '未选中时' }}
+                </div>
+              </div>
             </div>
             <!-- 标题和链接 -->
             <div class="imgText">
@@ -112,7 +126,11 @@
     </el-form>
 
     <!-- 上传图片 -->
-    <uploadimg ref="upload" @uploadInformation="uploadInformation" />
+    <uploadimg
+      ref="upload"
+      @uploadInformation="uploadInformation"
+      @handleClose="handleClose"
+    />
   </div>
 </template>
 
@@ -161,6 +179,8 @@ export default {
       dragOptions: {
         animation: 200,
       },
+      replaceIconIndex: null,
+      replaceIndex: null,
     }
   },
 
@@ -171,11 +191,22 @@ export default {
   methods: {
     // 提交
     uploadInformation(res) {
+      if (this.replaceIconIndex == 1) {
+        this.datas.iconList[this.replaceIndex].iconPic = res
+        this.replaceIconIndex = null
+        return
+      }
+      if (this.replaceIconIndex == 2) {
+        this.datas.iconList[this.replaceIndex].inactive = res
+        this.replaceIconIndex = null
+        return
+      }
       this.datas.iconList.push({
         /** 图标名称文字 */
         iconText: '',
         /** 图标图片 */
         iconPic: res,
+        inactive: res,
         /** 是否显示小圆点 */
         isDot: false,
         /** 跳转类型 */
@@ -184,12 +215,21 @@ export default {
         http: {},
       })
     },
-
+    /* 取消上传 */
+    handleClose() {
+      this.replaceIconIndex = null
+    },
     /* 删除图片 */
     deleteimg(index) {
       this.datas.iconList.splice(index, 1)
     },
-
+    /* 点击图片 */
+    replaceIcon(replaceIconIndex, replaceIndex) {
+      this.replaceIconIndex = replaceIconIndex
+      this.replaceIndex = replaceIndex
+      console.log(replaceIconIndex, replaceIndex)
+      this.$refs.upload.showUpload()
+    },
   },
 
   computed: {},
@@ -257,40 +297,35 @@ export default {
     }
 
     /* 图片 */
-    .imag {
-      width: 60px;
-      height: 60px;
+    .imagBox {
+      position: relative;
       border-radius: 5px;
       overflow: hidden;
-      position: relative;
       cursor: pointer;
-      img {
-        width: 100%;
-        height: 100%;
-        display: inline-block;
+      .imag {
+        width: 60px;
+        height: 60px;
       }
-      span {
-        background: rgba(0, 0, 0, 0.5);
-        font-size: 12px;
+      div {
         position: absolute;
-        left: 0px;
-        bottom: 0px;
-        display: inline-block;
-        width: 100%;
+        top: 0;
+        width: 60px;
+        line-height: 60px;
+        border-radius: 5px;
         text-align: center;
+        font-size: 12px;
         color: #fff;
-        height: 20px;
-        line-height: 20px;
+        background-color: rgba(0, 0, 0, 0.3);
       }
     }
+
     /* 图片字 */
     .imgText {
-      width: 80%;
+      padding-left: 20px;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-      padding-left: 20px;
-      justify-content: space-between;
+      justify-content: space-around;
       /* 图片字 */
       .imgTextChild {
         width: 100%;

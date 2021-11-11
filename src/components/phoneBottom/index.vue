@@ -1,10 +1,6 @@
 <template>
   <div class="phoneBottom">
     <p class="ft-links" v-show="datas.isShowBootom">
-      <span>店铺主页</span>
-      <span>个人中心</span>
-      <!-- <span>关注我们</span> -->
-      <!-- <span>店铺信息</span> -->
     </p>
   </div>
 </template>
@@ -13,11 +9,6 @@
 export default {
   name: 'phoneBottom',
   props:['datas'],
-  watch: {
-    datas() {
-      // console.log(this.datas,'------------this.datas')
-    },
-  },
 }
 </script>
 

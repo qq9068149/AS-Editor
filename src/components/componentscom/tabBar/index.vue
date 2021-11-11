@@ -9,14 +9,17 @@
         :active-color="datas.activeColor"
         :inactive-color="datas.inactiveColor"
       >
-        <van-tabbar-item
+        <van-tabbar-item 
           v-for="(item, index) in datas.iconList"
           :key="index"
           :name="item.iconName"
-          :icon="item.iconPic"
           :dot="item.isDot"
-          >{{ item.iconText }}</van-tabbar-item
         >
+          <span>{{ item.iconText }}</span>
+          <template #icon="props">
+            <img :src="props.active ? item.iconPic : item.inactive" />
+          </template>
+        </van-tabbar-item>
       </van-tabbar>
     </div>
 
@@ -29,7 +32,7 @@
         :active-color="datas.activeColor"
         :inactive-color="datas.inactiveColor"
       >
-        <van-tabbar-item icon="search" dot name="home">标签</van-tabbar-item>
+        <van-tabbar-item icon="search" name="home">标签</van-tabbar-item>
         <van-tabbar-item icon="home-o">标签</van-tabbar-item>
         <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
         <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
@@ -46,11 +49,11 @@
 export default {
   name: 'tabBar',
   props: {
-    datas: Object,
+    datas: Object
   },
   data() {
     return {
-      // active: 'home',
+      active: 0
     }
   },
 
@@ -71,7 +74,7 @@ export default {
   beforeDestroy() {
     document.querySelector('.phone-container').style.cssText =
       'padding-bottom: 0px'
-  },
+  }
 }
 </script>
 

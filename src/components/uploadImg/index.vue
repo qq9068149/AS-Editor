@@ -81,6 +81,7 @@ export default {
       this.$confirm('点击取消后您填写的信息将丢失，您确定取消？')
         .then(() => {
           this.handleRemove()
+          this.$emit('handleClose')
           // 隐藏上传文件
           this.dialogVisible = false
           this.dialogImageUrl = ''
