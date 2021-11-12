@@ -108,7 +108,7 @@ export default {
               name: 'storeinformation',
             },
             {
-              text: '进入店铺',
+              text: '单元格',
               type: '1-13',
               icon: 'icon-jinrudianpu',
               name: 'entertheshop',

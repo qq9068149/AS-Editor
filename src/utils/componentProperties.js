@@ -217,14 +217,15 @@ componentProperties.set('storeinformation', {
 })
 componentProperties.set('entertheshop', {
   component: 'entertheshop',
-  text: '进入店铺',
+  text: '单元格',
   type: '1-13',
   active: true,
   style: 'entertheshopstyle',
   setStyle: {
-    text: '进入店铺',
-    shopName: '店铺名称',
-    copywriting: '进入店铺',
+    text: '单元格',
+    icon: '', // 左侧图标
+    shopName: '左侧标题',
+    copywriting: '右侧内容',
     type: '10',
     http: {},
   },

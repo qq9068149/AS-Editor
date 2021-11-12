@@ -12,13 +12,13 @@
       size="small"
     >
       <el-form-item
-        label="店铺名称"
+        label="左侧标题"
         :hide-required-asterisk="true"
         prop="shopName"
       >
         <el-input
           v-model="datas.shopName"
-          placeholder="请输入店铺名称"
+          placeholder="请输入左侧标题"
           maxlength="10"
           show-word-limit
         />
@@ -26,16 +26,29 @@
 
       <!-- 文案 -->
       <el-form-item
-        label="文案"
+        label="右侧内容"
         :hide-required-asterisk="true"
         prop="copywriting"
       >
         <el-input
           v-model="datas.copywriting"
-          placeholder="请输入文案"
+          placeholder="请输入右侧内容"
           maxlength="8"
           show-word-limit
         />
+      </el-form-item>
+
+      <el-form-item label="左侧图标">
+        <img :src="datas.icon" v-if="datas.icon" />
+        <!-- 添加导航按钮 -->
+        <el-button
+          @click="$refs.upload.showUpload()"
+          class="uploadImg"
+          type="primary"
+          plain
+        >
+          <i class="el-icon-plus" />点击{{datas.icon?'更换':'添加'}}图片
+        </el-button>
       </el-form-item>
 
       <!-- 跳转页面 -->
@@ -67,10 +80,15 @@
         </div>
       </el-form-item>
     </el-form>
+
+    <!-- 上传图片 -->
+    <uploadimg ref="upload" @uploadInformation="uploadInformation" />
   </div>
 </template>
 
 <script>
+import uploadimg from '../../uploadImg' //图片上传
+
 export default {
   name: 'entertheshopstyle',
   props: {
@@ -82,11 +100,10 @@ export default {
         //校验表单输入
         shopName: [
           //页面名称
-          { required: true, message: '请输入店铺名称', trigger: 'blur' },
+          { required: true, message: '请输入左侧标题', trigger: 'blur' },
         ],
         copywriting: [
           //页面描述
-          { required: true, message: '请输入文案', trigger: 'blur' },
         ],
       },
       optionsType: [
@@ -101,7 +118,17 @@ export default {
       ], // 选择跳转类型
       emptyText: '',
     }
-  }
+  },
+  methods: {
+    // 提交
+    uploadInformation(res) {
+      this.datas.icon = res
+      console.log(res)
+    },
+  },
+  components: {
+    uploadimg,
+  },
 }
 </script>
 
@@ -131,6 +158,18 @@ export default {
     .fir-sele.el-select {
       width: 40%;
     }
+  }
+  /* 上传图片按钮 */
+  .uploadImg {
+    width: 345px;
+    height: 40px;
+    margin-top:20px ;
+  }
+  img{
+    display: block;
+    margin: 0 auto;
+    width: 56px;
+    height: 56px;
   }
 }
 </style>
