@@ -1,14 +1,11 @@
-import httpAjax from './httpAjax.js'
+/**请求路径
+ * 
+ */
+import { post } from '@/api/request'
 
-class httpApi {
-
-	//手机登录接口
-	loginAdminTest = data => httpAjax({
-		url: '/loginAdminTest',
-		data,
-		method: 'post'
-	})
-	
+export default {
+	// 登录
+  loginAdminTest: params => {
+    return post('/loginAdminTest', params)
+  }
 }
-
-export default new httpApi()
