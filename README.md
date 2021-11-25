@@ -4,18 +4,17 @@
 
 基于 vue 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
+
+官网：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
+
+在线体验：[http://www.aseditor.fun/](http://www.aseditor.fun/)
+
 #### 安装教程
 
 1.  npm install   （安装 node_modules 模块）
 2.  npm run serve （运行）
 3.  npm run build （打包）
 4.  npm update     (用于更新包到基于规范范围的最新版本)
-
-#### 在线文档or在线体验
-
-文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
-
-在线体验：[http://www.aseditor.fun/](http://www.aseditor.fun/)
 
 #### 使用说明
 
