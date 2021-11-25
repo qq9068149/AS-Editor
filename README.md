@@ -11,6 +11,11 @@
 3.  npm run build （打包）
 4.  npm update     (用于更新包到基于规范范围的最新版本)
 
+#### 在线文档or在线体验
+
+文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
+在线体验：[http://www.aseditor.fun/](http://www.aseditor.fun/)
+
 #### 使用说明
 
 ##### 使用教程
@@ -44,9 +49,6 @@ src / utils / componentProperties.js            // 组件数据
   setStyle: {}                  // 组件动态数据
 }
 ```
-#### 在线文档
-
-文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
 
 #### 扩展项目
 
