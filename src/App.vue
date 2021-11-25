@@ -20,11 +20,11 @@ export default {
     }
   },
   created() {
-    this.$httpApi
-      .loginAdminTest({ loginname: 'admin', pwd: '123456' })
-      .then((res) => {
-        console.log(res)
-      })
+    // this.$httpApi
+    //   .loginAdminTest({ loginname: 'admin', pwd: '123456' })
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
   },
   mounted() {},
   methods: {

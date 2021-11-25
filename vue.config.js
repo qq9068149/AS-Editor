@@ -12,7 +12,7 @@ module.exports = {
     open: true,
     proxy: {
       '/api': {
-        target: 'https://player.okgene.work/',
+        target: 'http://api.aseditor.fun/',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

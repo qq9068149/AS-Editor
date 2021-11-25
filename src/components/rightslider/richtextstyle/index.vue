@@ -111,7 +111,7 @@ export default {
             // 获取数据
             var res = JSON.parse(xhr.response)
             if (res.success != true) return failFun('HTTP Error: ' + res.msg)
-            succFun(res.result)
+            succFun(res.data.src)
           }
           xhr.send(formData)
         },
