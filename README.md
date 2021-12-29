@@ -5,9 +5,9 @@
 基于 vue 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
 
-官网：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
+文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
 
-在线体验：[http://www.aseditor.fun/](http://www.aseditor.fun/)
+在线体验：[http://was666.gitee.io/as-editor](http://was666.gitee.io/as-editor)
 
 #### 安装教程
 
