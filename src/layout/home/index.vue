@@ -17,10 +17,18 @@
         <el-button @click="reloads" type="danger"
           ><i class="el-icon-delete-solid el-icon--left"></i>重置</el-button
         >
+        <el-button @click="realTimeView.show = true">预览</el-button>
         <el-button @click="catJson">查看JSON </el-button>
-        <el-button @click="$refs.file.click()" >导入JSON </el-button>
+        <el-button @click="$refs.file.click()">导入JSON </el-button>
         <el-button @click="exportJSON">导出JSON </el-button>
-        <input type="file" ref="file" id="file" accept=".json" @change="importJSON" style="display: none;" />
+        <input
+          type="file"
+          ref="file"
+          id="file"
+          accept=".json"
+          @change="importJSON"
+          style="display: none"
+        />
         <!-- <el-button @click="Preservation"
           ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
         > -->
@@ -35,36 +43,10 @@
       <!-- 手机 -->
       <div class="phone">
         <section class="phoneAll" ref="imageTofile" id="imageTofile">
-          <!-- 导航栏 -->
           <img src="@/assets/images/phoneTop.png" alt="" class="statusBar" />
 
-          <!-- 标题 -->
-          <div
-            class="headerTop"
-            :style="{
-              height: pageSetup.titleHeight + 'px',
-            }"
-            @click="headTop"
-          >
-            <!-- 左半部分 -->
-            <div class="lef" v-show="pageSetup.isBack">
-              <van-icon name="arrow-left" />
-            </div>
-            <!-- 标题 -->
-            <div
-              class="header-title"
-              :style="{
-                height: pageSetup.titleHeight + 'px',
-                'line-height': pageSetup.titleHeight + 'px',
-              }"
-            >
-              {{ pageSetup.name }}
-            </div>
-            <!-- 右半部分 -->
-            <div class="rig" v-show="pageSetup.isPerson">
-              <span>个人中心</span>
-            </div>
-          </div>
+          <!-- 头部导航 -->
+          <headerTop :pageSetup="pageSetup" @click.native="headTop" />
 
           <!-- 主体内容 -->
           <section
@@ -110,7 +92,7 @@
           <div class="phoneSize">iPhone 8手机高度</div>
 
           <!-- 底部 -->
-          <phoneBottom :datas="pageSetup.bottomLogo" />
+          <phoneBottom />
         </section>
         <!-- 底部 -->
       </div>
@@ -144,18 +126,24 @@
       <div class="decorateAll">
         <!-- 页面设置 -->
         <transition name="decorateAnima">
-          <!-- 路由缓存 -->
-          <keep-alive exclude="richtextstyle">
-            <!-- 动态组件 -->
-            <component
-              :is="rightcom"
-              :datas="currentproperties"
-              @componenmanagement="componenmanagement"
-            />
-          </keep-alive>
+          <!-- 动态组件 -->
+          <component
+            :is="rightcom"
+            :datas="currentproperties"
+            @componenmanagement="componenmanagement"
+          />
         </transition>
       </div>
     </section>
+    <realTimeView
+      :datas="realTimeView"
+      :val="{
+        id,
+        name: pageSetup.name,
+        templateJson: JSON.stringify(pageSetup),
+        component: JSON.stringify(pageComponents),
+      }"
+    />
   </div>
 </template>
 
@@ -163,7 +151,9 @@
 import utils from 'utils/index' // 方法
 import componentProperties from '@/utils/componentProperties' // 组件数据
 import sliderassembly from 'components/sliderassembly' // 左侧组件大全
+import headerTop from 'components/headerTop' // 手机底部
 import phoneBottom from 'components/phoneBottom' // 手机底部
+import realTimeView from 'components/realTimeView' // 预览组件
 
 import html2canvas from 'html2canvas' // 生成图片
 import FileSaver from 'file-saver' // 导入or导出JSON
@@ -228,6 +218,9 @@ export default {
   inject: ['reload'],
   data() {
     return {
+      realTimeView: {
+        show: false, // 是否显示预览
+      },
       id: null, //当前页面
       deleShow: true, //删除标签显示
       index: '', //当前选中的index
@@ -237,15 +230,11 @@ export default {
         // 页面设置属性
         name: '页面标题', //页面名称
         details: '', //页面描述
-        bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
-        bottomLogo: {
-          isShowBootom: false,
-          botLogo: '',
-        }, // 底部logo
         isPerson: false, // 是否显示个人中心
         isBack: true, // 是否返回按钮
-        titleHeight: 35,
-        bgImg: '',
+        titleHeight: 35, // 高度
+        bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
+        bgImg: '', // 背景图片
       },
       pageComponents: [], //页面组件
       offsetY: 0, //记录上一次距离父元素高度
@@ -255,8 +244,8 @@ export default {
   },
 
   mounted() {
-      this.pageSetup.name = '页面标题'
-      this.currentproperties = this.pageSetup
+    this.pageSetup.name = '页面标题'
+    this.currentproperties = this.pageSetup
   },
 
   methods: {
@@ -281,15 +270,6 @@ export default {
           dangerouslyUseHTMLString: true,
           callback: () => {},
         }
-      )
-      console.log(
-        {
-          id: this.id,
-          name: this.pageSetup.name,
-          templateJson: this.pageSetup,
-          component: this.pageComponents,
-        },
-        '----------------查看JSON'
       )
     },
     /**
@@ -332,7 +312,7 @@ export default {
         let url = canvas.toDataURL('image/png')
         const formData = new FormData()
         formData.append('base64File', url)
-        console.log(formData,'--------------页面图片formData')
+        console.log(formData, '--------------页面图片formData')
         loading.close()
       })
     },
@@ -634,7 +614,7 @@ export default {
         // this.result为读取到的json字符串，需转成json对象
         let ImportJSON = JSON.parse(this.result)
         // 检测是否导入成功
-        console.log(ImportJSON,'-----------------导入成功')
+        console.log(ImportJSON, '-----------------导入成功')
         // 导入JSON数据
         _this.id = ImportJSON.id
         _this.pageSetup = JSON.parse(ImportJSON.templateJson)
@@ -645,7 +625,6 @@ export default {
 
   watch: {
     /* 监听右侧属性设置切换 */
-
     rightcom(newval) {
       if (newval === 'decorate') {
         utils.forEach(this.pageComponents, (res) => {
@@ -667,6 +646,8 @@ export default {
   },
 
   components: {
+    headerTop,
+    realTimeView,
     decorate,
     componenmanagement,
     phoneBottom,
@@ -849,61 +830,6 @@ export default {
         width: 130px;
         height: 21px;
         line-height: 21px;
-      }
-
-      /* 头部 */
-      .headerTop {
-        height: 35px;
-        width: 100%;
-        background: #fff;
-        display: flex;
-        padding: 0 5px;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        border-bottom: 1px solid #f7f8fa;
-        position: relative;
-        /* 左边 */
-        .lef {
-          position: absolute;
-          left: 18px;
-          top: 50%;
-          transform: translateY(-50%);
-          /* 图标 */
-          span {
-            color: #000;
-            font-weight: 400;
-            font-size: 12px;
-          }
-        }
-        .header-title {
-          width: 100%;
-          text-align: center;
-          font-size: 14px;
-          line-height: 35px;
-          color: #333333;
-        }
-        /* 右边 */
-        .rig {
-          // display: flex;
-          // align-items: center;
-          // height: 100%;
-          position: absolute;
-          right: 18px;
-          top: 50%;
-          transform: translateY(-50%);
-          /* 搜索图标 */
-          i {
-            font-size: 18px;
-            margin: 0 7px 5px;
-          }
-
-          /* 文字 */
-          span {
-            margin: 0 7px;
-            font-size: 12px;
-          }
-        }
       }
 
       /* 状态栏 */
