@@ -34,7 +34,7 @@
 import vuedraggable from 'vuedraggable' //拖拽组件
 
 export default {
-  name: 'componenManagement',
+  name: 'componenmanagement',
   props: ['datas'],
   components: { vuedraggable },
   data() {

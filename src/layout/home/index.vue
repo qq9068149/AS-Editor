@@ -148,70 +148,10 @@
 </template>
 
 <script>
-import utils from 'utils/index' // 方法
+import utils from 'utils/index' // 方法类
 import componentProperties from '@/utils/componentProperties' // 组件数据
-import sliderassembly from 'components/sliderassembly' // 左侧组件大全
-import headerTop from 'components/headerTop' // 手机底部
-import phoneBottom from 'components/phoneBottom' // 手机底部
-import realTimeView from 'components/realTimeView' // 预览组件
-
 import html2canvas from 'html2canvas' // 生成图片
-import FileSaver from 'file-saver' // 导入or导出JSON
-
-/* 手机组件 */
-import {
-  captiontext,
-  placementarea,
-  pictureads,
-  graphicnavigation,
-  richtext,
-  magiccube,
-  auxiliarysegmentation,
-  commoditysearch,
-  storeinformation,
-  entertheshop,
-  investigate,
-  notice,
-  videoss,
-  custommodule,
-  communitypowder,
-  storenotecard,
-  crowdoperation,
-  personalizedrecommendation,
-  onlineservice,
-  listswitching,
-  tabBar,
-  follow,
-  suspension,
-} from 'components/componentscom'
-
-/* 右侧组件 */
-import {
-  decorate,
-  componenmanagement,
-  captiontextsstyle,
-  pictureadsstyle,
-  graphicnavigationstyle,
-  richtextstyle,
-  magiccubestyle,
-  auxiliarysegmentationstyle,
-  commoditysearchstyle,
-  storeinformationstyle,
-  entertheshopstyle,
-  investigatestyle,
-  noticestyle,
-  videostyle,
-  custommodulestyle,
-  communitypowderstyle,
-  storenotecardstyle,
-  crowdoperationstyle,
-  personalizedrecommendationstyle,
-  onlineservicestyle,
-  listswitchingstyle,
-  tabBarStyle,
-  followStyle,
-  suspensionstyle,
-} from 'components/rightslider'
+import FileSaver from 'file-saver' // 导出JSON
 
 export default {
   name: 'home',
@@ -464,7 +404,7 @@ export default {
         )
       })
       if (someResult) {
-        this.$message.info('当前组件只能添加一个！')
+        this.$message.info('当前组件只能添加一个!')
         /* 删除提示组件 */
         this.pageComponents = this.pageComponents.filter(
           (res) => res.component !== 'placementarea'
@@ -643,60 +583,6 @@ export default {
         this.currentproperties = this.pageComponents
       }
     },
-  },
-
-  components: {
-    headerTop,
-    realTimeView,
-    decorate,
-    componenmanagement,
-    phoneBottom,
-    captiontext,
-    sliderassembly,
-    placementarea,
-    captiontextsstyle,
-    pictureadsstyle,
-    pictureads,
-    graphicnavigation,
-    graphicnavigationstyle,
-    richtext,
-    richtextstyle,
-    magiccube,
-    magiccubestyle,
-    auxiliarysegmentation,
-    auxiliarysegmentationstyle,
-    commoditysearch,
-    commoditysearchstyle,
-    storeinformation,
-    storeinformationstyle,
-    entertheshop,
-    entertheshopstyle,
-    investigate,
-    investigatestyle,
-    notice,
-    noticestyle,
-    videoss,
-    videostyle,
-    custommodule,
-    custommodulestyle,
-    communitypowder,
-    communitypowderstyle,
-    storenotecard,
-    storenotecardstyle,
-    crowdoperation,
-    crowdoperationstyle,
-    personalizedrecommendation,
-    personalizedrecommendationstyle,
-    onlineservice,
-    onlineservicestyle,
-    listswitching,
-    listswitchingstyle,
-    tabBarStyle,
-    tabBar,
-    follow,
-    followStyle,
-    suspension,
-    suspensionstyle,
   },
 }
 </script>
