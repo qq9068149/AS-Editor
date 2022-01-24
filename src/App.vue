@@ -46,7 +46,7 @@ export default {
   top: 0;
 }
 
-/* // 页面切换动画 */
+// 页面切换动画
 .fade-enter-active {
   transition: all 1.5s ease;
 }
@@ -63,5 +63,10 @@ export default {
 }
 .el-message-box.JSONView {
   width: 1100px;
+}
+
+// 提示样式
+.Prompt{
+  font-size: 12px; color: #969799; margin-bottom: 10px
 }
 </style>

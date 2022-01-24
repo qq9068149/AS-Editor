@@ -2,11 +2,15 @@
   <div class="componenManagement">
     <!-- 标题 -->
     <h2>组件设置</h2>
-
+    <p class="Prompt">底部导航组件为固定页面底部，无需拖拽调整位置</p>
     <!-- 拖拽 -->
     <vuedraggable v-model="data" v-bind="dragOptions">
       <transition-group>
-        <div v-for="(item, ind) in data" :key="item.text + ind" class="item">
+        <div
+          v-for="(item, ind) in data"
+          :key="item.text + ind"
+          :class="item.text == '底部导航' ? 'item delDragitem' : 'item'"
+        >
           <p>
             <i class="el-icon-s-grid" style="margin-right: 15px" />{{
               item.text
@@ -42,6 +46,8 @@ export default {
       data: this.datas,
       dragOptions: {
         animation: 200,
+        // class是 delDragitem 禁止拖拽
+        filter: '.delDragitem',
       },
     }
   },
@@ -101,6 +107,10 @@ export default {
     i {
       color: #999;
     }
+  }
+  .delDragitem {
+    background-color: rgba(10, 42, 97, 0.2);
+    cursor: no-drop;
   }
 }
 </style>
