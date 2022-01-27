@@ -10,6 +10,7 @@
         :src="'http://was666.gitee.io/as-editor-h5/#/?type=iframe'"
         @load="load"
       ></iframe>
+      <van-loading v-if="loading" size="24px" vertical>加载中</van-loading>
     </el-dialog>
   </div>
 </template>
@@ -23,8 +24,14 @@ export default {
     },
     val:Object
   },
+  data() {
+    return {
+      loading: true
+    }
+  },
   methods: {
     load() {
+      this.loading = false
       this.$refs["iframe"].contentWindow.postMessage(this.val, "*");
     },
   },

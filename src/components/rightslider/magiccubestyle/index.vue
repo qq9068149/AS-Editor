@@ -243,21 +243,8 @@
           />
           <div v-else style="position: relative">
             <img draggable="false" :src="item.src" alt="" />
-            <p
-              style="
-                width: 100%;
-                background: #999;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                color: #fff;
-                font-size: 5px;
-                text-align: center;
-                height: 20px;
-                line-hright: 20px;
-              "
-            >
-              点击跟换图片图片
+            <p>
+              点击更换图
             </p>
           </div>
         </div>
@@ -423,8 +410,7 @@ export default {
       if (this.datas.rubiksCubeType === 6) return '一左三右'
     },
   },
-  created() {
-  },
+  created() {},
   methods: {
     /* 替换 */
     uploadInformation(res) {
@@ -567,7 +553,7 @@ export default {
       cursor: pointer;
       img {
         width: 100%;
-        height: 100%;
+        height: 60px;
         display: inline-block;
       }
       span {
@@ -582,6 +568,17 @@ export default {
         color: #fff;
         height: 20px;
         line-height: 20px;
+      }
+      p {
+        width: 100%;
+        background: #999;
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        color: #fff;
+        font-size: 5px;
+        text-align: center;
+        height: 20px;
       }
     }
 
