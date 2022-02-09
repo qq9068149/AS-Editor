@@ -19,11 +19,11 @@
       </el-form-item>
 
       <el-form-item class="lef" label="公众号名称">
-        <input type="text" placeholder="请输入公众号名称" />
+        <el-input type="text" v-model="datas.followName" placeholder="请输入公众号名称" />
       </el-form-item>
 
       <el-form-item class="lef" label="公众号Id">
-        <input type="text" placeholder="请输入公众号Id" />
+        <el-input type="text" v-model="datas.followAppId" placeholder="请输入公众号Id" />
       </el-form-item>
     </el-form>
 

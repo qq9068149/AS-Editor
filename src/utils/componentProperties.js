@@ -378,7 +378,7 @@ componentProperties.set('follow', {
   setStyle: {
     text: '关注公众号',
     heade: 'https://imgs.starfirelink.com/miniShop//logo_1618466110849.png',
-    followName: '星火',
+    followName: '公众号名称',
     followAppId: '',
   },
 })

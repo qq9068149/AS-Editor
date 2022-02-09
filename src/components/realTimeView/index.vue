@@ -32,7 +32,7 @@ export default {
   methods: {
     load() {
       this.loading = false
-      this.$refs["iframe"].contentWindow.postMessage(this.val, "*");
+      this.$refs["iframe"].contentWindow.postMessage(this.val, "http://was666.gitee.io");
     },
   },
 }

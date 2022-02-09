@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <transition name="fade">
+    <!-- <transition name="fade"> -->
       <router-view v-if="isRouterAlive" />
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 

@@ -513,7 +513,6 @@ export default {
         type: 'warning',
       })
         .then(() => {
-          this.$router.push({ path: 'home' })
           this.reload()
         })
         .catch(() => {})
