@@ -79,53 +79,51 @@
 
       <!-- 图片广告 -->
       <div v-if="datas.imageList[0]">
-        <vuedraggable v-model="datas.imageList" v-bind="dragOptions">
-          <transition-group>
+        <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
+          <template #item="{ element, index }">
             <section
               class="imgBanner"
-              v-for="(item, index) in datas.imageList"
-              :key="item + index"
             >
-              <i class="el-icon-circle-close" @click="deleteimg(index)" />
+              <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
               <!-- 图片 -->
               <div class="imag">
-                <img :src="item.src" alt draggable="false" />
+                <img :src="element.src" alt draggable="false" />
               </div>
               <!-- 标题和链接 -->
               <div class="imgText">
                 <el-input
-                  v-model="item.text"
+                  v-model="element.text"
                   placeholder="请输入标题，也可不填"
-                  size="mini"
+                  size="small"
                 ></el-input>
 
                 <!-- 选择类型 -->
                 <div class="select-type">
                   <el-select
                     style="width: 60%"
-                    v-model="item.linktype"
+                    v-model="element.linktype"
                     placeholder="请选择跳转类型"
-                    size="mini"
+                    size="small"
                   >
                     <el-option
-                      v-for="item in optionsType"
-                      :key="item.name"
-                      :label="item.name"
-                      :value="item.type"
+                      v-for="element in optionsType"
+                      :key="element.name"
+                      :label="element.name"
+                      :value="element.type"
                     ></el-option>
                   </el-select>
 
                   <!-- 输入链接 -->
                   <el-input
                     style="width: 100%"
-                    size="mini"
+                    size="small"
                     placeholder="请输入链接，输入前确保可以访问"
-                    v-model="item.http.externalLink"
+                    v-model="element.http.externalLink"
                   ></el-input>
                 </div>
               </div>
             </section>
-          </transition-group>
+          </template>
         </vuedraggable>
       </div>
       <!-- 上传图片 -->
@@ -135,7 +133,7 @@
         type="primary"
         plain
       >
-        <i class="el-icon-plus" />点击添加图片
+        点击添加图片
       </el-button>
 
       <!-- 下划线 -->
@@ -175,7 +173,7 @@
         <el-slider
           v-model="datas.borderRadius"
           :max="30"
-          input-size="mini"
+          input-size="small"
           show-input
         ></el-slider>
       </el-form-item>
@@ -191,7 +189,7 @@
         <el-slider
           v-model="datas.pageMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         ></el-slider>
       </el-form-item>
@@ -207,7 +205,7 @@
         <el-slider
           v-model="datas.imageMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         ></el-slider>
       </el-form-item>
@@ -240,9 +238,6 @@ export default {
           name: '外部链接',
         },
       ], // 选择跳转类型
-      dragOptions: {
-        animation: 200,
-      },
       emptyText: '',
     }
   },
@@ -302,7 +297,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
@@ -364,11 +359,11 @@ export default {
     }
   }
 
-  /deep/.radi .el-radio {
+  :deep(.radi) .el-radio {
     margin-right: 8px;
   }
 
-  /deep/.radi1 .el-radio {
+  :deep(.radi1) .el-radio {
     margin-right: 7px;
     .el-radio__label {
       padding-left: 5px;
@@ -383,7 +378,7 @@ export default {
   }
 
   // 上传弹框内容部分
-  /deep/.uploadIMG .el-dialog__body {
+  :deep(.uploadIMG) .el-dialog__body {
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -393,7 +388,7 @@ export default {
   }
 
   .disable {
-    /deep/.el-upload {
+    :deep(.el-upload) {
       display: none !important;
     }
   }
@@ -455,7 +450,7 @@ export default {
       justify-content: space-between;
       .select-type {
         display: flex;
-        /deep/.el-select {
+        :deep(.el-select) {
           .el-input {
             input {
               white-space: nowrap;

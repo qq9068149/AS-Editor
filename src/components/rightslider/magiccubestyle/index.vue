@@ -254,7 +254,7 @@
           <el-select
             v-model="item.linktype"
             placeholder="请选择跳转类型"
-            size="mini"
+            size="small"
           >
             <el-option
               v-for="item in optionsType"
@@ -267,7 +267,7 @@
 
           <!-- 输入链接 -->
           <el-input
-            size="mini"
+            size="small"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="item.http.externalLink"
           >
@@ -311,7 +311,7 @@
         <el-slider
           v-model="datas.pageMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -322,7 +322,7 @@
         <el-slider
           v-model="datas.imgMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -519,7 +519,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }

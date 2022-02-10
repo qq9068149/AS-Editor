@@ -1,6 +1,6 @@
 <template>
   <div class="RealTimeView">
-    <el-dialog :visible.sync="datas.show" width="414px" top="8vh">
+    <el-dialog v-model="datas.show" width="414px" top="8vh">
       <img src="@/assets/images/phoneTop.png" style="width: 375px" />
       <iframe
         v-if="datas.show"

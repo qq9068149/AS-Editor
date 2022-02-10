@@ -49,26 +49,18 @@
           v-model="datas.titleHeight"
           :max="100"
           :min="35"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
       </el-form-item>
 
       <!-- 背景颜色 -->
-      <el-form-item label="背景颜色">
-        <!-- 单选框 -->
-        <el-radio-group v-model="colourAction">
-          <el-radio label="默认颜色" />
-          <el-radio label="自定义颜色" />
-        </el-radio-group>
-
+      <el-form-item label="背景颜色" class="lef">
         <!-- 颜色选择器 -->
         <el-color-picker
           v-model="datas.bgColor"
           show-alpha
-          class="picke"
-          v-show="pickeShow"
           :predefine="predefineColors"
         >
         </el-color-picker>
@@ -83,13 +75,12 @@
               class="uploadImg"
               type="primary"
               plain
-              ><i class="el-icon-plus" />更换图片</el-button
+              >更换图片</el-button
             >
             <el-button type="primary" @click="clear()">清空图片</el-button>
           </div>
         </div>
       </el-form-item>
-
     </el-form>
 
     <!-- 上传图片 -->
@@ -122,7 +113,6 @@ export default {
           { required: true, message: '请选择页面分类', trigger: 'blur' },
         ],
       },
-      colourAction: '默认颜色', // 颜色选择
       pickeShow: false, //颜色选择器是否显示
       predefineColors: [
         // 颜色选择器预设
@@ -147,9 +137,9 @@ export default {
       uploadImgDataType: null, // 获取到的图片地址属于哪一类别   0 修改底部logo   1 修改店铺图标 2 页面背景图
     }
   },
-
-  created() {},
-
+  setup() {
+    return {}
+  },
   methods: {
     // 显示上传图片组件   type :  2 页面背景图
     showUpload(type) {
@@ -168,18 +158,8 @@ export default {
     clear() {
       this.datas.bgImg = ''
     },
-
   },
-  watch: {
-    colourAction(data) {
-      if (data === '默认颜色') {
-        this.datas.bgColor = 'rgba(249, 249, 249, 10)'
-        this.pickeShow = false
-        return
-      } else return (this.pickeShow = true)
-    },
-  },
-  components: { uploadimg },
+  components: { uploadimg }
 }
 </script>
 
@@ -219,18 +199,18 @@ export default {
 
   .lef {
     display: flex;
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
       margin-right: 20px;
     }
   }
   .lef-height {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
       width: 80px;
       float: left;
     }
-    /deep/.el-form-item__content {
+    :deep(.el-form-item__content ){
       margin-left: 80px;
     }
   }

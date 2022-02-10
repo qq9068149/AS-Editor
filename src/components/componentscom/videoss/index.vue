@@ -12,7 +12,6 @@
         controls
         :autoplay="datas.autoplay"
         :poster="datas.coverUrl"
-        width="100%"
       ></video>
     </section>
 
@@ -59,6 +58,9 @@ export default {
     font-size: 100px;
     opacity: 0.5;
     color: #999;
+  }
+  video{
+    width: 100%;
   }
 }
 </style>

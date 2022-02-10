@@ -173,17 +173,17 @@ select {
   font-size: 18px;
   font-weight: bold;
 }
-/deep/.van-cell {
+:deep(.van-cell) {
   display: block;
 }
-/deep/.el-form-item__label {
+:deep(.el-form-item__label) {
   text-align: center;
   width: 100% !important;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-/deep/.el-form-item__content {
+:deep(.el-form-item__content) {
   margin-left: 100% !important;
 }
 /* 上传图片按钮 */
@@ -192,11 +192,11 @@ select {
   height: 40px;
   margin-top: 20px;
 }
-/deep/.van-radio,
+:deep(.van-radio),
 .van-checkbox {
   padding: 4px 0px;
 }
-/deep/.van-field__label {
+:deep(.van-field__label) {
   width: 100%;
   // overflow: hidden;
   // white-space: nowrap;
@@ -207,7 +207,7 @@ select {
   line-height: 20px;
   font-size: 13px;
 }
-/deep/.van-field__value {
+:deep(.van-field__value) {
   padding-left: 10px;
   font-size: 13px;
   padding-top: 5px;

@@ -2,10 +2,9 @@
   <div class="uploadImg">
     <!-- 上传图片 -->
     <el-dialog
-      class="uploadIMG"
       title="上传图片"
       :lock-scroll="true"
-      :visible.sync="dialogVisible"
+      v-model="dialogVisible"
       :close-on-press-escape="false"
       :close-on-click-modal="false"
       :show-close="false"
@@ -27,20 +26,22 @@
         :before-remove="handleRemove"
         :class="uploadShow ? 'disable' : ''"
       >
-        <i class="el-icon-plus"></i>
+        <i class="el-icon-plus">+</i>
       </el-upload>
 
       <!-- 按钮 -->
-      <span slot="footer" class="dialog-footer">
+       <template #footer>
+      <span  class="dialog-footer">
         <el-button @click="handleClose">取 消 上 传</el-button>
         <el-button type="primary" @click="uploadInformation" :disabled="disabl"
           >点 击 上 传</el-button
         >
       </span>
+      </template>
     </el-dialog>
 
     <!-- 图片放大 -->
-    <el-dialog :visible.sync="dialogVisibles" class="xianshi">
+    <el-dialog v-model="dialogVisibles">
       <img
         draggable="false"
         style="width: 640px; height: 400px; margin: 20px 0px"
@@ -62,7 +63,6 @@ export default {
       uploadShow: false, //是否显示上传图片
     }
   },
-  created() {},
   methods: {
     /* 显示上传文件组件 */
     showUpload() {
@@ -144,7 +144,7 @@ export default {
 @import '../../assets/css/minx.less';
 .uploadImg {
   // 上传弹框内容部分
-  /deep/.uploadIMG .el-dialog__body {
+  :deep(.el-dialog__body) {
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -154,9 +154,13 @@ export default {
   }
 
   .disable {
-    /deep/.el-upload {
+    :deep(.el-upload) {
       display: none !important;
     }
+  }
+  .el-icon-plus{
+    display: block;
+    margin-top: 50px;
   }
 }
 </style>

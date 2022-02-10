@@ -10,38 +10,36 @@
 
     <!-- 图片广告 -->
     <div v-if="datas.imageList[0]">
-      <vuedraggable v-model="datas.imageList" v-bind="dragOptions">
-        <transition-group>
+      <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
+         <template #item="{ element }">
           <section
             class="imgList"
-            v-for="(item, index) in datas.imageList"
-            :key="item + index"
           >
-            <i class="el-icon-circle-close" @click="deleteimg(index)" />
+            <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
             <!-- 图片 -->
             <div class="imag">
-              <img draggable="false" :src="item.src" alt="" />
+              <img draggable="false" :src="element.src" alt="" />
             </div>
             <!-- 标题和链接 -->
             <div class="imgText">
               <el-input
-                v-model="item.text"
+                v-model="element.text"
                 placeholder="请输入标题，也可不填"
-                size="mini"
+                size="small"
               ></el-input>
               <!-- 选择类型 -->
               <div class="select-type">
                 <el-select
                   style="width: 60%"
-                  v-model="item.linktype"
+                  v-model="element.linktype"
                   placeholder="请选择跳转类型"
-                  size="mini"
+                  size="small"
                 >
                   <el-option
-                    v-for="item in optionsType"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.type"
+                    v-for="element in optionsType"
+                    :key="element.name"
+                    :label="element.name"
+                    :value="element.type"
                   >
                   </el-option>
                 </el-select>
@@ -49,21 +47,21 @@
                 <!-- 输入链接 -->
                 <el-input
                   style="width: 100%"
-                  size="mini"
+                  size="small"
                   placeholder="请输入链接，输入前确保可以访问"
-                  v-model="item.http.externalLink"
+                  v-model="element.http.externalLink"
                 >
                 </el-input>
               </div>
             </div>
           </section>
-        </transition-group>
+        </template>>
       </vuedraggable>
     </div>
 
     <!-- 上传图片 -->
     <el-button @click="showUpload('0')" class="uploadImg" type="primary" plain
-      ><i class="el-icon-plus" />点击添加图片</el-button
+      >点击添加导航</el-button
     >
 
     <div class="bor"></div>
@@ -133,7 +131,7 @@
           v-model="datas.textHeight"
           :max="50"
           :min="24"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -163,7 +161,7 @@
         <el-slider
           v-model="datas.borderRadius"
           :max="50"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -180,7 +178,7 @@
               class="uploadImg"
               type="primary"
               plain
-              ><i class="el-icon-plus" />更换图片</el-button
+              >更换图片</el-button
             >
             <el-button type="primary" class="uploadImg" @click="clear()"
               >清空图片</el-button
@@ -233,10 +231,6 @@ export default {
   },
   data() {
     return {
-      dragOptions: {
-        //拖拽配置
-        animation: 200,
-      },
       predefineColors: [
         // 颜色选择器预设
         '#ff4500',
@@ -280,12 +274,14 @@ export default {
     },
     // 提交
     uploadInformation(res) {
+
       if (this.uploadImgDataType === '0') {
         this.datas.imageList.push({
           src: res,
           text: '',
           http: {},
         })
+        console.log(this.datas.imageList,33333333333333)
       } else if (this.uploadImgDataType === '1') {
         this.datas.bgImg = res
       }
@@ -323,7 +319,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
@@ -392,7 +388,7 @@ export default {
       justify-content: space-between;
       .select-type {
         display: flex;
-        /deep/.el-select {
+        :deep(.el-select) {
           .el-input {
             input {
               white-space: nowrap;

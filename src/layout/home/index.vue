@@ -14,9 +14,7 @@
         <!-- 返回 -->
       </p>
       <div>
-        <el-button @click="reloads" type="danger"
-          ><i class="el-icon-delete-solid el-icon--left"></i>重置</el-button
-        >
+        <el-button @click="reloads" type="danger">重置</el-button>
         <el-button @click="realTimeView.show = true">预览</el-button>
         <el-button @click="catJson">查看JSON </el-button>
         <el-button @click="$refs.file.click()">导入JSON </el-button>
@@ -29,9 +27,7 @@
           @change="importJSON"
           style="display: none"
         />
-        <!-- <el-button @click="Preservation"
-          ><i class="el-icon-s-claim el-icon--left"></i>保存</el-button
-        > -->
+        <!-- <el-button @click="Preservation">保存</el-button> -->
       </div>
     </section>
 
@@ -46,7 +42,7 @@
           <img src="@/assets/images/phoneTop.png" alt="" class="statusBar" />
 
           <!-- 头部导航 -->
-          <headerTop :pageSetup="pageSetup" @click.native="headTop" />
+          <headerTop :pageSetup="pageSetup" @click="headTop" />
 
           <!-- 主体内容 -->
           <section
@@ -69,21 +65,22 @@
                 :style="{
                   border: item.active && deleShow ? '2px solid #155bd4' : '',
                 }"
-                @click.native="activeComponent(item, index)"
+                @click="activeComponent(item, index)"
                 class="componentsClass"
                 :data-type="item.type"
               >
-                <div
-                  v-show="deleShow"
-                  class="deles"
-                  slot="deles"
-                  @click.stop="deleteObj(index)"
-                >
-                  <!-- 删除组件 -->
-                  <span class="iconfont icon-sanjiaoxingzuo"></span>
-                  {{ item.text }}
-                  <i class="el-icon-delete-solid" />
-                </div>
+                <template #deles>
+                  <div
+                    v-show="deleShow"
+                    class="deles"
+                    @click.stop="deleteObj(index)"
+                  >
+                    <!-- 删除组件 -->
+                    <span class="iconfont icon-sanjiaoxingzuo"></span>
+                    {{ item.text }}
+                    <van-icon name="delete" />
+                  </div>
+                </template>
               </component>
             </div>
           </section>
@@ -419,8 +416,7 @@ export default {
         /* 替换提示 */
         this.index = index
         if (res.component === 'placementarea')
-          this.$set(this.pageComponents, index, data)
-
+          this.pageComponents[index] = data
         if (this.pageComponents.length === index + 1)
           this.pageComponents = this.pageComponents.filter(
             (res) => res.component !== 'placementarea'

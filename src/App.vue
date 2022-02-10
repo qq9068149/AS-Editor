@@ -1,42 +1,26 @@
 <template>
   <div id="app">
-    <!-- <transition name="fade"> -->
-      <router-view v-if="isRouterAlive" />
-    <!-- </transition> -->
+    <router-view v-if="isRouterAlive" />
   </div>
 </template>
 
-<script>
-export default {
-  provide() {
-    return {
-      reload: this.reload,
-    }
-  },
+<script setup>
+import { ref, nextTick, provide } from 'vue'
 
-  data() {
-    return {
-      isRouterAlive: true,
-    }
-  },
-  created() {
-    // this.$httpApi
-    //   .loginAdminTest({ loginname: 'admin', pwd: '123456' })
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-  },
-  mounted() {},
-  methods: {
-    // 刷新页面
-    reload() {
-      this.isRouterAlive = false
-      this.$nextTick(() => {
-        this.isRouterAlive = true
-      })
-    },
-  },
+let isRouterAlive = ref(true)
+
+// reload无感刷新事件
+const reload = () => {
+  isRouterAlive.value = false
+  // nextTick：在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+  nextTick(() => {
+    isRouterAlive.value = true
+  })
 }
+
+// 向子组件以及子孙组件传递名为reload的函数，第一个参数自定义，第二个参数代表上面定义的reload()方法
+provide('reload', reload)
+
 </script>
 
 <style lang="less">
@@ -64,9 +48,14 @@ export default {
 .el-message-box.JSONView {
   width: 1100px;
 }
+.el-form-item__content {
+  display: block !important;
+}
 
 // 提示样式
-.Prompt{
-  font-size: 12px; color: #969799; margin-bottom: 10px
+.Prompt {
+  font-size: 12px;
+  color: #969799;
+  margin-bottom: 10px;
 }
 </style>

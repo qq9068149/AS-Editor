@@ -2,15 +2,7 @@
   <div class="communitypowderstyle">
     <!-- 标题 -->
     <h2>{{ datas.text }}</h2>
-
     <div style="height: 20px" />
-
-    <!-- 提示 -->
-    <!-- <el-tooltip class="item" effect="dark" content="" placement="bottom">
-      <div slot="content">活码是用户推广个人微信号或粉丝群的二维码，适用于线上线下，吸引用户<br/>添加好友或粉丝群进行长期维护的场景</div>
-      <i class="el-icon-question" style="cursor: pointer;"></i>
-    </el-tooltip> -->
-
     <!-- 表单 -->
     <el-form
       label-position="top"
@@ -38,7 +30,7 @@
       <!-- 二维码 -->
       <el-form-item label="二维码" :hide-required-asterisk="true">
         <div class="backgroundImg" @click="showImg('qrcodeImg')">
-          <i class="el-icon-plus" v-if="!datas.qrcodeImg" size="30"></i>
+          <i class="el-icon-plus" v-if="!datas.qrcodeImg" size="30">+</i>
           <img draggable="false" v-else :src="datas.qrcodeImg" alt="" />
           <p>更换图片</p>
         </div>
@@ -213,7 +205,7 @@ export default {
     }
   }
   .color-select {
-    /deep/.el-form-item__content {
+    :deep(.el-form-item__content) {
       float: right;
     }
   }

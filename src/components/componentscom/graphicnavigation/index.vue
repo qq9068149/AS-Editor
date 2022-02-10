@@ -112,8 +112,8 @@ export default {
     &::-webkit-scrollbar-thumb {
       background-color: #155bd4;
     }
-    /deep/.el-collapse-item__header,
-    /deep/.el-collapse-item__wrap {
+    :deep(.el-collapse-item__header),
+    :deep(.el-collapse-item__wrap) {
       border-bottom: 0 !important;
     }
     /* 导航 */

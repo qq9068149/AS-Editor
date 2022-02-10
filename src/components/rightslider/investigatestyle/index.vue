@@ -55,7 +55,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="addText" class="uploadImg" type="primary" plain>
-          <i class="el-icon-plus" />点击添加内容
+          点击添加内容
         </el-button>
       </el-form-item>
     </el-form>
@@ -121,7 +121,7 @@ export default {
   }
   .lef {
     position: relative;
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
     .delete {
@@ -141,7 +141,7 @@ export default {
     }
   }
 
-  /deep/.el-form-item__content {
+  :deep(.el-form-item__content) {
     margin-left: 0 !important;
     // display: flex;
     div {
@@ -169,7 +169,7 @@ export default {
     margin-top: 20px;
   }
 }
-// /deep/.el-input__inner{
+// :deep(.el-input__inner){
 //   padding: 0 5px;
 // }
 </style>

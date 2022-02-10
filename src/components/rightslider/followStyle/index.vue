@@ -13,7 +13,7 @@
             type="primary"
             plain
           >
-            <i class="el-icon-plus" />上传公众号图片
+            上传公众号图片
           </el-button>
         </div>
       </el-form-item>
@@ -85,7 +85,7 @@ h2 {
   color: #323233;
 }
 .lef {
-  /deep/.el-form-item__label {
+  :deep(.el-form-item__label) {
     text-align: left;
   }
 }

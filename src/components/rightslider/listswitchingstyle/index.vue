@@ -71,41 +71,46 @@
 
         <!-- 图片广告 -->
         <div v-if="datas.imageList[0]">
-          <vuedraggable v-model="datas.imageList" v-bind="dragOptions">
-            <transition-group>
-              <section
-                class="imgBanner"
-                v-for="(item, index) in datas.imageList"
-                :key="item + index"
-              >
-                <i class="el-icon-circle-close" @click="deleteimg(index)" />
+          <vuedraggable
+            :list="datas.imageList"
+            item-key="index"
+            :forceFallback="true"
+            :animation="200"
+          >
+            <template #item="{ element, index }">
+              <section class="imgBanner">
+                <van-icon
+                  class="el-icon-circle-close"
+                  name="close"
+                  @click="deleteimg(index)"
+                />
                 <div class="imag">
-                  <img draggable="false" :src="item.coverUrl" alt="" />
+                  <img draggable="false" :src="element.coverUrl" alt="" />
                 </div>
                 <div class="imgText">
                   <div>
                     <el-input
                       disabled="disabled"
                       style="width: 65%"
-                      v-model="item.name"
-                      size="mini"
+                      v-model="element.name"
+                      size="small"
                     />
                     <el-input
                       disabled="disabled"
                       type="number"
                       style="width: 35%"
-                      v-model.number="item.price"
-                      size="mini"
+                      v-model.number="element.price"
+                      size="small"
                     />
                   </div>
                   <el-input
                     disabled="disabled"
-                    v-model="item.introduce"
-                    size="mini"
+                    v-model="element.introduce"
+                    size="small"
                   />
                 </div>
               </section>
-            </transition-group>
+            </template>
           </vuedraggable>
         </div>
 
@@ -115,20 +120,20 @@
           class="uploadImg"
           type="primary"
           plain
-          ><i class="el-icon-plus" />点击添加商品</el-button
+          >点击添加商品</el-button
         >
       </div>
 
       <div v-show="datas.commoditylisttype !== 0">
         <h5 style="color: #000; font-size: 14px; margin-left: 7px">
           添加商品分组<el-button
-            style="padding: 2px 4px; fnot-size: 12px; margin-left: 200px"
+            style="padding: 2px 4px; margin-left: 200px"
             @click="addGrouping"
             type="primary"
-            size="mini"
+            size="small"
             plain
           >
-            <i class="el-icon-plus" />添加</el-button
+            添加</el-button
           >
         </h5>
         <p
@@ -154,34 +159,35 @@
             class="tit"
             style="width: 100px"
             placeholder="请输入分组名称"
-            size="mini"
+            size="small"
           />
-          <i
-            @click="delecommoditylisttypetab(index)"
-            class="el-icon-delete"
+          <van-icon
+            name="delete-o"
             style="
               cursor: pointer;
               padding: 2px 4px;
-              fnot-size: 12px;
               margin-left: 200px;
               color: red;
             "
+            @click="delecommoditylisttypetab(index)"
           />
 
-          <vuedraggable v-model="item.imageList" v-bind="dragOptions">
-            <transition-group>
-              <section
-                class="imgBanner"
-                v-for="(item, ind) in item.imageList"
-                :key="item + ind"
-              >
-                <i
+          <vuedraggable
+            :list="item.imageList"
+            item-key="index"
+            :forceFallback="true"
+            :animation="200"
+          >
+            <template #item="{ element, ind }">
+              <section class="imgBanner">
+                <van-icon
                   class="el-icon-circle-close"
+                  name="close"
                   @click="delecommodityimg(index, ind)"
                 />
                 <!-- 图片 -->
                 <div class="imag">
-                  <img draggable="false" :src="item.coverUrl" alt="" />
+                  <img draggable="false" :src="element.coverUrl" alt="" />
                 </div>
                 <!-- 标题和链接 -->
                 <div class="imgText">
@@ -189,25 +195,25 @@
                     <el-input
                       disabled="disabled"
                       style="width: 65%"
-                      v-model="item.name"
-                      size="mini"
+                      v-model="element.name"
+                      size="small"
                     />
                     <el-input
                       disabled="disabled"
                       type="number"
                       style="width: 35%"
-                      v-model.number="item.price"
-                      size="mini"
+                      v-model.number="element.price"
+                      size="small"
                     />
                   </div>
                   <el-input
                     disabled="disabled"
-                    v-model="item.introduce"
-                    size="mini"
+                    v-model="element.introduce"
+                    size="small"
                   />
                 </div>
               </section>
-            </transition-group>
+            </template>
           </vuedraggable>
 
           <el-button
@@ -215,7 +221,7 @@
             class="uploadImg"
             type="primary"
             plain
-            ><i class="el-icon-plus" />点击添加商品</el-button
+            >点击添加商品</el-button
           >
         </section>
       </div>
@@ -277,7 +283,7 @@
         <el-slider
           v-model="datas.borderRadius"
           :max="30"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -290,7 +296,7 @@
         <el-slider
           v-model="datas.pageMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -303,7 +309,7 @@
         <el-slider
           v-model="datas.commodityMargin"
           :max="20"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -320,9 +326,11 @@
               class="uploadImg"
               type="primary"
               plain
-              ><i class="el-icon-plus" />更换图片</el-button
+              >更换图片</el-button
             >
-            <el-button type="primary" class="uploadImg" @click="clear()">清空图片</el-button>
+            <el-button type="primary" class="uploadImg" @click="clear()"
+              >清空图片</el-button
+            >
           </div>
         </div>
       </el-form-item>
@@ -360,7 +368,7 @@
           v-show="datas.purchasebuttonType > 3"
           style="width: 40%; margin-top: 10px"
           v-model="datas.purchase"
-          size="mini"
+          size="small"
         />
       </el-radio-group>
 
@@ -489,9 +497,6 @@ export default {
         textWeight: [{ required: true, validator: kon, trigger: 'blur' }],
       },
       marker: ['新品', '热卖', 'NEW', 'HOT'],
-      dragOptions: {
-        animation: 200,
-      },
       imgText: null, //当前选中的类型
       imgNumber: null, //第几个数组
       predefineColors: [
@@ -526,8 +531,7 @@ export default {
       uploadImgDataType: null,
     }
   },
-  created() {
-  },
+  created() {},
   methods: {
     /* 上传图片弹框 */
     dialogVisibleshow(text, number) {
@@ -591,12 +595,12 @@ export default {
   computed: {
     styleText() {
       let modeType
-      if (this.datas.commodityType === 0)  modeType = '大图模式'
-      if (this.datas.commodityType === 1)  modeType = '一行两个'
-      if (this.datas.commodityType === 2)  modeType = '一行三个'
-      if (this.datas.commodityType === 3)  modeType = '详细列表'
-      if (this.datas.commodityType === 4)  modeType = '一大两小'
-      if (this.datas.commodityType === 5)  modeType = '横向滑动'
+      if (this.datas.commodityType === 0) modeType = '大图模式'
+      if (this.datas.commodityType === 1) modeType = '一行两个'
+      if (this.datas.commodityType === 2) modeType = '一行三个'
+      if (this.datas.commodityType === 3) modeType = '详细列表'
+      if (this.datas.commodityType === 4) modeType = '一大两小'
+      if (this.datas.commodityType === 5) modeType = '横向滑动'
 
       return modeType
     },
@@ -624,7 +628,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
@@ -723,7 +727,7 @@ export default {
   }
 
   /* 单选框 */
-  /deep/.radi1 {
+  :deep(.radi1) {
     border-top: 1px solid #f7f8fa;
     border-bottom: 1px solid #f7f8fa;
     padding: 12px 0;
@@ -798,7 +802,7 @@ export default {
   }
 
   // 上传弹框内容部分
-  /deep/.uploadIMG .el-dialog__body {
+  :deep(.uploadIMG) .el-dialog__body {
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -808,14 +812,14 @@ export default {
   }
 
   .disable {
-    /deep/.el-upload {
+    :deep(.el-upload) {
       display: none !important;
     }
   }
 
   .tit {
     margin-bottom: 20px;
-    /deep/.el-input__inner {
+    :deep(.el-input__inner) {
       text-align: center;
     }
   }

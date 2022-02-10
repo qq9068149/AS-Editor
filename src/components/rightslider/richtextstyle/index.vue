@@ -161,33 +161,32 @@ export default {
 }
 
 /* 修改富文本样式 */
-/deep/.tox {
+:deep(.tox) {
   border: 1px solid #ebedf0 !important;
-}
-/deep/.tox .tox-tbtn {
-  height: 25px !important;
-  margin: 0 2px !important;
-  width: auto;
-  font-size: 13px;
+  .tox-tbtn {
+    height: 25px !important;
+    margin: 0 2px !important;
+    width: auto;
+    font-size: 13px;
+  }
+  .tox-tbtn--bespoke .tox-tbtn__select-label {
+    width: auto !important;
+  }
+  .tox-toolbar__group {
+    background: #f7f8fa;
+  }
 }
 
-/deep/.tox .tox-tbtn--bespoke .tox-tbtn__select-label {
-  width: auto !important;
-}
-/deep/.tox .tox-toolbar,
+:deep(.tox) .tox-toolbar,
 .tox .tox-toolbar__primary,
 .tox .tox-toolbar__overflow {
   background: none !important;
 }
 
-/deep/.tox .tox-toolbar__group {
-  background: #f7f8fa;
-}
-
-/deep/.tox .tox-tbtn--enabled,
+:deep(.tox) .tox-tbtn--enabled,
 .tox .tox-tbtn--enabled:hover {
   background: none !important;
-  /deep/svg {
+  :deep(svg) {
     fill: #155bd4 !important;
   }
 }

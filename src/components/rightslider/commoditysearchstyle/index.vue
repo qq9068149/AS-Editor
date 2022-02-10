@@ -11,26 +11,27 @@
     <!-- 表单 -->
     <el-form label-width="80px" :model="datas" size="small">
       <div v-if="datas.hotords[0]">
-        <vuedraggable v-model="datas.hotords" v-bind="dragOptions">
-          <transition-group>
-            <section
-              class="imgList"
-              v-for="(item, index) in datas.hotords"
-              :key="item + index"
-            >
-              <i class="el-icon-circle-close" @click="deleteHotords(index)" />
+        <vuedraggable
+          :list="datas.hotords"
+          item-key="index"
+          :forceFallback="true"
+          :animation="200"
+        >
+          <template #item="{ element }">
+            <section class="imgList">
+              <van-icon class="el-icon-circle-close" name="close"  @click="deleteHotords(index)"/>
               <!-- 标题和链接 -->
               <div class="imgText">
-                <el-input v-model="item.text" placeholder="请输入热词" />
+                <el-input v-model="element.text" placeholder="请输入热词" />
               </div>
             </section>
-          </transition-group>
+          </template>
         </vuedraggable>
       </div>
 
       <!-- 添加热词 -->
       <el-button @click="addHotords" class="uploadImg" type="primary" plain
-        ><i class="el-icon-plus" />点击添加热词</el-button
+        >点击添加热词</el-button
       >
 
       <div style="height: 20px" />
@@ -130,7 +131,7 @@
           v-model="datas.heights"
           :max="50"
           :min="28"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -212,10 +213,6 @@ export default {
         'hsla(209, 100%, 56%, 0.73)',
         '#c7158577',
       ],
-      dragOptions: {
-        //拖拽配置
-        animation: 200,
-      },
     }
   },
   methods: {
@@ -313,7 +310,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }

@@ -4,32 +4,28 @@
     <h2>组件设置</h2>
     <p class="Prompt">底部导航组件为固定页面底部，无需拖拽调整位置</p>
     <!-- 拖拽 -->
-    <vuedraggable v-model="data" v-bind="dragOptions">
-      <transition-group>
-        <div
-          v-for="(item, ind) in data"
-          :key="item.text + ind"
-          :class="item.text == '底部导航' ? 'item delDragitem' : 'item'"
-        >
-          <p>
-            <i class="el-icon-s-grid" style="margin-right: 15px" />{{
-              item.text
-            }}
-          </p>
+    <vuedraggable
+      :list="data"
+      item-key="index"
+      :forceFallback="true"
+      :animation="200"
+      filter=".delDragitem"
+    >
+      <template #item="{ element, index }">
+        <div :class="element.text == '底部导航' ? 'item delDragitem' : 'item'">
+          <p>{{ element.text }}</p>
           <el-popconfirm
             title="您确定要删除该组件吗?"
             icon="el-icon-warning"
             iconColor="red"
-            @confirm="onConfirms(ind)"
+            @confirm="onConfirms(index)"
           >
-            <i
-              class="el-icon-delete-solid"
-              slot="reference"
-              style="cursor: pointer"
-            />
+            <template #reference>
+              <van-icon name="delete-o" style="cursor: pointer"/>
+            </template>
           </el-popconfirm>
         </div>
-      </transition-group>
+      </template>
     </vuedraggable>
   </div>
 </template>
@@ -44,11 +40,6 @@ export default {
   data() {
     return {
       data: this.datas,
-      dragOptions: {
-        animation: 200,
-        // class是 delDragitem 禁止拖拽
-        filter: '.delDragitem',
-      },
     }
   },
   methods: {

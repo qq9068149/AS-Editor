@@ -2,10 +2,9 @@
   <div class="uploadCommodity">
     <!-- 选择商品 -->
     <el-dialog
-      class="uploadIMG"
       title="选择商品"
       :lock-scroll="true"
-      :visible.sync="dialogVisible"
+      v-model="dialogVisible"
       :close-on-press-escape="false"
       :close-on-click-modal="false"
       :show-close="false"
@@ -17,7 +16,7 @@
         style="width: 60%"
         v-model="type"
         placeholder="请选择跳转类型"
-        size="mini"
+        size="small"
         @change="selectType()"
       >
         <el-option
@@ -34,7 +33,7 @@
         v-if="type !== '11'"
         v-model="dialogImageUrl.name"
         placeholder="请选择图片跳转链接"
-        size="mini"
+        size="small"
         @change="changeId"
         :no-data-text="emptyText"
         @visible-change="
@@ -56,18 +55,23 @@
       <el-input
         style="width: 60%; margin-top: 15px"
         v-if="type === '11'"
-        size="mini"
+        size="small"
         placeholder="请输入链接，输入前确保可以访问"
         v-model="externalLink"
       ></el-input>
 
       <!-- 按钮 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose">取 消 上 传</el-button>
-        <el-button type="primary" @click="uploadInformation" :disabled="disabl"
-          >点 击 上 传</el-button
-        >
-      </span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="handleClose">取 消 上 传</el-button>
+          <el-button
+            type="primary"
+            @click="uploadInformation"
+            :disabled="disabl"
+            >点 击 上 传</el-button
+          >
+        </span>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -186,7 +190,7 @@ export default {
 @import '../../assets/css/minx.less';
 .uploadCommodity {
   // 上传弹框内容部分
-  /deep/.uploadIMG .el-dialog__body {
+  :deep(.el-dialog__body) {
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -196,7 +200,7 @@ export default {
   }
 
   .disable {
-    /deep/.el-upload {
+    :deep(.el-upload) {
       display: none !important;
     }
   }

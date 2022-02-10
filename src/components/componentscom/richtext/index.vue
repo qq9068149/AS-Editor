@@ -26,16 +26,16 @@ export default {
 .richtext {
   position: relative;
 }
-/deep/img {
+:deep(img) {
   max-width: 100% !important;
   display: block;
 }
 .richtext {
   position: relative;
-  /deep/pre {
+  :deep(pre) {
     white-space: break-spaces;
   }
-  /deep/p {
+  :deep(p) {
     word-break: break-all;
   }
 }

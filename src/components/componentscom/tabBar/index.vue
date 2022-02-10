@@ -89,7 +89,7 @@ export default {
 }
 
 .tabbar {
-  /deep/ .van-icon {
+  :deep(.van-icon) {
     width: 25px;
     height: 25px;
     img {

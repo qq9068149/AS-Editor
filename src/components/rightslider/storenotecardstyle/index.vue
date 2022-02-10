@@ -47,54 +47,52 @@
 
       <!-- 图片广告 -->
       <div v-if="datas.imageList[0]">
-        <vuedraggable v-model="datas.imageList" v-bind="dragOptions">
-          <transition-group>
+        <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
+          <template #item="{ element, index }">
             <section
               class="imgBanner"
-              v-for="(item, index) in datas.imageList"
-              :key="item + index"
             >
-              <i class="el-icon-circle-close" @click="deleteimg(index)" />
+              <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
               <!-- 图片 -->
               <div class="imag">
-                <img :src="item.src" alt="" draggable="false" />
+                <img :src="element.src" alt="" draggable="false" />
               </div>
               <!-- 标题和链接 -->
               <div class="imgText">
                 <el-input
-                  v-model="item.text"
+                  v-model="element.text"
                   placeholder="笔记标题"
-                  size="mini"
+                  size="small"
                 />
                 <!-- 标题和链接 -->
                 <div class="imgTextChild">
                   <!-- 选择类型 -->
                   <el-select
-                    v-model="item.linktype"
+                    v-model="element.linktype"
                     placeholder="请选择跳转类型"
-                    size="mini"
+                    size="small"
                     @change="selectType(index)"
                   >
                     <el-option
-                      v-for="iteml in optionsType"
-                      :key="iteml.name"
-                      :label="iteml.name"
-                      :value="iteml.type"
+                      v-for="element in optionsType"
+                      :key="element.name"
+                      :label="element.name"
+                      :value="element.type"
                     >
                     </el-option>
                   </el-select>
 
                   <!-- 输入外部链接 -->
                   <el-input
-                    size="mini"
+                    size="small"
                     placeholder="请输入链接，输入前确保可以访问"
-                    v-model="item.http.externalLink"
+                    v-model="element.http.externalLink"
                   >
                   </el-input>
                 </div>
               </div>
             </section>
-          </transition-group>
+          </template>
         </vuedraggable>
       </div>
 
@@ -104,7 +102,7 @@
         class="uploadImg"
         type="primary"
         plain
-        ><i class="el-icon-plus" />点击添加卡片</el-button
+        >点击添加卡片</el-button
       >
 
       <div style="height: 10px" />
@@ -146,7 +144,7 @@
         <el-slider
           v-model="datas.borderRadius"
           :max="30"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -223,7 +221,7 @@
             style="width: 60%"
             v-model="datas.linktype"
             placeholder="请选择跳转类型"
-            size="mini"
+            size="small"
           >
             <el-option
               v-for="item in optionsType1"
@@ -237,7 +235,7 @@
           <!-- 输入外部链接 -->
           <el-input
             style="width: 100%"
-            size="mini"
+            size="small"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="datas.http.externalLink"
           >
@@ -327,9 +325,6 @@ export default {
         textWeight: [{ required: true, validator: kon, trigger: 'blur' }],
       },
       marker: ['新品', '热卖', 'NEW', 'HOT'],
-      dragOptions: {
-        animation: 200,
-      },
       optionsType: [
         {
           type: '10',
@@ -401,7 +396,7 @@ export default {
   }
 
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
@@ -494,7 +489,7 @@ export default {
   }
 
   /* 单选框 */
-  /deep/.radi1 {
+  :deep(.radi1) {
     border-top: 1px solid #f7f8fa;
     border-bottom: 1px solid #f7f8fa;
     padding: 12px 0;
@@ -579,7 +574,7 @@ export default {
   }
 
   // 上传弹框内容部分
-  /deep/.uploadIMG .el-dialog__body {
+  :deep(.uploadIMG) .el-dialog__body {
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -589,13 +584,13 @@ export default {
   }
 
   .disable {
-    /deep/.el-upload {
+    :deep(.el-upload) {
       display: none !important;
     }
   }
 
   .tit {
-    /deep/.el-input__inner {
+    :deep(.el-input__inner) {
       text-align: center;
     }
   }

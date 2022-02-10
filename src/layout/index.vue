@@ -13,9 +13,11 @@
       </div>
 
       <!-- 子路由 -->
-      <transition name="layoutFade">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="layoutFade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </section>
   </div>
 </template>

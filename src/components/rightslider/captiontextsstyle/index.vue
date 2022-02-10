@@ -118,7 +118,7 @@
           v-model="datas.wordHeight"
           :max="100"
           :min="20"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -200,7 +200,7 @@
           type="text"
           style="width: 110px; margin: 15px"
           v-model="datas.more.text"
-          size="mini"
+          size="small"
         />
 
         <div style="height: 10px" />
@@ -325,10 +325,10 @@ export default {
     }
   }
 
-  /deep/.wid .el-form-item__label {
+  :deep(.wid) .el-form-item__label {
     width: 94px !important;
   }
-  /deep/.wid .el-form-item__content {
+  :deep(.wid) .el-form-item__content {
     float: right;
   }
 }

@@ -36,21 +36,19 @@
           v-model="datas.Highlight"
           :max="4"
           :min="0"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
       </el-form-item>
 
       <el-form-item class="lef" label="导航"> </el-form-item>
-      <vuedraggable v-model="datas.iconList" v-bind="dragOptions">
-        <transition-group>
+      <vuedraggable :list="datas.iconList" item-key="index" :forceFallback="true" :animation="200">
+        <template #item="{ element, index }">
           <section
             class="imgBanner"
-            v-for="(item, index) in datas.iconList"
-            :key="item + index"
           >
-            <i class="el-icon-circle-close" @click="deleteimg(index)" />
+            <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
             <!-- 图片 -->
             <div>
               <div
@@ -61,7 +59,7 @@
               >
                 <img
                   class="imag"
-                  :src="replaceIconIndex == 1 ? item.iconPic : item.inactive"
+                  :src="replaceIconIndex == 1 ? element.iconPic : element.inactive"
                   draggable="false"
                 />
                 <div>
@@ -73,43 +71,43 @@
             <div class="imgText">
               <div class="imgText-top">
                 <el-input
-                  v-model="item.iconText"
+                  v-model="element.iconText"
                   placeholder="导航名称"
-                  size="mini"
+                  size="small"
                 />
                 <div class="imgText-top-r">
                   <span>小圆点</span>
-                  <el-checkbox v-model="item.isDot"></el-checkbox>
+                  <el-checkbox v-model="element.isDot"></el-checkbox>
                 </div>
               </div>
               <!-- 标题和链接 -->
               <div class="imgTextChild">
                 <!-- 选择类型 -->
                 <el-select
-                  v-model="item.linktype"
+                  v-model="element.linktype"
                   placeholder="请选择跳转类型"
-                  size="mini"
+                  size="small"
                 >
                   <el-option
-                    v-for="iteml in optionsType"
-                    :key="iteml.name"
-                    :label="iteml.name"
-                    :value="iteml.type"
+                    v-for="element in optionsType"
+                    :key="element.name"
+                    :label="element.name"
+                    :value="element.type"
                   >
                   </el-option>
                 </el-select>
 
                 <!-- 输入链接 -->
                 <el-input
-                  size="mini"
+                  size="small"
                   placeholder="请输入链接，输入前确保可以访问"
-                  v-model="item.http.externalLink"
+                  v-model="element.http.externalLink"
                 >
                 </el-input>
               </div>
             </div>
           </section>
-        </transition-group>
+        </template>
       </vuedraggable>
 
       <!-- 添加导航按钮 -->
@@ -120,7 +118,7 @@
         plain
         v-if="datas.iconList.length < 5"
       >
-        <i class="el-icon-plus" />点击添加导航
+        点击添加导航
       </el-button>
       <i class="icon-tip">*最多添加5个</i>
     </el-form>
@@ -176,9 +174,6 @@ export default {
         },
       ], // 选择跳转类型
       emptyText: '',
-      dragOptions: {
-        animation: 200,
-      },
       replaceIconIndex: null,
       replaceIndex: null,
     }
@@ -261,7 +256,7 @@ export default {
     color: #323233;
   }
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
@@ -342,13 +337,14 @@ export default {
         justify-content: space-between;
         align-items: center;
         .imgText-top-r {
-          flex: 1;
+          width: 50%;
           text-align: center;
+          font-size: 12px;
           span {
             margin-right: 10px;
           }
         }
-        /deep/.el-input,
+        :deep(.el-input),
         .el-input--mini {
           flex: 1;
         }

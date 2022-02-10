@@ -47,7 +47,7 @@
           type="primary"
           plain
         >
-          <i class="el-icon-plus" />点击{{datas.icon?'更换':'添加'}}图片
+          点击{{datas.icon?'更换':'添加'}}图片
         </el-button>
       </el-form-item>
 
@@ -58,7 +58,7 @@
             style="width: 60%"
             v-model="datas.type"
             placeholder="请选择跳转类型"
-            size="mini"
+            size="small"
           >
             <el-option
               v-for="item in optionsType"
@@ -72,7 +72,7 @@
           <!-- 输入链接 -->
           <el-input
             style="width: 100%"
-            size="mini"
+            size="small"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="datas.http.externalLink"
           >

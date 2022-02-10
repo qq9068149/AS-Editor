@@ -330,8 +330,8 @@
         更多》
       </div>
       <van-tabs
-        v-model="active1"
-        v-show="datas.commoditylisttype === 1"
+        v-model:active="active1"
+        v-if="datas.commoditylisttype === 1"
         animated
         swipeable
         :color="datas.tabColor"
@@ -682,9 +682,9 @@
         更多》
       </div>
       <van-tree-select
+        v-model:main-active-index="active"
         height="auto"
         :items="datas.commoditylisttypetab"
-        :main-active-index.sync="active"
         v-show="datas.commoditylisttype === 2"
         class="type3"
         @click-nav="treeSelect"
@@ -1139,8 +1139,8 @@ export default {
       &::-webkit-scrollbar-thumb {
         background-color: #155bd4;
       }
-      /deep/.el-collapse-item__header,
-      /deep/.el-collapse-item__wrap {
+      :deep(.el-collapse-item__header),
+      :deep(.el-collapse-item__wrap) {
         border-bottom: 0 !important;
       }
     }
@@ -1322,7 +1322,7 @@ export default {
       //     right: 5px;
       //   }
       // }
-      // /deep/.van-tag--mark{
+      // :deep(.van-tag--mark){
       //   border-radius: 10px 0px 0px 10px !important;
       //   padding-right: 3px;
       //   padding-left: 8px;
@@ -1403,21 +1403,21 @@ export default {
       }
     }
   }
-  .defaultcommodityListFlex{
+  .defaultcommodityListFlex {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
   .tab-type2 {
-    /deep/.van-tabs__wrap {
+    :deep(.van-tabs__wrap) {
       min-height: 44px;
     }
-    /deep/.van-tabs__line {
+    :deep(.van-tabs__line) {
       height: 2px;
     }
   }
   .type3 {
-    /deep/.van-tree-select__content {
+    :deep(.van-tree-select__content) {
       flex: 3.9 !important;
       .defaultcommodityList3 {
         height: 84px !important;
@@ -1450,7 +1450,7 @@ export default {
         }
       }
     }
-    /deep/.van-sidebar-item {
+    :deep(.van-sidebar-item) {
       font-size: 16px;
     }
   }

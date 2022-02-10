@@ -10,7 +10,7 @@
         <el-slider
           v-model="datas.blankHeight"
           :max="100"
-          input-size="mini"
+          input-size="small"
           show-input
         >
         </el-slider>
@@ -187,12 +187,12 @@ export default {
     color: #323233;
   }
   .lef {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       text-align: left;
     }
   }
   .aa {
-    /deep/.el-form-item__label {
+    :deep(.el-form-item__label) {
       width: 100px !important;
     }
   }
