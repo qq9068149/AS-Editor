@@ -63,7 +63,7 @@
 
     <!-- 上传图片 -->
     <el-button @click="showUpload('0')" class="uploadImg" type="primary" plain
-      ><i class="el-icon-plus" />点击添加图片</el-button
+      ><i class="el-icon-plus" />点击添加导航</el-button
     >
 
     <div class="bor"></div>
