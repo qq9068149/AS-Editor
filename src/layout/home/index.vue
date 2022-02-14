@@ -176,7 +176,7 @@ export default {
       pageComponents: [], //页面组件
       offsetY: 0, //记录上一次距离父元素高度
       pointer: { show: false }, //穿透
-      onlyOne: ['1-21', '1-22'], // 只能存在一个的组件
+      onlyOne: ['1-5','1-16'], // 只能存在一个的组件(组件的type)
     }
   },
 
@@ -389,15 +389,16 @@ export default {
      */
     drop(event) {
       /* 获取数据 */
-
       let data = utils.deepClone(
         componentProperties.get(event.dataTransfer.getData('componentName'))
       )
-
+      
+      /* 查询是否只能存在一个的组件 */
       let someResult = this.pageComponents.some((item) => {
+        console.log(item.component,'--------------item.component')
         return (
           this.onlyOne.includes(item.type) &&
-          item.type === event.dataTransfer.getData('Text')
+          item.component === event.dataTransfer.getData('componentName')
         )
       })
       if (someResult) {
