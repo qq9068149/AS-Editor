@@ -9,7 +9,6 @@
           margin-left: 15px;
           cursor: pointer;
         "
-        @click="Previous"
       >
         <!-- 返回 -->
       </p>
@@ -27,7 +26,6 @@
           @change="importJSON"
           style="display: none"
         />
-        <!-- <el-button @click="Preservation">保存</el-button> -->
       </div>
     </section>
 
@@ -147,22 +145,19 @@
 <script>
 import utils from 'utils/index' // 方法类
 import componentProperties from '@/utils/componentProperties' // 组件数据
-import html2canvas from 'html2canvas' // 生成图片
 import FileSaver from 'file-saver' // 导出JSON
+import { reactive, watch, toRefs, inject } from 'vue'
+import { ElMessageBox, ElMessage } from 'element-plus'
 
 export default {
   name: 'home',
-  inject: ['reload'],
-  data() {
-    return {
-      realTimeView: {
-        show: false, // 是否显示预览
-      },
-      id: null, //当前页面
-      deleShow: true, //删除标签显示
-      index: '', //当前选中的index
-      rightcom: 'decorate', //右侧组件切换
-      currentproperties: {}, //当前属性
+  setup() {
+    // 是否显示预览
+    const realTimeView = reactive({ show: false })
+
+    // 页面数据
+    const datas = reactive({
+      id: null, //当前页面id
       pageSetup: {
         // 页面设置属性
         name: '页面标题', //页面名称
@@ -173,31 +168,21 @@ export default {
         bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
         bgImg: '', // 背景图片
       },
-      pageComponents: [], //页面组件
-      offsetY: 0, //记录上一次距离父元素高度
-      pointer: { show: false }, //穿透
-      onlyOne: ['1-5','1-16'], // 只能存在一个的组件(组件的type)
-    }
-  },
+      pageComponents: [] //页面组件
+    })
 
-  mounted() {
-    this.pageSetup.name = '页面标题'
-    this.currentproperties = this.pageSetup
-  },
-
-  methods: {
     // 查看JSON
-    catJson() {
-      this.$alert(
+    const catJson = () => {
+      ElMessageBox.alert(
         `{
           <br/>
-          "id": ${this.id},
+          "id": ${datas.id},
           <br/>
-          "name": "${this.pageSetup.name}",
+          "name": "${datas.pageSetup.name}",
           <br/>
-          "templateJson": '${JSON.stringify(this.pageSetup)}',
+          "templateJson": '${JSON.stringify(datas.pageSetup)}',
           <br/>
-          "component": '${JSON.stringify(this.pageComponents)}',
+          "component": '${JSON.stringify(datas.pageComponents)}',
           <br/>
         }`,
         '查看JSON',
@@ -208,58 +193,106 @@ export default {
           callback: () => {},
         }
       )
-    },
-    /**
-     * 保存
-     */
-    Preservation() {
-      /* 隐藏border和删除图标 */
-      this.deleShow = false
-      /* 渲染结束截图 */
-      this.$nextTick(() => {
-        /* 截图 */
-        this.toImage()
+    }
+
+    // 导出json
+    const exportJSON = () => {
+      // 将json转换成字符串
+      const data = JSON.stringify({
+        id: datas.id,
+        name: datas.pageSetup.name,
+        templateJson: JSON.stringify(datas.pageSetup),
+        component: JSON.stringify(datas.pageComponents),
       })
-    },
+      const blob = new Blob([data], { type: '' })
+      FileSaver.saveAs(blob, `${datas.pageSetup.name}.json`)
+    }
+
+    // 导入json
+    const importJSON = () => {
+      const file = document.getElementById('file').files[0]
+      const reader = new FileReader()
+      reader.readAsText(file)
+      let _this = datas
+      reader.onload = function () {
+        // this.result为读取到的json字符串，需转成json对象
+        let ImportJSON = JSON.parse(this.result)
+        // 检测是否导入成功
+        console.log(ImportJSON, '-----------------导入成功')
+        // 导入JSON数据
+        _this.id = ImportJSON.id
+        _this.pageSetup = JSON.parse(ImportJSON.templateJson)
+        _this.pageComponents = JSON.parse(ImportJSON.component)
+      }
+    }
 
     /**
-     * 页面截图
+     * 切换组件位置  用于组件管理中删除功能
      *
-     * @param {Function} callBack 回调函数
+     * @param {Object} res 组件切换后返回的位置
      */
-    toImage() {
-      /* 加载 */
-      const loading = this.$loading({
-        lock: true,
-        text: '保存中...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)',
+    const componenmanagement = (res) => {
+      console.log(6666666666666666)
+      datas.pageComponents = res
+    }
+
+    // 选择组件数据
+    const choose = reactive({
+      deleShow: true, //删除标签显示
+      index: '', //当前选中的index
+      rightcom: 'decorate', //右侧组件切换
+      currentproperties: {}, //当前属性
+      offsetY: 0, //记录上一次距离父元素高度
+      onlyOne: ['1-5', '1-16'], // 只能存在一个的组件(组件的type)
+      pointer: { show: false }, //穿透
+    })
+
+    /**
+     * 选择组件
+     *
+     * @param {Object} res 当前组件对象
+     */
+    const activeComponent = (res, index) => {
+      choose.index = index
+      /* 切换组件 */
+      choose.rightcom = res.style
+      /* 丢样式 */
+      choose.currentproperties = res.setStyle
+
+      /* 替换 */
+      datas.pageComponents.forEach(res => {
+        /* 修改选中 */
+        if (res.active === true) res.active = false
       })
 
-      const imageTofiles = document.querySelector('#imageTofile')
-      /* 截图 */
-      html2canvas(this.$refs.imageTofile, {
-        backgroundColor: null,
-        height: imageTofiles.scrollHeight,
-        width: imageTofiles.scrollWidth,
-        useCORS: true,
-      }).then((canvas) => {
-        /* 显示border和删除图标 */
-        this.deleShow = true
-        let url = canvas.toDataURL('image/png')
-        const formData = new FormData()
-        formData.append('base64File', url)
-        console.log(formData, '--------------页面图片formData')
-        loading.close()
+      /* 选中样式 */
+      res.active = true
+    }
+
+    // 切换标题
+    const headTop = () => {
+      choose.rightcom = 'decorate'
+      /* 替换 */
+      datas.pageComponents.forEach(res => {
+        /* 修改选中 */
+        if (res.active === true) res.active = false
+         console.log(res,'res++++++++++')
       })
-    },
+    }
+
+    // 删除组件
+    const deleteObj = (index) => {
+      datas.pageComponents.splice(index, 1)
+      if (choose.index === index) choose.rightcom = 'decorate'
+      if (index < choose.index) choose.index = choose.index - 1
+    }
 
     /**
      * 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件
      *
      * @param {Object} event event对象
      */
-    allowDrop(event) {
+    const allowDrop = (event) => {
       //阻止浏览器的默认事件
       event.preventDefault()
 
@@ -267,33 +300,33 @@ export default {
       let eventoffset = event.offsetY
 
       /* 如果没有移动不触发事件减少损耗 */
-      if (this.offsetY === eventoffset) return
-      else this.offsetY = eventoffset
+      if (choose.offsetY === eventoffset) return
+      else choose.offsetY = eventoffset
 
       /* 获取组件 */
       const childrenObject = event.target.children[0]
 
       // 一个以上的组件计算
-      if (this.pageComponents.length) {
+      if (datas.pageComponents.length) {
         /* 如果只有一个组件并且第一个是提示组件直接返回 */
         if (
-          this.pageComponents.length === 1 &&
-          this.pageComponents[0].type === 0
+          datas.pageComponents.length === 1 &&
+          datas.pageComponents[0].type === 0
         )
           return
 
         /* 如果鼠标的高度小于第一个的一半直接放到第一个 */
         if (eventoffset < childrenObject.children[0].clientHeight / 2) {
           /* 如果第一个是提示组件直接返回 */
-          if (this.pageComponents[0].type === 0) return
+          if (datas.pageComponents[0].type === 0) return
 
           /* 删除提示组件 */
-          this.pageComponents = this.pageComponents.filter(
+          datas.pageComponents = datas.pageComponents.filter(
             (res) => res.component !== 'placementarea'
           )
 
           /* 最后面添加提示组件 */
-          this.pageComponents.unshift({
+          datas.pageComponents.unshift({
             component: 'placementarea',
             type: 0,
           })
@@ -313,16 +346,16 @@ export default {
             eventoffset
         ) {
           /* 最后一个组件是提示组件返回 */
-          if (this.pageComponents[this.pageComponents.length - 1].type === 0)
+          if (datas.pageComponents[datas.pageComponents.length - 1].type === 0)
             return
 
           /* 清除提示组件 */
-          this.pageComponents = this.pageComponents.filter(
+          datas.pageComponents = datas.pageComponents.filter(
             (res) => res.component !== 'placementarea'
           )
 
           /* 最后一个不是提示组件添加 */
-          this.pageComponents.push({
+          datas.pageComponents.push({
             component: 'placementarea',
             type: 0,
           })
@@ -338,34 +371,34 @@ export default {
 
           if (childoffset + childrens[i].clientHeight / 2 > event.offsetY) {
             /* 如果是提示组件直接返回 */
-            if (this.pageComponents[i].type === 0) break
+            if (datas.pageComponents[i].type === 0) break
 
-            if (this.pageComponents[i - 1].type === 0) break
+            if (datas.pageComponents[i - 1].type === 0) break
 
             /* 清除提示组件 */
-            this.pageComponents = this.pageComponents.filter(
+            datas.pageComponents = datas.pageComponents.filter(
               (res) => res.component !== 'placementarea'
             )
 
-            this.pageComponents.splice(i, 0, {
+            datas.pageComponents.splice(i, 0, {
               component: 'placementarea',
               type: 0,
             })
             break
           } else if (childoffset + childrens[i].clientHeight > event.offsetY) {
-            if (this.pageComponents[i].type === 0) break
+            if (datas.pageComponents[i].type === 0) break
 
             if (
-              !this.pageComponents[i + 1] ||
-              this.pageComponents[i + 1].type === 0
+              !datas.pageComponents[i + 1] ||
+              datas.pageComponents[i + 1].type === 0
             )
               break
 
-            this.pageComponents = this.pageComponents.filter(
+            datas.pageComponents = datas.pageComponents.filter(
               (res) => res.component !== 'placementarea'
             )
 
-            this.pageComponents.splice(i, 0, {
+            datas.pageComponents.splice(i, 0, {
               component: 'placementarea',
               type: 0,
             })
@@ -375,210 +408,137 @@ export default {
         }
       } else {
         /* 一个组件都没有直接push */
-        this.pageComponents.push({
+        datas.pageComponents.push({
           component: 'placementarea',
           type: 0,
         })
       }
-    },
+    }
 
     /**
      * 当在有效放置目标上放置元素或选择文本时触发此事件
      *
      * @param {Object} event event对象
      */
-    drop(event) {
+    const drop = (event) => {
       /* 获取数据 */
       let data = utils.deepClone(
         componentProperties.get(event.dataTransfer.getData('componentName'))
       )
-      
+      console.log(data,'data++++++++++++++++++++++++++++++++++')
+
       /* 查询是否只能存在一个的组件 */
-      let someResult = this.pageComponents.some((item) => {
-        console.log(item.component,'--------------item.component')
+      let someResult = datas.pageComponents.some((item) => {
+        console.log(item.component, '--------------item.component')
         return (
-          this.onlyOne.includes(item.type) &&
+          choose.onlyOne.includes(item.type) &&
           item.component === event.dataTransfer.getData('componentName')
         )
       })
       if (someResult) {
-        this.$message.info('当前组件只能添加一个!')
+        ElMessage.info('当前组件只能添加一个!')
         /* 删除提示组件 */
-        this.pageComponents = this.pageComponents.filter(
+        datas.pageComponents = datas.pageComponents.filter(
           (res) => res.component !== 'placementarea'
         )
         return
       }
 
       /* 替换 */
-      utils.forEach(this.pageComponents, (res, index) => {
+      datas.pageComponents.forEach((res, index) => {
         /* 修改选中 */
         if (res.active === true) res.active = false
         /* 替换提示 */
-        this.index = index
+        choose.index = index
         if (res.component === 'placementarea')
-          this.pageComponents[index] = data
-        if (this.pageComponents.length === index + 1)
-          this.pageComponents = this.pageComponents.filter(
+          datas.pageComponents[index] = data
+        if (datas.pageComponents.length === index + 1)
+          datas.pageComponents = datas.pageComponents.filter(
             (res) => res.component !== 'placementarea'
           )
       })
 
       /* 切换组件 */
-      this.rightcom = data.style
+      choose.rightcom = data.style
       /* 丢样式 */
-      this.currentproperties = data.setStyle
+      choose.currentproperties = data.setStyle
 
       console.log(
         data,
-        this.rightcom,
-        this.currentproperties,
+        choose.rightcom,
+        choose.currentproperties,
         '----------components data'
       )
-    },
+    }
 
     /**
      * 当拖动的元素或文本选择离开有效的放置目标时，会触发此事件
      *
      * @param {Object} event event对象
      */
-    dragleaves() {
+    const dragleaves = () => {
       /* 删除提示组件 */
-      this.pageComponents = this.pageComponents.filter(
+      datas.pageComponents = datas.pageComponents.filter(
         (res) => res.component !== 'placementarea'
       )
-    },
+    }
 
-    /**
-     * 切换组件位置
-     *
-     * @param {Object} res 组件切换后返回的位置
-     */
-    componenmanagement(res) {
-      this.pageComponents = res
-    },
-
-    /**
-     * 选择组件
-     *
-     * @param {Object} res 当前组件对象
-     */
-    activeComponent(res, index) {
-      this.index = index
-      /* 切换组件 */
-      this.rightcom = res.style
-      /* 丢样式 */
-      this.currentproperties = res.setStyle
-
-      /* 替换 */
-      utils.forEach(this.pageComponents, (res) => {
-        /* 修改选中 */
-        if (res.active === true) res.active = false
-      })
-
-      /* 选中样式 */
-      res.active = true
-    },
-
-    /**
-     * 标题切换
-     *
-     * @param {Object} res 当前组件对象
-     */
-    headTop() {
-      this.rightcom = 'decorate'
-
-      /* 替换 */
-      utils.forEach(this.pageComponents, (res) => {
-        /* 修改选中 */
-        if (res.active === true) res.active = false
-      })
-    },
-
-    /* 删除组件 */
-    deleteObj(index) {
-      this.pageComponents.splice(index, 1)
-      if (this.index === index) this.rightcom = 'decorate'
-      if (index < this.index) this.index = this.index - 1
-    },
-
-    /* 页面刷新 */
-    reloads() {
-      this.$confirm('重置后您添加或者修改的数据将会失效, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-      })
+    const reload = inject('reload')
+    // 重置
+    const reloads = () => {
+      ElMessageBox.confirm(
+        '重置后您添加或者修改的数据将会失效, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      )
         .then(() => {
-          this.reload()
+          reload()
         })
         .catch(() => {})
-    },
+    }
 
-    // 返回上一步
-    Previous() {
-      this.$confirm('返回列表您添加或者修改的数据将会失效, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-      })
-        .then(() => {
-          this.$router.go(-1)
-        })
-        .catch(() => {})
-    },
-
-    // 导出json
-    exportJSON() {
-      // 将json转换成字符串
-      const data = JSON.stringify({
-        id: this.id,
-        name: this.pageSetup.name,
-        templateJson: JSON.stringify(this.pageSetup),
-        component: JSON.stringify(this.pageComponents),
-      })
-      const blob = new Blob([data], { type: '' })
-      FileSaver.saveAs(blob, `${this.pageSetup.name}.json`)
-    },
-    // 导入json
-    importJSON() {
-      const file = document.getElementById('file').files[0]
-      const reader = new FileReader()
-      reader.readAsText(file)
-      let _this = this
-      reader.onload = function () {
-        // this.result为读取到的json字符串，需转成json对象
-        let ImportJSON = JSON.parse(this.result)
-        // 检测是否导入成功
-        console.log(ImportJSON, '-----------------导入成功')
-        // 导入JSON数据
-        _this.id = ImportJSON.id
-        _this.pageSetup = JSON.parse(ImportJSON.templateJson)
-        _this.pageComponents = JSON.parse(ImportJSON.component)
+    // 监听右侧属性设置切换 
+    watch(
+      () => choose.rightcom,
+      (newval) => {
+        if (newval === 'decorate') {
+          datas.pageComponents.forEach(res => {
+            /* 修改选中 */
+            if (res.active === true) res.active = false
+          })
+          choose.currentproperties = datas.pageSetup
+          return
+        }
+        if (newval === 'componenmanagement') {
+          /* 替换 */
+          datas.pageComponents.forEach(res => {
+            /* 修改选中 */
+            if (res.active === true) res.active = false
+          })
+          choose.currentproperties = datas.pageComponents
+        }
       }
-    },
-  },
-
-  watch: {
-    /* 监听右侧属性设置切换 */
-    rightcom(newval) {
-      if (newval === 'decorate') {
-        utils.forEach(this.pageComponents, (res) => {
-          /* 修改选中 */
-          if (res.active === true) res.active = false
-        })
-        this.currentproperties = this.pageSetup
-        return
-      }
-      if (newval === 'componenmanagement') {
-        /* 替换 */
-        utils.forEach(this.pageComponents, (res) => {
-          /* 修改选中 */
-          if (res.active === true) res.active = false
-        })
-        this.currentproperties = this.pageComponents
-      }
-    },
+    )
+    return {
+      realTimeView,
+      ...toRefs(datas),
+      ...toRefs(choose),
+      catJson,
+      componenmanagement,
+      activeComponent,
+      headTop,
+      deleteObj,
+      exportJSON,
+      importJSON,
+      allowDrop,
+      drop,
+      dragleaves,
+      reloads,
+    }
   },
 }
 </script>
