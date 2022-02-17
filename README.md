@@ -55,6 +55,12 @@ AS-Editor-H5：[https://gitee.com/was666/as-editor-h5.git](https://gitee.com/was
 
 AS-Editor-H5 是移动端 vue 模版，可以通过定义的 JSON 生成 vue 页面
 
+#### 感谢捐赠
+
+| [![有育哥](https://was666.gitee.io/as-editor-doc/assets/img/donate1.png)](https://gitee.com/cfxp) | [![邓跃辉](https://was666.gitee.io/as-editor-doc/assets/img/donate3.png)](https://gitee.com/york8888_admin) | [![hackchen](https://was666.gitee.io/as-editor-doc/assets/img/donate2.png)](https://gitee.com/hackchen) |
+| :-: | :-: | :-: |
+| [有育哥](https://gitee.com/cfxp) | [邓跃辉](https://gitee.com/york8888_admin) |[hackchen](https://gitee.com/hackchen) |
+
 #### 参与贡献
 
 1. Fork 本仓库
