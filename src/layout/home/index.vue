@@ -53,34 +53,41 @@
             @dragover="allowDrop($event)"
             @dragleave="dragleaves($event)"
           >
-            <div :class="pointer.show ? 'pointer-events' : ''">
-              <!-- 动态组件 -->
-              <component
-                :is="item.component"
-                v-for="(item, index) in pageComponents"
-                :key="index"
-                :datas="item.setStyle"
-                :style="{
-                  border: item.active && deleShow ? '2px solid #155bd4' : '',
-                }"
-                @click="activeComponent(item, index)"
-                class="componentsClass"
-                :data-type="item.type"
-              >
-                <template #deles>
-                  <div
-                    v-show="deleShow"
-                    class="deles"
-                    @click.stop="deleteObj(index)"
-                  >
-                    <!-- 删除组件 -->
-                    <span class="iconfont icon-sanjiaoxingzuo"></span>
-                    {{ item.text }}
-                    <van-icon name="delete" />
-                  </div>
-                </template>
-              </component>
-            </div>
+            <!-- 动态组件 -->
+            <vuedraggable
+              :class="pointer.show ? 'pointer-events' : ''"
+              :list="pageComponents"
+              item-key="index"
+              :forceFallback="true"
+              :animation="200"
+            >
+              <template #item="{ element, index }">
+                <component
+                  :is="element.component"
+                  :datas="element.setStyle"
+                  :style="{
+                    border:
+                      element.active && deleShow ? '2px solid #155bd4' : '',
+                  }"
+                  @click="activeComponent(element, index)"
+                  class="componentsClass"
+                  :data-type="element.type"
+                >
+                  <template #deles>
+                    <div
+                      v-show="deleShow"
+                      class="deles"
+                      @click.stop="deleteObj(index)"
+                    >
+                      <!-- 删除组件 -->
+                      <span class="iconfont icon-sanjiaoxingzuo"></span>
+                      {{ element.text }}
+                      <van-icon name="delete" />
+                    </div>
+                  </template>
+                </component>
+              </template>
+            </vuedraggable>
           </section>
 
           <!-- 手机高度 -->
@@ -148,6 +155,7 @@ import componentProperties from '@/utils/componentProperties' // 组件数据
 import FileSaver from 'file-saver' // 导出JSON
 import { reactive, watch, toRefs, inject } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import vuedraggable from 'vuedraggable' //拖拽组件
 
 export default {
   name: 'home',
@@ -168,7 +176,7 @@ export default {
         bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
         bgImg: '', // 背景图片
       },
-      pageComponents: [] //页面组件
+      pageComponents: [], //页面组件
     })
 
     // 查看JSON
@@ -232,7 +240,6 @@ export default {
      * @param {Object} res 组件切换后返回的位置
      */
     const componenmanagement = (res) => {
-      console.log(6666666666666666)
       datas.pageComponents = res
     }
 
@@ -260,7 +267,7 @@ export default {
       choose.currentproperties = res.setStyle
 
       /* 替换 */
-      datas.pageComponents.forEach(res => {
+      datas.pageComponents.forEach((res) => {
         /* 修改选中 */
         if (res.active === true) res.active = false
       })
@@ -273,10 +280,9 @@ export default {
     const headTop = () => {
       choose.rightcom = 'decorate'
       /* 替换 */
-      datas.pageComponents.forEach(res => {
+      datas.pageComponents.forEach((res) => {
         /* 修改选中 */
         if (res.active === true) res.active = false
-         console.log(res,'res++++++++++')
       })
     }
 
@@ -425,7 +431,6 @@ export default {
       let data = utils.deepClone(
         componentProperties.get(event.dataTransfer.getData('componentName'))
       )
-      console.log(data,'data++++++++++++++++++++++++++++++++++')
 
       /* 查询是否只能存在一个的组件 */
       let someResult = datas.pageComponents.some((item) => {
@@ -501,12 +506,12 @@ export default {
         .catch(() => {})
     }
 
-    // 监听右侧属性设置切换 
+    // 监听右侧属性设置切换
     watch(
       () => choose.rightcom,
       (newval) => {
         if (newval === 'decorate') {
-          datas.pageComponents.forEach(res => {
+          datas.pageComponents.forEach((res) => {
             /* 修改选中 */
             if (res.active === true) res.active = false
           })
@@ -515,7 +520,7 @@ export default {
         }
         if (newval === 'componenmanagement') {
           /* 替换 */
-          datas.pageComponents.forEach(res => {
+          datas.pageComponents.forEach((res) => {
             /* 修改选中 */
             if (res.active === true) res.active = false
           })
@@ -540,6 +545,7 @@ export default {
       reloads,
     }
   },
+  components: { vuedraggable },
 }
 </script>
 
