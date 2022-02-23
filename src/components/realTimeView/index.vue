@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { ref  } from 'vue';
 export default {
   name: 'RealTimeView',
   props: {
@@ -24,17 +25,21 @@ export default {
     },
     val:Object
   },
-  data() {
-    return {
-      loading: true
+  setup(props) {
+    // 是否在加载中
+    const loading = ref(true)
+
+    // 加载完成事件
+    const load = () => {
+      loading.value = false
+      document.querySelector('iframe').contentWindow.postMessage(props.val, "http://was666.gitee.io");
     }
-  },
-  methods: {
-    load() {
-      this.loading = false
-      this.$refs["iframe"].contentWindow.postMessage(this.val, "http://was666.gitee.io");
-    },
-  },
+
+    return{
+      loading,
+      load
+    }
+  }
 }
 </script>
 
