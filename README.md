@@ -49,11 +49,13 @@ src / utils / componentProperties.js            // 组件数据
 }
 ```
 
-#### 扩展项目
+#### 官方生态
 
-AS-Editor-H5：[https://gitee.com/was666/as-editor-h5.git](https://gitee.com/was666/as-editor-h5.git)
-
-AS-Editor-H5 是移动端 vue 模版，可以通过定义的 JSON 生成 vue 页面
+| 项目 | 描述 |
+| --- | --- |
+| [AS-Editor(Vue2版)](https://gitee.com/was666/as-editor) | 基于 Vue2 的 AS-Editor |
+| [AS-Editor(Vue3版)](https://gitee.com/was666/as-editor/tree/vue3.x/) | 基于 Vue3 的 AS-Editor |
+| [AS-Editor-H5](https://gitee.com/was666/as-editor-h5.git) | AS-Editor-H5 是移动端 Vue 模版，可以通过定义的 JSON 生成 Vue 页面 |
 
 #### 感谢捐赠
 
