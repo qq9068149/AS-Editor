@@ -77,10 +77,15 @@
 </template>
 
 <script>
+import { reactive, toRefs, computed } from 'vue'
+import { ElMessageBox } from 'element-plus'
+
 export default {
   name: 'uploadCommodity',
-  data() {
-    return {
+  emits: ['uploadListInformation'],
+  setup(props, ctx) {
+    // 数据集合
+    const datas = reactive({
       dialogVisible: false, //弹框默认隐藏
       dialogImageUrl: {}, // 选择的数据
       type: '2',
@@ -98,90 +103,94 @@ export default {
       options: [], //后端返回的列表提供下拉选择
       externalLink: null,
       emptyText: '',
-    }
-  },
-  created() {},
-  methods: {
-    selectType() {
-      // 清空 options
-      this.options = []
-    },
+    })
 
-    // 选择类型
-    changeType(isVisible, linkType) {
-      if (isVisible && linkType) {
-        this.emptyText = '正在搜索中'
-        /* 获取信息 */
-        let res = {
-          code: 0,
-          success: true,
-          error: false,
-          data: [
-            {
-              coverUrl:
-                'https://imgs.starfirelink.com/minicourse/非遗传承人@2x_1621504834414.png',
-              introduce: '',
-              price: 0,
-              name: '测试1',
-              videoId: '5285890818212341060',
-              id: 403,
-              type: 2,
-              seriesId: '0',
-            },
-            {
-              coverUrl:
-                'https://imgs.starfirelink.com/minicourse/QQ截图20210409170420_1621416051505.png',
-              introduce: '1',
-              price: 1,
-              name: '测试2',
-              videoId: '',
-              id: 396,
-              type: 2,
-              seriesId: '85',
-            },
-          ],
+    // 事件集合
+    const methods = {
+      selectType() {
+        // 清空 options
+        datas.options = []
+      },
+      // 选择类型
+      changeType(isVisible, linkType) {
+        if (isVisible && linkType) {
+          datas.emptyText = '正在搜索中'
+          /* 获取信息 */
+          let res = {
+            code: 0,
+            success: true,
+            error: false,
+            data: [
+              {
+                coverUrl:
+                  'https://imgs.starfirelink.com/minicourse/非遗传承人@2x_1621504834414.png',
+                introduce: '',
+                price: 0,
+                name: '测试1',
+                videoId: '5285890818212341060',
+                id: 403,
+                type: 2,
+                seriesId: '0',
+              },
+              {
+                coverUrl:
+                  'https://imgs.starfirelink.com/minicourse/QQ截图20210409170420_1621416051505.png',
+                introduce: '1',
+                price: 1,
+                name: '测试2',
+                videoId: '',
+                id: 396,
+                type: 2,
+                seriesId: '85',
+              },
+            ],
+          }
+          res.data.length === 0 ? (datas.emptyText = '暂无数据') : null
+          datas.options = res.data
         }
-        this.activ = 0
-        res.data.length === 0 ? (this.emptyText = '暂无数据') : null
-        this.options = res.data
-      }
-    },
-    // 保存跳转的地方
-    changeId(res) {
-      this.dialogImageUrl = res
-      console.log(this.dialogImageUrl, '----------------changeId')
-    },
-    /* 显示上传文件组件 */
-    showUpload() {
-      this.dialogVisible = true
-    },
-    /* 传递图片地址 */
-    uploadInformation() {
-      this.dialogImageUrl.httpType = this.type
-      this.$emit('uploadListInformation', this.dialogImageUrl)
+      },
+      // 保存跳转的地方
+      changeId(res) {
+        datas.dialogImageUrl = res
+        console.log(datas.dialogImageUrl, '----------------changeId')
+      },
+      /* 显示上传文件组件 */
+      showUpload() {
+        datas.dialogVisible = true
+      },
+      /* 传递图片地址 */
+      uploadInformation() {
+        datas.dialogImageUrl.httpType = datas.type
+        ctx.emit('uploadListInformation', datas.dialogImageUrl)
 
-      // 隐藏上传弹框
-      this.dialogVisible = false
-      this.uploadShow = false
-      this.dialogImageUrl = {}
-    },
-    // 关闭弹框
-    handleClose() {
-      this.$confirm('点击取消后您填写的信息将丢失，您确定取消？')
-        .then(() => {
-          // 隐藏上传文件
-          this.dialogVisible = false
-          this.dialogImageUrl = {}
-        })
-        .catch(() => {})
-    },
-  },
-  computed: {
-    // 提交按钮是否可以点击
-    disabl() {
-      if (!this.dialogImageUrl) return true
+        // 隐藏上传弹框
+        datas.dialogVisible = false
+        datas.uploadShow = false
+        datas.dialogImageUrl = {}
+      },
+      // 关闭弹框
+      handleClose() {
+        ElMessageBox.confirm('点击取消后您填写的信息将丢失，您确定取消？')
+          .then(() => {
+            // 隐藏上传文件
+            datas.dialogVisible = false
+            datas.dialogImageUrl = {}
+          })
+          .catch(() => {})
+      },
+    }
+
+    // 通过computed获得disabl
+    const disabl = computed(() => {
+      if (!datas.dialogImageUrl) return true
       return false
-    },
+    })
+
+    return {
+      ...toRefs(datas),
+      ...methods,
+      disabl,
+    }
   },
 }
 </script>
