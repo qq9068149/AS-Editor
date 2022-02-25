@@ -432,6 +432,21 @@ export default {
         componentProperties.get(event.dataTransfer.getData('componentName'))
       )
 
+      /* 查询是否只能存在一个的组件且在第一个 */
+      let someOne = datas.pageComponents.some((item, index) => {
+        return (
+          item.component === 'placementarea' &&
+          index === 0 &&
+          choose.onlyOne.includes(data.type)
+        )
+      })
+      if (someOne) {
+        ElMessage.info('固定位置的组件(如: 底部导航、悬浮)不能放在第一个!')
+        /* 删除提示组件 */
+        dragleaves()
+        return
+      }
+
       /* 查询是否只能存在一个的组件 */
       let someResult = datas.pageComponents.some((item) => {
         console.log(item.component, '--------------item.component')
@@ -443,9 +458,7 @@ export default {
       if (someResult) {
         ElMessage.info('当前组件只能添加一个!')
         /* 删除提示组件 */
-        datas.pageComponents = datas.pageComponents.filter(
-          (res) => res.component !== 'placementarea'
-        )
+        dragleaves()
         return
       }
 
@@ -457,10 +470,6 @@ export default {
         choose.index = index
         if (res.component === 'placementarea')
           datas.pageComponents[index] = data
-        if (datas.pageComponents.length === index + 1)
-          datas.pageComponents = datas.pageComponents.filter(
-            (res) => res.component !== 'placementarea'
-          )
       })
 
       /* 切换组件 */
