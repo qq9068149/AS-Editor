@@ -179,7 +179,7 @@ export default {
       pageComponents: [], //页面组件
       offsetY: 0, //记录上一次距离父元素高度
       pointer: { show: false }, //穿透
-      onlyOne: ['1-5','1-16'], // 只能存在一个的组件(组件的type)
+      onlyOne: ['1-5', '1-16'], // 只能存在一个的组件(组件的type)
     }
   },
 
@@ -396,6 +396,21 @@ export default {
         componentProperties.get(event.dataTransfer.getData('componentName'))
       )
 
+      /* 查询是否只能存在一个的组件且在第一个 */
+      let someOne = this.pageComponents.some((item, index) => {
+        return (
+          item.component === 'placementarea' &&
+          index === 0 &&
+          this.onlyOne.includes(data.type)
+        )
+      })
+      if (someOne) {
+        this.$message.info('固定位置的组件(如: 底部导航、悬浮)不能放在第一个!')
+        /* 删除提示组件 */
+        this.dragleaves()
+        return
+      }
+
       /* 查询是否只能存在一个的组件 */
       let someResult = this.pageComponents.some((item) => {
         return (
@@ -406,9 +421,7 @@ export default {
       if (someResult) {
         this.$message.info('当前组件只能添加一个!')
         /* 删除提示组件 */
-        this.pageComponents = this.pageComponents.filter(
-          (res) => res.component !== 'placementarea'
-        )
+        this.dragleaves()
         return
       }
 
@@ -420,11 +433,6 @@ export default {
         this.index = index
         if (res.component === 'placementarea')
           this.$set(this.pageComponents, index, data)
-
-        if (this.pageComponents.length === index + 1)
-          this.pageComponents = this.pageComponents.filter(
-            (res) => res.component !== 'placementarea'
-          )
       })
 
       /* 切换组件 */
