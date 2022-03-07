@@ -58,4 +58,9 @@ provide('reload', reload)
   color: #969799;
   margin-bottom: 10px;
 }
+
+// 该元素不接受鼠标事件
+.pointer-events {
+  pointer-events: none;
+}
 </style>

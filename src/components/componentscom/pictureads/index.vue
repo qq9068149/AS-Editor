@@ -33,7 +33,7 @@
 
     <!-- 轮播组件 -->
     <div
-      class="swiper-container"
+      class="swiper-container pointer-events"
       v-if="
         (imageList[0] && swiperType === 1) ||
         swiperType === 2 ||
