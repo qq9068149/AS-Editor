@@ -1,6 +1,7 @@
 {
   "name": "as-editor",
   "version": "1.0.0",
+  "author": "孤傲 <9068149@qq.com>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
