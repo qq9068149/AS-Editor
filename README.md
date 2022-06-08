@@ -53,9 +53,9 @@ src / utils / componentProperties.js            // The component data
 
 | Project | Describe |
 | --- | --- |
-| [AS-Editor <br/> Vue2 version](https://gitee.com/was666/as-editor) | As-editor based on Vue2 |
-| [AS-Editor <br/> Vue3 version](https://gitee.com/was666/as-editor/tree/vue3.x/) | Vue3 based as-Editor |
-| [AS-Editor-H5](https://gitee.com/was666/as-editor-h5.git) | As-editor-h5 is a mobile Vue template that generates Vue pages from defined JSON |
+| [AS-Editor <br/> Vue2 version](https://github.com/qq9068149/AS-Editor) | As-editor based on Vue2 |
+| [AS-Editor <br/> Vue3 version](https://github.com/qq9068149/AS-Editor/tree/vue3.x) | Vue3 based as-Editor |
+| [AS-Editor-H5](https://github.com/qq9068149/AS-Editor-H5) | As-editor-h5 is a mobile Vue template that generates Vue pages from defined JSON |
 
 #### Participate in the contribution
 
