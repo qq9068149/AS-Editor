@@ -55,7 +55,7 @@ src / utils / componentProperties.js            // 组件数据
 | --- | --- |
 | [AS-Editor <br/> Vue2版](https://gitee.com/was666/as-editor) | 基于 Vue2 的 AS-Editor |
 | [AS-Editor <br/> Vue3版](https://gitee.com/was666/as-editor/tree/vue3.x/) | 基于 Vue3 的 AS-Editor |
-| [AS-Editor-H5](https://gitee.com/was666/as-editor-h5.git) | AS-Editor-H5 是移动端 Vue 模版，可以通过定义的 JSON 生成 Vue 页面 |
+| [AS-Editor-H5](https://gitee.com/was666/as-editor-h5) | AS-Editor-H5 是移动端 Vue 模版，可以通过定义的 JSON 生成 Vue 页面 |
 
 #### 感谢捐赠
 
