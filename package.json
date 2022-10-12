@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "clipboard": "^2.0.6",
     "core-js": "^3.19.0",
+    "cos-js-sdk-v5": "^1.4.6",
     "element-ui": "^2.15.6",
     "file-saver": "^2.0.5",
     "html2canvas": "1.0.0-alpha.9",

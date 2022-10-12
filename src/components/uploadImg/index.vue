@@ -26,6 +26,7 @@
         :before-upload="uploads"
         :before-remove="handleRemove"
         :class="uploadShow ? 'disable' : ''"
+        :http-request="upload"
       >
         <i class="el-icon-plus"></i>
       </el-upload>
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import { uploadCOS } from '@/utils/upload'
 export default {
   name: 'uploadImg',
   data() {
@@ -123,6 +125,17 @@ export default {
     uploadError() {
       this.$message.error('请重新上传')
       this.uploadShow = false
+    },
+
+    /**
+     * 自定义上传（使用腾讯云COS）
+     * http-request	覆盖action默认的上传行为，可以自定义上传的实现
+     * 如果要用api接口上传去除el-upload的 http-request属性即可
+     */
+    upload(data) {
+      uploadCOS(data.file).then((res) => {
+        this.dialogImageUrl = res
+      })
     },
   },
   computed: {

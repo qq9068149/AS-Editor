@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { uploadCOS } from '@/utils/upload'
+
 import Editor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver'
 import 'tinymce/skins/ui/oxide/skin.min.css'
@@ -98,6 +100,15 @@ export default {
         theme: 'silver', //主题
         menubar: false,
         images_upload_handler: (blobInfo, succFun, failFun) => {
+          // 腾讯云COS上传开始
+          uploadCOS(blobInfo.blob()).then((res) => {
+            succFun(res)
+          })
+          return
+          //（如果要用api接口上传删除腾讯云COS上传这些代码）
+          // 腾讯云COS上传结束 
+          
+
           var formData = new FormData()
 
           formData.append('path', 'test/')
@@ -113,6 +124,7 @@ export default {
             if (res.success != true) return failFun('HTTP Error: ' + res.msg)
             succFun(res.data.src)
           }
+
           xhr.send(formData)
         },
       },
