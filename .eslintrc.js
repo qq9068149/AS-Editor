@@ -25,7 +25,8 @@ module.exports = {
     'no-new-object': 'off', // 禁止使用 Object 构造函数
     "vue/no-v-model-argument": "off",
     'no-prototype-builtins': 'off',
-    'vue/no-mutating-props': 'off'
+    'vue/no-mutating-props': 'off',
+    'vue/script-setup-uses-vars': 'off'
   },
   parser: 'vue-eslint-parser',
 }
