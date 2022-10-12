@@ -15,6 +15,9 @@
 3. npm run build （打包）
 4. npm update (用于更新包到基于规范范围的最新版本)
 
+> 注：在新版本的npm中，默认情况下，npm install遇到冲突的peerDependencies时将失败。
+> 可使用：npm install --legacy-peer-deps
+
 #### 使用说明
 
 ##### 使用教程
