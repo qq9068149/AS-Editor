@@ -2,7 +2,7 @@
 
 ## 介绍
 
-基于 vue 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
+基于 vue2.x 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
 文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
 
