@@ -2,9 +2,7 @@
 
 ## 介绍
 
-该分支是基于 vue3.x 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
-
-该分支使用了element-plus + vant3 组件库
+基于 vue3.x 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
 文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
 
@@ -51,11 +49,19 @@ src / utils / componentProperties.js            // 组件数据
 }
 ```
 
-#### 扩展项目
+#### 官方生态
 
-AS-Editor-H5：[https://gitee.com/was666/as-editor-h5.git](https://gitee.com/was666/as-editor-h5.git)
+| 项目 | 描述 |
+| --- | --- |
+| [AS-Editor <br/> Vue2版](https://gitee.com/was666/as-editor) | 基于 Vue2 的 AS-Editor |
+| [AS-Editor <br/> Vue3版](https://gitee.com/was666/as-editor/tree/vue3.x/) | 基于 Vue3 的 AS-Editor |
+| [AS-Editor-H5](https://gitee.com/was666/as-editor-h5) | AS-Editor-H5 是移动端 Vue 模版，可以通过定义的 JSON 生成 Vue 页面 |
 
-AS-Editor-H5 是移动端 vue 模版，可以通过定义的 JSON 生成 vue 页面
+#### 感谢捐赠
+
+| [![有育哥](https://was666.gitee.io/as-editor-doc/assets/img/donate1.png)](https://gitee.com/cfxp) | [![邓跃辉](https://was666.gitee.io/as-editor-doc/assets/img/donate3.png)](https://gitee.com/york8888_admin) | [![hackchen](https://was666.gitee.io/as-editor-doc/assets/img/donate2.png)](https://gitee.com/hackchen) | [![狼牙](https://was666.gitee.io/as-editor-doc/assets/img/langYa.png)](https://gitee.com/fdfgasdvdxz) | [![许中杰](https://was666.gitee.io/as-editor-doc/assets/img/xuzhongjie.png)](https://gitee.com/xu-zhongjie) |[![RainbowParadise](https://was666.gitee.io/as-editor-doc/assets/img/RainbowParadise.png)](https://gitee.com/mars728) |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| [有育哥](https://gitee.com/cfxp) | [邓跃辉](https://gitee.com/york8888_admin) |[hackchen](https://gitee.com/hackchen) | [狼牙](https://gitee.com/fdfgasdvdxz) | [许中杰](https://gitee.com/xu-zhongjie) |[RainbowParadise](https://gitee.com/mars728) |
 
 #### 参与贡献
 
