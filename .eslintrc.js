@@ -23,10 +23,11 @@ module.exports = {
     'no-useless-return': 'off',
     'no-unreachable': 'off', // 禁止在 return、throw、continue 和 break 语句后出现不可达代码
     'no-new-object': 'off', // 禁止使用 Object 构造函数
-    "vue/no-v-model-argument": "off",
+    'vue/no-v-model-argument': 'off',
     'no-prototype-builtins': 'off',
     'vue/no-mutating-props': 'off',
-    'vue/script-setup-uses-vars': 'off'
+    'vue/script-setup-uses-vars': 'off',
+    'no-unused-vars': 0,
   },
   parser: 'vue-eslint-parser',
 }

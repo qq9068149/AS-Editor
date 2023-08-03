@@ -14,7 +14,7 @@
       </p>
       <div>
         <el-button @click="reloads" type="danger">重置</el-button>
-        <el-button @click="realTimeView.show = true">预览</el-button>
+        <el-button @click="realTimeViewData.show = true">预览</el-button>
         <el-button @click="catJson">查看JSON </el-button>
         <el-button @click="$refs.file.click()">导入JSON </el-button>
         <el-button @click="exportJSON">导出JSON </el-button>
@@ -138,7 +138,7 @@
       </div>
     </section>
     <realTimeView
-      :datas="realTimeView"
+      :datas="realTimeViewData"
       :val="{
         id,
         name: pageSetup.name,
@@ -149,7 +149,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import utils from 'utils/index' // 方法类
 import componentProperties from '@/utils/componentProperties' // 组件数据
 import FileSaver from 'file-saver' // 导出JSON
@@ -157,32 +157,29 @@ import { reactive, watch, toRefs, inject } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import vuedraggable from 'vuedraggable' //拖拽组件
 
-export default {
-  name: 'home',
-  setup() {
-    // 是否显示预览
-    const realTimeView = reactive({ show: false })
+// 是否显示预览
+const realTimeViewData = reactive({ show: false })
 
-    // 页面数据
-    const datas = reactive({
-      id: null, //当前页面id
-      pageSetup: {
-        // 页面设置属性
-        name: '页面标题', //页面名称
-        details: '', //页面描述
-        isPerson: false, // 是否显示个人中心
-        isBack: true, // 是否返回按钮
-        titleHeight: 35, // 高度
-        bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
-        bgImg: '', // 背景图片
-      },
-      pageComponents: [], //页面组件
-    })
+// 页面数据
+const datas = reactive({
+  id: null, //当前页面id
+  pageSetup: {
+    // 页面设置属性
+    name: '页面标题', //页面名称
+    details: '', //页面描述
+    isPerson: false, // 是否显示个人中心
+    isBack: true, // 是否返回按钮
+    titleHeight: 35, // 高度
+    bgColor: 'rgba(249, 249, 249, 10)', //背景颜色
+    bgImg: '', // 背景图片
+  },
+  pageComponents: [], //页面组件
+})
 
-    // 查看JSON
-    const catJson = () => {
-      ElMessageBox.alert(
-        `{
+// 查看JSON
+const catJson = () => {
+  ElMessageBox.alert(
+    `{
           <br/>
           "id": ${datas.id},
           <br/>
@@ -193,369 +190,353 @@ export default {
           "component": '${JSON.stringify(datas.pageComponents)}',
           <br/>
         }`,
-        '查看JSON',
-        {
-          confirmButtonText: '确定',
-          customClass: 'JSONView',
-          dangerouslyUseHTMLString: true,
-          callback: () => {},
-        }
-      )
+    '查看JSON',
+    {
+      confirmButtonText: '确定',
+      customClass: 'JSONView',
+      dangerouslyUseHTMLString: true,
+      callback: () => {},
     }
+  )
+}
 
-    // 导出json
-    const exportJSON = () => {
-      // 将json转换成字符串
-      const data = JSON.stringify({
-        id: datas.id,
-        name: datas.pageSetup.name,
-        templateJson: JSON.stringify(datas.pageSetup),
-        component: JSON.stringify(datas.pageComponents),
-      })
-      const blob = new Blob([data], { type: '' })
-      FileSaver.saveAs(blob, `${datas.pageSetup.name}.json`)
-    }
+// 导出json
+const exportJSON = () => {
+  // 将json转换成字符串
+  const data = JSON.stringify({
+    id: datas.id,
+    name: datas.pageSetup.name,
+    templateJson: JSON.stringify(datas.pageSetup),
+    component: JSON.stringify(datas.pageComponents),
+  })
+  const blob = new Blob([data], { type: '' })
+  FileSaver.saveAs(blob, `${datas.pageSetup.name}.json`)
+}
 
-    // 导入json
-    const importJSON = () => {
-      const file = document.getElementById('file').files[0]
-      const reader = new FileReader()
-      reader.readAsText(file)
-      let _this = datas
-      reader.onload = function () {
-        // this.result为读取到的json字符串，需转成json对象
-        let ImportJSON = JSON.parse(this.result)
-        // 检测是否导入成功
-        console.log(ImportJSON, '-----------------导入成功')
-        // 导入JSON数据
-        _this.id = ImportJSON.id
-        _this.pageSetup = JSON.parse(ImportJSON.templateJson)
-        _this.pageComponents = JSON.parse(ImportJSON.component)
-      }
-    }
+// 导入json
+const importJSON = () => {
+  const file = document.getElementById('file').files[0]
+  const reader = new FileReader()
+  reader.readAsText(file)
+  let _this = datas
+  reader.onload = function () {
+    // this.result为读取到的json字符串，需转成json对象
+    let ImportJSON = JSON.parse(this.result)
+    // 检测是否导入成功
+    console.log(ImportJSON, '-----------------导入成功')
+    // 导入JSON数据
+    _this.id = ImportJSON.id
+    _this.pageSetup = JSON.parse(ImportJSON.templateJson)
+    _this.pageComponents = JSON.parse(ImportJSON.component)
+  }
+}
 
-    /**
-     * 切换组件位置  用于组件管理中删除功能
-     *
-     * @param {Object} res 组件切换后返回的位置
-     */
-    const componenmanagement = (res) => {
-      datas.pageComponents = res
-    }
+/**
+ * 切换组件位置  用于组件管理中删除功能
+ *
+ * @param {Object} res 组件切换后返回的位置
+ */
+const componenmanagement = (res) => {
+  datas.pageComponents = res
+}
 
-    // 选择组件数据
-    const choose = reactive({
-      deleShow: true, //删除标签显示
-      index: '', //当前选中的index
-      rightcom: 'decorate', //右侧组件切换
-      currentproperties: {}, //当前属性
-      offsetY: 0, //记录上一次距离父元素高度
-      onlyOne: ['1-5', '1-16'], // 只能存在一个的组件(组件的type)
-      pointer: { show: false }, //穿透
-    })
+// 选择组件数据
+const choose = reactive({
+  deleShow: true, // 删除标签显示
+  index: '', // 当前选中的index
+  rightcom: 'decorate', // 右侧组件切换
+  currentproperties: datas.pageSetup, // 当前属性  默认：页面设置
+  offsetY: 0, //记录上一次距离父元素高度
+  onlyOne: ['1-5', '1-16'], // 只能存在一个的组件(组件的type)
+  pointer: { show: false }, // 穿透
+})
 
-    /**
-     * 选择组件
-     *
-     * @param {Object} res 当前组件对象
-     */
-    const activeComponent = (res, index) => {
-      choose.index = index
-      /* 切换组件 */
-      choose.rightcom = res.style
-      /* 丢样式 */
-      choose.currentproperties = res.setStyle
+/**
+ * 选择组件
+ *
+ * @param {Object} res 当前组件对象
+ */
+const activeComponent = (res, index) => {
+  choose.index = index
+  /* 切换组件 */
+  choose.rightcom = res.style
+  /* 丢样式 */
+  choose.currentproperties = res.setStyle
 
-      /* 替换 */
-      datas.pageComponents.forEach((res) => {
-        /* 修改选中 */
-        if (res.active === true) res.active = false
-      })
+  /* 替换 */
+  datas.pageComponents.forEach((res) => {
+    /* 修改选中 */
+    if (res.active === true) res.active = false
+  })
 
-      /* 选中样式 */
-      res.active = true
-    }
+  /* 选中样式 */
+  res.active = true
+}
 
-    // 切换标题
-    const headTop = () => {
-      choose.rightcom = 'decorate'
-      /* 替换 */
-      datas.pageComponents.forEach((res) => {
-        /* 修改选中 */
-        if (res.active === true) res.active = false
-      })
-    }
+// 切换标题
+const headTop = () => {
+  choose.rightcom = 'decorate'
+  /* 替换 */
+  datas.pageComponents.forEach((res) => {
+    /* 修改选中 */
+    if (res.active === true) res.active = false
+  })
+}
 
-    // 删除组件
-    const deleteObj = (index) => {
-      datas.pageComponents.splice(index, 1)
-      if (choose.index === index) choose.rightcom = 'decorate'
-      if (index < choose.index) choose.index = choose.index - 1
-    }
+/**
+ * 删除组件
+ *
+ * @param {Number} index 当前组件index
+ */
+const deleteObj = (index) => {
+  datas.pageComponents.splice(index, 1)
+  if (choose.index === index) choose.rightcom = 'decorate'
+  if (index < choose.index) choose.index = choose.index - 1
+}
 
-    /**
-     * 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件
-     *
-     * @param {Object} event event对象
-     */
-    const allowDrop = (event) => {
-      //阻止浏览器的默认事件
-      event.preventDefault()
+/**
+ * 当将元素或文本选择拖动到有效放置目标（每几百毫秒）上时，会触发此事件
+ *
+ * @param {Object} event event对象
+ */
+const allowDrop = (event) => {
+  //阻止浏览器的默认事件
+  event.preventDefault()
 
-      /* 获取鼠标高度 */
-      let eventoffset = event.offsetY
+  /* 获取鼠标高度 */
+  let eventoffset = event.offsetY
 
-      /* 如果没有移动不触发事件减少损耗 */
-      if (choose.offsetY === eventoffset) return
-      else choose.offsetY = eventoffset
+  /* 如果没有移动不触发事件减少损耗 */
+  if (choose.offsetY === eventoffset) return
+  else choose.offsetY = eventoffset
 
-      /* 获取组件 */
-      const childrenObject = event.target.children[0]
+  /* 获取组件 */
+  const childrenObject = event.target.children[0]
 
-      // 一个以上的组件计算
-      if (datas.pageComponents.length) {
-        /* 如果只有一个组件并且第一个是提示组件直接返回 */
-        if (
-          datas.pageComponents.length === 1 &&
-          datas.pageComponents[0].type === 0
-        )
-          return
+  // 一个以上的组件计算
+  if (datas.pageComponents.length) {
+    /* 如果只有一个组件并且第一个是提示组件直接返回 */
+    if (datas.pageComponents.length === 1 && datas.pageComponents[0].type === 0)
+      return
 
-        /* 如果鼠标的高度小于第一个的一半直接放到第一个 */
-        if (eventoffset < childrenObject.children[0].clientHeight / 2) {
-          /* 如果第一个是提示组件直接返回 */
-          if (datas.pageComponents[0].type === 0) return
+    /* 如果鼠标的高度小于第一个的一半直接放到第一个 */
+    if (eventoffset < childrenObject.children[0].clientHeight / 2) {
+      /* 如果第一个是提示组件直接返回 */
+      if (datas.pageComponents[0].type === 0) return
 
-          /* 删除提示组件 */
-          datas.pageComponents = datas.pageComponents.filter(
-            (res) => res.component !== 'placementarea'
-          )
-
-          /* 最后面添加提示组件 */
-          datas.pageComponents.unshift({
-            component: 'placementarea',
-            type: 0,
-          })
-
-          return
-        }
-
-        /* 记录距离父元素高度 */
-        const childOff = childrenObject.offsetTop
-
-        /* 鼠标在所有组件下面 */
-        if (
-          eventoffset > childrenObject.clientHeight ||
-          childrenObject.lastChild.offsetTop -
-            childOff +
-            childrenObject.lastChild.clientHeight / 2 <
-            eventoffset
-        ) {
-          /* 最后一个组件是提示组件返回 */
-          if (datas.pageComponents[datas.pageComponents.length - 1].type === 0)
-            return
-
-          /* 清除提示组件 */
-          datas.pageComponents = datas.pageComponents.filter(
-            (res) => res.component !== 'placementarea'
-          )
-
-          /* 最后一个不是提示组件添加 */
-          datas.pageComponents.push({
-            component: 'placementarea',
-            type: 0,
-          })
-
-          return
-        }
-
-        const childrens = childrenObject.children
-
-        /* 在两个组件中间，插入 */
-        for (let i = 0, l = childrens.length; i < l; i++) {
-          const childoffset = childrens[i].offsetTop - childOff
-
-          if (childoffset + childrens[i].clientHeight / 2 > event.offsetY) {
-            /* 如果是提示组件直接返回 */
-            if (datas.pageComponents[i].type === 0) break
-
-            if (datas.pageComponents[i - 1].type === 0) break
-
-            /* 清除提示组件 */
-            datas.pageComponents = datas.pageComponents.filter(
-              (res) => res.component !== 'placementarea'
-            )
-
-            datas.pageComponents.splice(i, 0, {
-              component: 'placementarea',
-              type: 0,
-            })
-            break
-          } else if (childoffset + childrens[i].clientHeight > event.offsetY) {
-            if (datas.pageComponents[i].type === 0) break
-
-            if (
-              !datas.pageComponents[i + 1] ||
-              datas.pageComponents[i + 1].type === 0
-            )
-              break
-
-            datas.pageComponents = datas.pageComponents.filter(
-              (res) => res.component !== 'placementarea'
-            )
-
-            datas.pageComponents.splice(i, 0, {
-              component: 'placementarea',
-              type: 0,
-            })
-
-            break
-          }
-        }
-      } else {
-        /* 一个组件都没有直接push */
-        datas.pageComponents.push({
-          component: 'placementarea',
-          type: 0,
-        })
-      }
-    }
-
-    /**
-     * 当在有效放置目标上放置元素或选择文本时触发此事件
-     *
-     * @param {Object} event event对象
-     */
-    const drop = (event) => {
-      /* 获取数据 */
-      let data = utils.deepClone(
-        componentProperties.get(event.dataTransfer.getData('componentName'))
-      )
-
-      /* 查询是否只能存在一个的组件且在第一个 */
-      let someOne = datas.pageComponents.some((item, index) => {
-        return (
-          item.component === 'placementarea' &&
-          index === 0 &&
-          choose.onlyOne.includes(data.type)
-        )
-      })
-      if (someOne) {
-        ElMessage.info('固定位置的组件(如: 底部导航、悬浮)不能放在第一个!')
-        /* 删除提示组件 */
-        dragleaves()
-        return
-      }
-
-      /* 查询是否只能存在一个的组件 */
-      let someResult = datas.pageComponents.some((item) => {
-        console.log(item.component, '--------------item.component')
-        return (
-          choose.onlyOne.includes(item.type) &&
-          item.component === event.dataTransfer.getData('componentName')
-        )
-      })
-      if (someResult) {
-        ElMessage.info('当前组件只能添加一个!')
-        /* 删除提示组件 */
-        dragleaves()
-        return
-      }
-
-      /* 替换 */
-      datas.pageComponents.forEach((res, index) => {
-        /* 修改选中 */
-        if (res.active === true) res.active = false
-        /* 替换提示 */
-        choose.index = index
-        if (res.component === 'placementarea')
-          datas.pageComponents[index] = data
-      })
-
-      /* 切换组件 */
-      choose.rightcom = data.style
-      /* 丢样式 */
-      choose.currentproperties = data.setStyle
-
-      console.log(
-        data,
-        choose.rightcom,
-        choose.currentproperties,
-        '----------components data'
-      )
-    }
-
-    /**
-     * 当拖动的元素或文本选择离开有效的放置目标时，会触发此事件
-     *
-     * @param {Object} event event对象
-     */
-    const dragleaves = () => {
       /* 删除提示组件 */
       datas.pageComponents = datas.pageComponents.filter(
         (res) => res.component !== 'placementarea'
       )
+
+      /* 最后面添加提示组件 */
+      datas.pageComponents.unshift({
+        component: 'placementarea',
+        type: 0,
+      })
+
+      return
     }
 
-    const reload = inject('reload')
-    // 重置
-    const reloads = () => {
-      ElMessageBox.confirm(
-        '重置后您添加或者修改的数据将会失效, 是否继续?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-        }
+    /* 记录距离父元素高度 */
+    const childOff = childrenObject.offsetTop
+
+    /* 鼠标在所有组件下面 */
+    if (
+      eventoffset > childrenObject.clientHeight ||
+      childrenObject.lastChild.offsetTop -
+        childOff +
+        childrenObject.lastChild.clientHeight / 2 <
+        eventoffset
+    ) {
+      /* 最后一个组件是提示组件返回 */
+      if (datas.pageComponents[datas.pageComponents.length - 1].type === 0)
+        return
+
+      /* 清除提示组件 */
+      datas.pageComponents = datas.pageComponents.filter(
+        (res) => res.component !== 'placementarea'
       )
-        .then(() => {
-          reload()
-        })
-        .catch(() => {})
+
+      /* 最后一个不是提示组件添加 */
+      datas.pageComponents.push({
+        component: 'placementarea',
+        type: 0,
+      })
+
+      return
     }
 
-    // 监听右侧属性设置切换
-    watch(
-      () => choose.rightcom,
-      (newval) => {
-        if (newval === 'decorate') {
-          datas.pageComponents.forEach((res) => {
-            /* 修改选中 */
-            if (res.active === true) res.active = false
-          })
-          choose.currentproperties = datas.pageSetup
-          return
-        }
-        if (newval === 'componenmanagement') {
-          /* 替换 */
-          datas.pageComponents.forEach((res) => {
-            /* 修改选中 */
-            if (res.active === true) res.active = false
-          })
-          choose.currentproperties = datas.pageComponents
-        }
+    const childrens = childrenObject.children
+
+    /* 在两个组件中间，插入 */
+    for (let i = 0, l = childrens.length; i < l; i++) {
+      const childoffset = childrens[i].offsetTop - childOff
+
+      if (childoffset + childrens[i].clientHeight / 2 > event.offsetY) {
+        /* 如果是提示组件直接返回 */
+        if (datas.pageComponents[i].type === 0) break
+
+        if (datas.pageComponents[i - 1].type === 0) break
+
+        /* 清除提示组件 */
+        datas.pageComponents = datas.pageComponents.filter(
+          (res) => res.component !== 'placementarea'
+        )
+
+        datas.pageComponents.splice(i, 0, {
+          component: 'placementarea',
+          type: 0,
+        })
+        break
+      } else if (childoffset + childrens[i].clientHeight > event.offsetY) {
+        if (datas.pageComponents[i].type === 0) break
+
+        if (
+          !datas.pageComponents[i + 1] ||
+          datas.pageComponents[i + 1].type === 0
+        )
+          break
+
+        datas.pageComponents = datas.pageComponents.filter(
+          (res) => res.component !== 'placementarea'
+        )
+
+        datas.pageComponents.splice(i, 0, {
+          component: 'placementarea',
+          type: 0,
+        })
+
+        break
       }
-    )
-    return {
-      realTimeView,
-      ...toRefs(datas),
-      ...toRefs(choose),
-      catJson,
-      componenmanagement,
-      activeComponent,
-      headTop,
-      deleteObj,
-      exportJSON,
-      importJSON,
-      allowDrop,
-      drop,
-      dragleaves,
-      reloads,
     }
-  },
-  components: { vuedraggable },
+  } else {
+    /* 一个组件都没有直接push */
+    datas.pageComponents.push({
+      component: 'placementarea',
+      type: 0,
+    })
+  }
 }
+
+/**
+ * 当在有效放置目标上放置元素或选择文本时触发此事件
+ *
+ * @param {Object} event event对象
+ */
+const drop = (event) => {
+  /* 获取数据 */
+  let data = utils.deepClone(
+    componentProperties.get(event.dataTransfer.getData('componentName'))
+  )
+
+  /* 查询是否只能存在一个的组件且在第一个 */
+  let someOne = datas.pageComponents.some((item, index) => {
+    return (
+      item.component === 'placementarea' &&
+      index === 0 &&
+      choose.onlyOne.includes(data.type)
+    )
+  })
+  if (someOne) {
+    ElMessage.info('固定位置的组件(如: 底部导航、悬浮)不能放在第一个!')
+    /* 删除提示组件 */
+    dragleaves()
+    return
+  }
+
+  /* 查询是否只能存在一个的组件 */
+  let someResult = datas.pageComponents.some((item) => {
+    console.log(item.component, '--------------item.component')
+    return (
+      choose.onlyOne.includes(item.type) &&
+      item.component === event.dataTransfer.getData('componentName')
+    )
+  })
+  if (someResult) {
+    ElMessage.info('当前组件只能添加一个!')
+    /* 删除提示组件 */
+    dragleaves()
+    return
+  }
+
+  /* 替换 */
+  datas.pageComponents.forEach((res, index) => {
+    /* 修改选中 */
+    if (res.active === true) res.active = false
+    /* 替换提示 */
+    choose.index = index
+    if (res.component === 'placementarea') datas.pageComponents[index] = data
+  })
+
+  /* 切换组件 */
+  choose.rightcom = data.style
+  /* 丢样式 */
+  choose.currentproperties = data.setStyle
+
+  console.log(
+    data,
+    choose.rightcom,
+    choose.currentproperties,
+    '----------components data'
+  )
+}
+
+/**
+ * 当拖动的元素或文本选择离开有效的放置目标时，会触发此事件
+ *
+ * @param {Object} event event对象
+ */
+const dragleaves = () => {
+  /* 删除提示组件 */
+  datas.pageComponents = datas.pageComponents.filter(
+    (res) => res.component !== 'placementarea'
+  )
+}
+
+const reload = inject('reload')
+// 重置
+const reloads = () => {
+  ElMessageBox.confirm(
+    '重置后您添加或者修改的数据将会失效, 是否继续?',
+    '提示',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      reload()
+    })
+    .catch(() => {})
+}
+
+// 监听右侧属性设置切换
+watch(
+  () => choose.rightcom,
+  (newval) => {
+    if (newval === 'decorate') {
+      datas.pageComponents.forEach((res) => {
+        /* 修改选中 */
+        if (res.active === true) res.active = false
+      })
+      choose.currentproperties = datas.pageSetup
+      return
+    }
+    if (newval === 'componenmanagement') {
+      /* 替换 */
+      datas.pageComponents.forEach((res) => {
+        /* 修改选中 */
+        if (res.active === true) res.active = false
+      })
+      choose.currentproperties = datas.pageComponents
+    }
+  }
+)
+
+const { id, pageSetup, pageComponents } = toRefs(datas)
+const { deleShow, rightcom, currentproperties, pointer } = toRefs(choose)
 </script>
 
 <style lang="less" scoped>
