@@ -4,13 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 公告 -->
-    <el-form
-      label-width="90px"
-      :model="datas"
-      :rules="rules"
-      size="small"
-      class="lef"
-    >
+    <el-form label-width="90px" :model="datas" :rules="rules" class="lef">
       <el-form-item
         label="公告"
         :hide-required-asterisk="true"

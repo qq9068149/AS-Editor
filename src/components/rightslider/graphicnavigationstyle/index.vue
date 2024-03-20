@@ -10,12 +10,19 @@
 
     <!-- 图片广告 -->
     <div v-if="datas.imageList[0]">
-      <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
-         <template #item="{ element }">
-          <section
-            class="imgList"
-          >
-            <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
+      <vuedraggable
+        :list="datas.imageList"
+        item-key="index"
+        :forceFallback="true"
+        :animation="200"
+      >
+        <template #item="{ element }">
+          <section class="imgList">
+            <van-icon
+              class="el-icon-circle-close"
+              name="close"
+              @click="deleteimg(index)"
+            />
             <!-- 图片 -->
             <div class="imag">
               <img draggable="false" :src="element.src" alt="" />
@@ -25,7 +32,6 @@
               <el-input
                 v-model="element.text"
                 placeholder="请输入标题，也可不填"
-                size="small"
               ></el-input>
               <!-- 选择类型 -->
               <div class="select-type">
@@ -33,7 +39,6 @@
                   style="width: 60%"
                   v-model="element.linktype"
                   placeholder="请选择跳转类型"
-                  size="small"
                 >
                   <el-option
                     v-for="element in optionsType"
@@ -47,15 +52,14 @@
                 <!-- 输入链接 -->
                 <el-input
                   style="width: 100%"
-                  size="small"
                   placeholder="请输入链接，输入前确保可以访问"
                   v-model="element.http.externalLink"
                 >
                 </el-input>
               </div>
             </div>
-          </section>
-        </template>>
+          </section> </template
+        >>
       </vuedraggable>
     </div>
 
@@ -67,7 +71,7 @@
     <div class="bor"></div>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <!-- 商品类型选择 -->
       <el-form-item class="lef" label="商品类型">
         <el-radio-group v-model="datas.navigationType">
@@ -265,8 +269,7 @@ export default {
       uploadImgDataType: null,
     }
   },
-  created() {
-  },
+  created() {},
   methods: {
     showUpload(type) {
       this.uploadImgDataType = type
@@ -274,14 +277,13 @@ export default {
     },
     // 提交
     uploadInformation(res) {
-
       if (this.uploadImgDataType === '0') {
         this.datas.imageList.push({
           src: res,
           text: '',
           http: {},
         })
-        console.log(this.datas.imageList,33333333333333)
+        console.log(this.datas.imageList, 33333333333333)
       } else if (this.uploadImgDataType === '1') {
         this.datas.bgImg = res
       }

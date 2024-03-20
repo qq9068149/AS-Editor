@@ -8,7 +8,6 @@
       label-position="top"
       label-width="80px"
       :model="datas"
-      size="small"
       :rules="rules"
     >
       <div style="height: 10px" />

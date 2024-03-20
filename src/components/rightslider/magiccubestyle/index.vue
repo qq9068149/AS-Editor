@@ -225,7 +225,7 @@
     <p style="color: #d40000; font-size: 12px; margin-top: 10px">请添加图片</p>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <section
         class="magiccubestyleList"
         v-for="(item, index) in datas.imageList"
@@ -243,19 +243,13 @@
           />
           <div v-else style="position: relative">
             <img draggable="false" :src="item.src" alt="" />
-            <p>
-              点击更换图
-            </p>
+            <p>点击更换图</p>
           </div>
         </div>
         <!-- 标题和链接 -->
         <div class="imgText">
           <!-- 选择类型 -->
-          <el-select
-            v-model="item.linktype"
-            placeholder="请选择跳转类型"
-            size="small"
-          >
+          <el-select v-model="item.linktype" placeholder="请选择跳转类型">
             <el-option
               v-for="item in optionsType"
               :key="item.name"
@@ -267,7 +261,6 @@
 
           <!-- 输入链接 -->
           <el-input
-            size="small"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="item.http.externalLink"
           >

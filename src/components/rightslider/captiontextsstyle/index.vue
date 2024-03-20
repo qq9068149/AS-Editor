@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small" :rules="rules">
+    <el-form label-width="80px" :model="datas" :rules="rules">
       <!-- 标题内容 -->
       <el-form-item label="标题内容">
         <el-input
@@ -200,14 +200,16 @@
           type="text"
           style="width: 110px; margin: 15px"
           v-model="datas.more.text"
-          size="small"
         />
 
         <div style="height: 10px" />
 
         <!-- 跳转链接 -->
         <el-form-item label="跳转链接">
-          <el-radio-group v-model="datas.more.httpType" style="margin-left: 18px">
+          <el-radio-group
+            v-model="datas.more.httpType"
+            style="margin-left: 18px"
+          >
             <el-radio :label="10">内部链接</el-radio>
             <el-radio :label="11">外部链接</el-radio>
           </el-radio-group>

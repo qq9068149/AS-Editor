@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 表单 -->
-    <el-form label-width="100px" :model="datas" size="small">
+    <el-form label-width="100px" :model="datas">
       <el-form-item class="lef" label="外边框">
         <el-checkbox v-model="datas.isShowBorder">显示</el-checkbox>
       </el-form-item>
@@ -43,12 +43,19 @@
       </el-form-item>
 
       <el-form-item class="lef" label="导航"> </el-form-item>
-      <vuedraggable :list="datas.iconList" item-key="index" :forceFallback="true" :animation="200">
+      <vuedraggable
+        :list="datas.iconList"
+        item-key="index"
+        :forceFallback="true"
+        :animation="200"
+      >
         <template #item="{ element, index }">
-          <section
-            class="imgBanner"
-          >
-            <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
+          <section class="imgBanner">
+            <van-icon
+              class="el-icon-circle-close"
+              name="close"
+              @click="deleteimg(index)"
+            />
             <!-- 图片 -->
             <div>
               <div
@@ -59,7 +66,9 @@
               >
                 <img
                   class="imag"
-                  :src="replaceIconIndex == 1 ? element.iconPic : element.inactive"
+                  :src="
+                    replaceIconIndex == 1 ? element.iconPic : element.inactive
+                  "
                   draggable="false"
                 />
                 <div>
@@ -70,11 +79,7 @@
             <!-- 标题和链接 -->
             <div class="imgText">
               <div class="imgText-top">
-                <el-input
-                  v-model="element.iconText"
-                  placeholder="导航名称"
-                  size="small"
-                />
+                <el-input v-model="element.iconText" placeholder="导航名称" />
                 <div class="imgText-top-r">
                   <span>小圆点</span>
                   <el-checkbox v-model="element.isDot"></el-checkbox>
@@ -86,7 +91,6 @@
                 <el-select
                   v-model="element.linktype"
                   placeholder="请选择跳转类型"
-                  size="small"
                 >
                   <el-option
                     v-for="element in optionsType"
@@ -99,7 +103,6 @@
 
                 <!-- 输入链接 -->
                 <el-input
-                  size="small"
                   placeholder="请输入链接，输入前确保可以访问"
                   v-model="element.http.externalLink"
                 >

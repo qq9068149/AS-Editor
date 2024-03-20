@@ -4,7 +4,7 @@
     <h2>图片广告</h2>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <!-- 标题内容 -->
       <el-form-item label="选择模板" class="lef">
         <p style="color: #000">{{ styleText }}</p>
@@ -79,12 +79,19 @@
 
       <!-- 图片广告 -->
       <div v-if="datas.imageList[0]">
-        <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
+        <vuedraggable
+          :list="datas.imageList"
+          item-key="index"
+          :forceFallback="true"
+          :animation="200"
+        >
           <template #item="{ element, index }">
-            <section
-              class="imgBanner"
-            >
-              <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
+            <section class="imgBanner">
+              <van-icon
+                class="el-icon-circle-close"
+                name="close"
+                @click="deleteimg(index)"
+              />
               <!-- 图片 -->
               <div class="imag">
                 <img :src="element.src" alt draggable="false" />
@@ -94,7 +101,6 @@
                 <el-input
                   v-model="element.text"
                   placeholder="请输入标题，也可不填"
-                  size="small"
                 ></el-input>
 
                 <!-- 选择类型 -->
@@ -103,7 +109,6 @@
                     style="width: 60%"
                     v-model="element.linktype"
                     placeholder="请选择跳转类型"
-                    size="small"
                   >
                     <el-option
                       v-for="element in optionsType"
@@ -116,7 +121,6 @@
                   <!-- 输入链接 -->
                   <el-input
                     style="width: 100%"
-                    size="small"
                     placeholder="请输入链接，输入前确保可以访问"
                     v-model="element.http.externalLink"
                   ></el-input>
@@ -242,11 +246,9 @@ export default {
     }
   },
 
-  created() {
-  },
+  created() {},
 
   methods: {
-
     // 提交
     uploadInformation(res) {
       this.datas.imageList.push({

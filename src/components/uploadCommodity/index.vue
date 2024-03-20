@@ -16,7 +16,6 @@
         style="width: 60%"
         v-model="type"
         placeholder="请选择跳转类型"
-        size="small"
         @change="selectType()"
       >
         <el-option
@@ -33,7 +32,6 @@
         v-if="type !== '11'"
         v-model="dialogImageUrl.name"
         placeholder="请选择图片跳转链接"
-        size="small"
         @change="changeId"
         :no-data-text="emptyText"
         @visible-change="
@@ -55,7 +53,6 @@
       <el-input
         style="width: 60%; margin-top: 15px"
         v-if="type === '11'"
-        size="small"
         placeholder="请输入链接，输入前确保可以访问"
         v-model="externalLink"
       ></el-input>

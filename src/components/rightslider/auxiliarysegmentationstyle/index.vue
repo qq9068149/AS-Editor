@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <!-- 空白高度 -->
       <el-form-item label="空白高度" class="lef">
         <el-slider

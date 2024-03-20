@@ -17,7 +17,7 @@
             <p class="last">{{ datas.describe }}</p>
           </div>
         </div>
-        <van-button class="rig" type="danger" size="small" color="#f44">{{
+        <van-button class="rig" type="danger" color="#f44">{{
           datas.buttonName
         }}</van-button>
       </div>

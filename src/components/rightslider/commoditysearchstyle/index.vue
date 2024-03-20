@@ -9,7 +9,7 @@
     </p>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <div v-if="datas.hotords[0]">
         <vuedraggable
           :list="datas.hotords"
@@ -19,7 +19,11 @@
         >
           <template #item="{ element }">
             <section class="imgList">
-              <van-icon class="el-icon-circle-close" name="close"  @click="deleteHotords(index)"/>
+              <van-icon
+                class="el-icon-circle-close"
+                name="close"
+                @click="deleteHotords(index)"
+              />
               <!-- 标题和链接 -->
               <div class="imgText">
                 <el-input v-model="element.text" placeholder="请输入热词" />

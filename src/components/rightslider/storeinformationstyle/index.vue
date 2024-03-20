@@ -43,7 +43,7 @@
     ></div>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small" :rules="rules">
+    <el-form label-width="80px" :model="datas" :rules="rules">
       <!-- 标题内容 -->
       <el-form-item label="选择模板" class="lef"> </el-form-item>
 

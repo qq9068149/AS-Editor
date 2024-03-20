@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small" :rules="rules">
+    <el-form label-width="80px" :model="datas" :rules="rules">
       <el-form-item label="活动名称" class="lef">
         <el-input v-model="datas.name"></el-input>
       </el-form-item>
@@ -47,30 +47,32 @@
 
       <!-- 图片广告 -->
       <div v-if="datas.imageList[0]">
-        <vuedraggable :list="datas.imageList" item-key="index" :forceFallback="true" :animation="200">
+        <vuedraggable
+          :list="datas.imageList"
+          item-key="index"
+          :forceFallback="true"
+          :animation="200"
+        >
           <template #item="{ element, index }">
-            <section
-              class="imgBanner"
-            >
-              <van-icon class="el-icon-circle-close" name="close" @click="deleteimg(index)" />
+            <section class="imgBanner">
+              <van-icon
+                class="el-icon-circle-close"
+                name="close"
+                @click="deleteimg(index)"
+              />
               <!-- 图片 -->
               <div class="imag">
                 <img :src="element.src" alt="" draggable="false" />
               </div>
               <!-- 标题和链接 -->
               <div class="imgText">
-                <el-input
-                  v-model="element.text"
-                  placeholder="笔记标题"
-                  size="small"
-                />
+                <el-input v-model="element.text" placeholder="笔记标题" />
                 <!-- 标题和链接 -->
                 <div class="imgTextChild">
                   <!-- 选择类型 -->
                   <el-select
                     v-model="element.linktype"
                     placeholder="请选择跳转类型"
-                    size="small"
                     @change="selectType(index)"
                   >
                     <el-option
@@ -84,7 +86,6 @@
 
                   <!-- 输入外部链接 -->
                   <el-input
-                    size="small"
                     placeholder="请输入链接，输入前确保可以访问"
                     v-model="element.http.externalLink"
                   >
@@ -221,7 +222,6 @@
             style="width: 60%"
             v-model="datas.linktype"
             placeholder="请选择跳转类型"
-            size="small"
           >
             <el-option
               v-for="item in optionsType1"
@@ -235,7 +235,6 @@
           <!-- 输入外部链接 -->
           <el-input
             style="width: 100%"
-            size="small"
             placeholder="请输入链接，输入前确保可以访问"
             v-model="datas.http.externalLink"
           >

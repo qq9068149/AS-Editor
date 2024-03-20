@@ -9,7 +9,6 @@
       label-width="80px"
       :model="datas"
       :rules="rules"
-      size="small"
     >
       <el-form-item label="页面名称" :hide-required-asterisk="true" prop="name">
         <el-input
@@ -159,7 +158,7 @@ export default {
       this.datas.bgImg = ''
     },
   },
-  components: { uploadimg }
+  components: { uploadimg },
 }
 </script>
 
@@ -210,7 +209,7 @@ export default {
       width: 80px;
       float: left;
     }
-    :deep(.el-form-item__content ){
+    :deep(.el-form-item__content) {
       margin-left: 80px;
     }
   }

@@ -3,7 +3,7 @@
     <!-- 标题 -->
     <h2>{{ datas.text }}</h2>
 
-    <el-form label-width="70px" :model="datas" size="small" class="lef">
+    <el-form label-width="70px" :model="datas" class="lef">
       <el-form-item label="封面链接">
         <el-input
           v-model="datas.coverUrl"

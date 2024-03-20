@@ -3,7 +3,7 @@
     <!-- 标题 -->
     <h2>{{ datas.text }}</h2>
 
-    <el-form label-width="80px" :model="datas" size="small">
+    <el-form label-width="80px" :model="datas">
       <!-- 背景颜色 -->
       <el-form-item label="背景颜色">
         <!-- 背景颜色 -->
@@ -106,8 +106,7 @@ export default {
           })
           return
           //（如果要用api接口上传删除腾讯云COS上传这些代码）
-          // 腾讯云COS上传结束 
-          
+          // 腾讯云COS上传结束
 
           var formData = new FormData()
 

@@ -4,7 +4,7 @@
     <h2>{{ datas.text }}</h2>
 
     <!-- 表单 -->
-    <el-form label-width="80px" :model="datas" size="small" :rules="rules">
+    <el-form label-width="80px" :model="datas" :rules="rules">
       <!-- 标题内容 -->
       <el-form-item
         class="lef"
@@ -93,21 +93,15 @@
                       disabled="disabled"
                       style="width: 65%"
                       v-model="element.name"
-                      size="small"
                     />
                     <el-input
                       disabled="disabled"
                       type="number"
                       style="width: 35%"
                       v-model.number="element.price"
-                      size="small"
                     />
                   </div>
-                  <el-input
-                    disabled="disabled"
-                    v-model="element.introduce"
-                    size="small"
-                  />
+                  <el-input disabled="disabled" v-model="element.introduce" />
                 </div>
               </section>
             </template>
@@ -130,7 +124,6 @@
             style="padding: 2px 4px; margin-left: 200px"
             @click="addGrouping"
             type="primary"
-            size="small"
             plain
           >
             添加</el-button
@@ -159,7 +152,6 @@
             class="tit"
             style="width: 100px"
             placeholder="请输入分组名称"
-            size="small"
           />
           <van-icon
             name="delete-o"
@@ -196,21 +188,15 @@
                       disabled="disabled"
                       style="width: 65%"
                       v-model="element.name"
-                      size="small"
                     />
                     <el-input
                       disabled="disabled"
                       type="number"
                       style="width: 35%"
                       v-model.number="element.price"
-                      size="small"
                     />
                   </div>
-                  <el-input
-                    disabled="disabled"
-                    v-model="element.introduce"
-                    size="small"
-                  />
+                  <el-input disabled="disabled" v-model="element.introduce" />
                 </div>
               </section>
             </template>
@@ -368,7 +354,6 @@
           v-show="datas.purchasebuttonType > 3"
           style="width: 40%; margin-top: 10px"
           v-model="datas.purchase"
-          size="small"
         />
       </el-radio-group>
 
