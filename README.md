@@ -59,9 +59,9 @@ src / utils / componentProperties.js            // 组件数据
 
 #### 感谢捐赠
 
-| [![有育哥](https://was666.gitee.io/as-editor-doc/assets/img/donate1.png)](https://gitee.com/cfxp) | [![邓跃辉](https://was666.gitee.io/as-editor-doc/assets/img/donate3.png)](https://gitee.com/york8888_admin) | [![hackchen](https://was666.gitee.io/as-editor-doc/assets/img/donate2.png)](https://gitee.com/hackchen) | [![狼牙](https://was666.gitee.io/as-editor-doc/assets/img/langYa.png)](https://gitee.com/fdfgasdvdxz) | [![许中杰](https://was666.gitee.io/as-editor-doc/assets/img/xuzhongjie.png)](https://gitee.com/xu-zhongjie) |[![RainbowParadise](https://was666.gitee.io/as-editor-doc/assets/img/RainbowParadise.png)](https://gitee.com/mars728) |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| [有育哥](https://gitee.com/cfxp) | [邓跃辉](https://gitee.com/york8888_admin) |[hackchen](https://gitee.com/hackchen) | [狼牙](https://gitee.com/fdfgasdvdxz) | [许中杰](https://gitee.com/xu-zhongjie) |[RainbowParadise](https://gitee.com/mars728) |
+| [![有育哥](https://was666.gitee.io/as-editor-doc/assets/img/donate1.png)](https://gitee.com/cfxp) | [![邓跃辉](https://was666.gitee.io/as-editor-doc/assets/img/donate3.png)](https://gitee.com/york8888_admin) | [![hackchen](https://was666.gitee.io/as-editor-doc/assets/img/donate2.png)](https://gitee.com/hackchen) | [![狼牙](https://was666.gitee.io/as-editor-doc/assets/img/langYa.png)](https://gitee.com/fdfgasdvdxz) | [![许中杰](https://was666.gitee.io/as-editor-doc/assets/img/xuzhongjie.png)](https://gitee.com/xu-zhongjie) |[![RainbowParadise](https://was666.gitee.io/as-editor-doc/assets/img/RainbowParadise.png)](https://gitee.com/mars728) |[![神秘的凯](https://was666.gitee.io/as-editor-doc/assets/img/shenmidekai.png)](https://gitee.com/mars728) |
+| :-: | :-: | :-: | :-: | :-: | :-: |:-: |
+| [有育哥](https://gitee.com/cfxp) | [邓跃辉](https://gitee.com/york8888_admin) |[hackchen](https://gitee.com/hackchen) | [狼牙](https://gitee.com/fdfgasdvdxz) | [许中杰](https://gitee.com/xu-zhongjie) |[RainbowParadise](https://gitee.com/mars728) |[神秘的凯](https://gitee.com/shenmidekai) |
 
 #### 参与贡献
 
