@@ -4,9 +4,9 @@
 
 基于 vue2.x 可视化拖拽编辑，页面生成工具。提升前端开发效率，可集成至移动端项目作为通过定义 JSON 直接生成 UI 界面。
 
-文档地址：[https://was666.gitee.io/as-editor-doc](https://was666.gitee.io/as-editor-doc)
+文档地址：[http://qiniu-program.juroom.cn](http://qiniu-program.juroom.cn)
 
-在线体验：[http://was666.gitee.io/as-editor](http://was666.gitee.io/as-editor)
+在线体验：[http://qiniu-plat.juroom.cn](http://qiniu-plat.juroom.cn)
 
 ### 安装教程
 
@@ -22,12 +22,12 @@
 
 ##### 使用教程
 
-![步骤1](https://was666.gitee.io/as-editor-doc/assets/img/README1.632216e1.png 'image1.png')
-![步骤2](https://was666.gitee.io/as-editor-doc/assets/img/README2.7459c50e.png 'image2.png')
-![步骤3](https://was666.gitee.io/as-editor-doc/assets/img/README3.157d3f15.png 'image3.png')
-![步骤4](https://was666.gitee.io/as-editor-doc/assets/img/README4.aa04245c.png 'image4.png')
-![步骤5](https://was666.gitee.io/as-editor-doc/assets/img/README5.afb38460.png 'image5.png')
-![步骤6](https://was666.gitee.io/as-editor-doc/assets/img/README6.a77d96b6.png 'image6.png')
+![步骤1](http://qiniu-program.juroom.cn/assets/img/README1.632216e1.png 'image1.png')
+![步骤2](http://qiniu-program.juroom.cn/assets/img/README2.7459c50e.png 'image2.png')
+![步骤3](http://qiniu-program.juroom.cn/assets/img/README3.157d3f15.png 'image3.png')
+![步骤4](http://qiniu-program.juroom.cn/assets/img/README4.aa04245c.png 'image4.png')
+![步骤5](http://qiniu-program.juroom.cn/assets/img/README5.afb38460.png 'image5.png')
+![步骤6](http://qiniu-program.juroom.cn/assets/img/README6.a77d96b6.png 'image6.png')
 
 ##### 自定义组件可以看
 
@@ -62,9 +62,8 @@ src / utils / componentProperties.js            // 组件数据
 
 #### 感谢捐赠
 
-| [![有育哥](https://was666.gitee.io/as-editor-doc/assets/img/donate1.png)](https://gitee.com/cfxp) | [![邓跃辉](https://was666.gitee.io/as-editor-doc/assets/img/donate3.png)](https://gitee.com/york8888_admin) | [![hackchen](https://was666.gitee.io/as-editor-doc/assets/img/donate2.png)](https://gitee.com/hackchen) | [![狼牙](https://was666.gitee.io/as-editor-doc/assets/img/langYa.png)](https://gitee.com/fdfgasdvdxz) | [![许中杰](https://was666.gitee.io/as-editor-doc/assets/img/xuzhongjie.png)](https://gitee.com/xu-zhongjie) |[![RainbowParadise](https://was666.gitee.io/as-editor-doc/assets/img/RainbowParadise.png)](https://gitee.com/mars728) |[![神秘的凯](https://was666.gitee.io/as-editor-doc/assets/img/shenmidekai.png)](https://gitee.com/mars728) |
-| :-: | :-: | :-: | :-: | :-: | :-: |:-: |
 | [有育哥](https://gitee.com/cfxp) | [邓跃辉](https://gitee.com/york8888_admin) |[hackchen](https://gitee.com/hackchen) | [狼牙](https://gitee.com/fdfgasdvdxz) | [许中杰](https://gitee.com/xu-zhongjie) |[RainbowParadise](https://gitee.com/mars728) |[神秘的凯](https://gitee.com/shenmidekai) |
+|---|---|---|---|---|---|---|
 
 #### 参与贡献
 
