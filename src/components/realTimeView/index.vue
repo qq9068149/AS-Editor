@@ -7,7 +7,7 @@
         ref="iframe"
         class="screen"
         :scrolling="false"
-        :src="'http://was666.gitee.io/as-editor-h5/#/?type=iframe'"
+        :src="'https://qiniu-plat.juroom.cn/h5/index.html#/?type=iframe'"
         @load="load"
       ></iframe>
       <van-loading v-if="loading" size="24px" vertical>加载中</van-loading>
@@ -32,7 +32,7 @@ export default {
   methods: {
     load() {
       this.loading = false
-      this.$refs["iframe"].contentWindow.postMessage(this.val, "http://was666.gitee.io");
+      this.$refs["iframe"].contentWindow.postMessage(this.val, "https://qiniu-plat.juroom.cn");
     },
   },
 }
